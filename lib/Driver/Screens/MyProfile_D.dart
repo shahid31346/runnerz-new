@@ -26,9 +26,10 @@ class _ProfileScreenDState extends State<ProfileScreenD> {
     String value = '';
     SharedPreferences pref1 = await SharedPreferences.getInstance();
     value = pref1.getString("user_id")!;
-    print(value + ' 123');
+
     Uri apiUrl = Uri.parse(
-        'http://35.158.106.116/api/customers/driver_profile_info?driver_id=5');
+        'https://gocourier.iaoai.io/api/customers/driver_profile_info?driver_id=' +
+            value);
     //Constants.baseUrl + 'customers/driver_profile_info?driver_id=' + value;
 
     Map<String, String> headers = {
@@ -40,7 +41,8 @@ class _ProfileScreenDState extends State<ProfileScreenD> {
       apiUrl,
       headers: headers,
     );
-
+    print(' 123');
+    print(apiUrl);
     return json.decode(response.body); // returns a List type
   }
 
@@ -49,29 +51,29 @@ class _ProfileScreenDState extends State<ProfileScreenD> {
       loading = true;
       apiCalled = true;
     });
-    try {
-      Map _data1 = await _getJson();
-      print(_data1['driver'][0]);
+    // try {
+    Map _data1 = await _getJson();
+    print(_data1['driver'][0]);
 
-      if (_data1['driver'] is List) {
-        DriverDetailsResponse prodDetailResponse =
-            DriverDetailsResponse.fromJson(_data1);
-        setState(() {
-          loading = false;
-          detail = prodDetailResponse.data![0];
-        });
-      } else {
-        setState(() {
-          detail = DriverDetail();
-          loading = false;
-        });
-      }
-    } catch (e) {
+    if (_data1['driver'] is List) {
+      DriverDetailsResponse prodDetailResponse =
+          DriverDetailsResponse.fromJson(_data1);
       setState(() {
-        detail = null;
+        loading = false;
+        detail = prodDetailResponse.data![0];
+      });
+    } else {
+      setState(() {
+        detail = DriverDetail();
         loading = false;
       });
     }
+    // } catch (e) {
+    //   setState(() {
+    //     detail = null;
+    //     loading = false;
+    //   });
+    // }
   }
 
   @override
@@ -190,7 +192,7 @@ class _ProfileScreenDState extends State<ProfileScreenD> {
                     height: 07,
                   ),
                   Text(
-                    "${detail!.vechileNo}".toUpperCase(),
+                 detail!.vechileNo == null ? "Not assigned" : "${detail!.vechileNo}".toUpperCase(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -250,7 +252,7 @@ class _ProfileScreenDState extends State<ProfileScreenD> {
                       Row(
                         children: <Widget>[
                           Text(
-                            "${detail!.vechiletype}",
+                         detail!.vechiletype == null  ? "Not assigned" :  "${detail!.vechiletype}",
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -294,7 +296,9 @@ class _ProfileScreenDState extends State<ProfileScreenD> {
                       Row(
                         children: <Widget>[
                           Text(
-                            "${detail!.vechilename}",
+                            detail!.vechilename == null
+                                ? "Not assigned"
+                                : "${detail!.vechilename}",
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -330,7 +334,10 @@ class _ProfileScreenDState extends State<ProfileScreenD> {
                         Padding(
                           padding: const EdgeInsets.only(top: 12.0),
                           child: Text(
-                            "${detail!.driverAverageRating}".toUpperCase(),
+                            detail!.driverAverageRating == null
+                                ? "No rating"
+                                : "${detail!.driverAverageRating}"
+                                    .toUpperCase(),
                             style: TextStyle(
                                 color: Colors.black54,
                                 fontSize: 60,
@@ -345,8 +352,10 @@ class _ProfileScreenDState extends State<ProfileScreenD> {
                           children: <Widget>[
                             StarRating(
                               size: 30,
-                              rating:
-                                  double.parse('${detail!.driverAverageRating}'),
+                              rating: detail!.driverAverageRating == null
+                                  ? 3.0
+                                  : double.parse(
+                                      '${detail!.driverAverageRating}'),
                               //rating: double.parse(ratingInNumbers),
                               onRatingChanged: (s) {},
                             ),

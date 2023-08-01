@@ -4,7 +4,7 @@ class DriverDetail {
   final String? vechileNo;
   final String? vechilename;
   final String? vechiletype;
-  final String? driverAverageRating;
+  final double? driverAverageRating;
 
   DriverDetail(
       {this.name,

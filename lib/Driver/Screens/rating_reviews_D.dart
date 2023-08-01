@@ -26,7 +26,7 @@ class _RateReviewsScreenDState extends State<RateReviewsScreenD> {
     SharedPreferences pref1 = await SharedPreferences.getInstance();
     _value = pref1.getString("user_id")!;
     Uri apiUrl =
-        Uri.parse(Constants.baseUrl + 'customers/driver_rating?driver_id=5');
+        Uri.parse(Constants.baseUrl + 'customers/driver_rating?driver_id='+_value);
     //  + _value;
 
     Map<String, String> headers = {
@@ -47,7 +47,7 @@ class _RateReviewsScreenDState extends State<RateReviewsScreenD> {
       loading = true;
       apiCalled = true;
     });
-    try {
+    // try {
       Map _data1 = await getJson();
       print(_data1['data'][0]);
 
@@ -64,12 +64,12 @@ class _RateReviewsScreenDState extends State<RateReviewsScreenD> {
           loading = false;
         });
       }
-    } catch (e) {
-      setState(() {
-        detail = null;
-        loading = false;
-      });
-    }
+    // } catch (e) {
+    //   setState(() {
+    //     detail = null;
+    //     loading = false;
+    //   });
+    // }
   }
 
   Future<List<RateReviewCons>> getDelivered() async {
@@ -158,7 +158,7 @@ class _RateReviewsScreenDState extends State<RateReviewsScreenD> {
                           Padding(
                             padding: const EdgeInsets.only(top: 12.0),
                             child: Text(
-                              '${detail!.stars}'.toUpperCase(),
+                           detail!.stars == null ? "No Rating" :  '${detail!.stars}'.toUpperCase(),
                               style: TextStyle(
                                   color: Colors.black54,
                                   fontSize: 60,
@@ -173,7 +173,8 @@ class _RateReviewsScreenDState extends State<RateReviewsScreenD> {
                             children: <Widget>[
                               StarRating(
                                 size: 30,
-                                rating: double.parse('${detail!.stars}'),
+                                rating: 
+                              detail!.stars == null ? 3.0: double.parse('${detail!.stars}')??0.0,
                                 //rating: double.parse(ratingInNumbers),
                                 onRatingChanged: (stars){},
                               ),

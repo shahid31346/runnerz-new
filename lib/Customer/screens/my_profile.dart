@@ -22,7 +22,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<Map> _getJson() async {
     String value = '';
     SharedPreferences pref1 = await SharedPreferences.getInstance();
-    value = pref1.getString("user_id")!;
     print(value);
     Uri apiUrl = Uri.parse(
         Constants.baseUrl + 'customers/get_user_detail?user_id=' + value);
