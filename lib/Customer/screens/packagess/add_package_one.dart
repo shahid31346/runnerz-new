@@ -114,7 +114,7 @@ class _AddPackageOneState extends State<AddPackageOne> {
   }
 
   Future<bool> checkAndRequestCameraPermissions() async {
- var permission = await Permission.storage.status;
+    var permission = await Permission.storage.status;
 
     if (permission.isGranted) {
       // Either the permission was already granted before or the user just granted it.
@@ -1465,7 +1465,7 @@ class _AddPackageOneState extends State<AddPackageOne> {
                       ),
                     ),
 
-                    Padding(
+                  _imgs.isEmpty ? Container():  Padding(
                       padding: const EdgeInsets.only(
                           top: 8.0, right: 8.0, left: 8.0),
                       child: Container(
@@ -1547,7 +1547,7 @@ class _AddPackageOneState extends State<AddPackageOne> {
                                   activeColor: Constants.primary,
                                   value: 1,
                                   groupValue: radioValue,
-                                          onChanged: (r) {
+                                  onChanged: (r) {
                                     handleRadioValueChanged(r!);
                                   }),
                               const Padding(
@@ -1598,7 +1598,8 @@ class _AddPackageOneState extends State<AddPackageOne> {
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Theme.of(context).colorScheme.secondary,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
                                     width: 2.0),
                               ),
                               // enabledBorder: OutlineInputBorder(
@@ -1803,7 +1804,7 @@ class _AddPackageOneState extends State<AddPackageOne> {
       error = e.toString();
     }
 
-    if (!mounted) return;
+    //
 
     setState(() {
       images = resultList;
@@ -1813,12 +1814,15 @@ class _AddPackageOneState extends State<AddPackageOne> {
 
     //here convert assests to file  which help to upload images
     for (var result in resultList) {
-         String? path = await LecleFlutterAbsolutePath.getAbsolutePath(
+      String? path = await LecleFlutterAbsolutePath.getAbsolutePath(
           uri: result.identifier);
       File file = File(path!);
       String fileName = file.path.split('/').last;
       imagesName.add(fileName);
       _imgs.add(File(path));
     }
+      setState(() {});
+
+    if (!mounted) return;
   }
 }
