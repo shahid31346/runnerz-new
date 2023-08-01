@@ -40,9 +40,12 @@ dependencies:
   toast: ^0.3.0
   intl: ^0.18.1
   flutter_datetime_picker_plus: ^2.0.1
+  flutter_google_places_hoc081098: ^2.0.0-beta.0
   # flutter_google_places: ^0.3.0
   # geocoder: ^0.2.1
-  google_places_flutter: ^2.0.6
+  # google_places_flutter: ^2.0.6
+  # flutter_google_places: any
+  # flutter_google_places_sdk: 
   fl_geocoder: ^0.1.0+1
   image_picker: ^1.0.1
   mime: ^1.0.4

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:runnerz/Customer/screens/home.dart';
 import 'package:runnerz/splash_screen.dart';
 
 Future<void> main() async {
@@ -11,7 +12,7 @@ Future<void> main() async {
       primarySwatch: Colors.blue,
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
-    home: SplashScreen(),
+    home: HomeScreen(),
   ));
 }
 
