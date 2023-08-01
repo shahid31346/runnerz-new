@@ -1,10 +1,17 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:location/location.dart' as loc;
 import 'package:runnerz/Driver/Widgets/drawer_D.dart';
 import 'package:runnerz/Utils/base_appbar.dart';
 import 'package:runnerz/Utils/const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreenD extends StatefulWidget {
   @override
@@ -12,6 +19,17 @@ class HomeScreenD extends StatefulWidget {
 }
 
 class _HomeScreenDState extends State<HomeScreenD> {
+  //  final List<_PositionItem> _positionItems = <_PositionItem>[];
+  StreamSubscription<Position>? _positionStreamSubscription;
+
+  // CollectionReference collectionReferenceLocation =
+  //     FirebaseFirestore.instance.collection('locations');
+  bool _isSwitched = false;
+  bool _isSwitched2 = false;
+  String? onlineStatus;
+  String responseDynamic = "";
+  bool _isLoading = false;
+  String? valueforSharedprefrences;
   var location = loc.Location();
   String? searchAddr;
   GoogleMapController? mapController;
@@ -67,6 +85,160 @@ class _HomeScreenDState extends State<HomeScreenD> {
     // getUserLocation();
     _checkGps();
     getUserLocation();
+  }
+
+  onlineStatusFunction() async {
+    SharedPreferences pref1 = await SharedPreferences.getInstance();
+    setState(() {
+      _isSwitched = pref1.getBool("online_status")!;
+    });
+  }
+
+  // nameData() async {
+  //   onlineStatusFunction();
+  //   String name = '';
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     name = preferences.getString("name");
+  //   });
+  //   return name;
+  // }
+
+  // pictureData() async {
+  //   String photo = '';
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     photo = preferences.getString("photo");
+  //   });
+
+  //   return photo;
+  // }
+
+  Future<Map> _getJsonOnline() async {
+    String value = '';
+
+    SharedPreferences pref1 = await SharedPreferences.getInstance();
+    value = pref1.getString("user_id")!;
+    print(value);
+
+    if (_isSwitched) {
+      onlineStatus = '15';
+      pref1.setBool("online_status", true);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("You're Online Now"),
+        ),
+      );
+
+      // _toggleListening(value);
+    } else {
+      onlineStatus = '16';
+      pref1.setBool("online_status", false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("You're Offline Now"),
+        ),
+      );
+      // _toggleListening(value);
+    }
+
+    Uri apiUrl = Uri.parse(Constants.baseUrl +
+        'customers/switch_user?driver_id=$value&is_visible=$onlineStatus'); // +
+    //vechiletype;
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': Constants.authToken,
+    };
+
+    http.Response response = await http.get(
+      apiUrl,
+      headers: headers,
+    );
+
+    return json.decode(response.body); // returns a List type
+  }
+
+  void onlineStatusGetter() async {
+//    getJson();
+    String _body = "";
+
+    //String amount = "";
+
+    try {
+      Map _data = await _getJsonOnline();
+
+      print(_data);
+
+      Map<String, dynamic> dataMap = _data["data"];
+      dataMap.keys.forEach((k) {
+        responseDynamic = (dataMap[k].toString());
+        print(dataMap[k]);
+      });
+
+      _body = (_data['status']);
+
+      print(_body);
+
+      if (_body == 'ERROR') {
+        setState(() {
+          _isLoading = false;
+        });
+        print("error");
+
+        showDialog(
+            context: context,
+            builder: (c) {
+              return AlertDialog(
+                title: Text("oops"),
+                content: Text(responseDynamic),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Close"),
+                  )
+                ],
+              );
+            });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      var error = e.toString();
+      if (e is SocketException) error = 'No internet';
+
+      showDialog(
+          context: context,
+          builder: (c) {
+            return AlertDialog(
+              title: Text("oops"),
+              content: Text(error),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Close"),
+                )
+              ],
+            );
+          });
+    }
+  }
+
+  void _toggleSwitch() {
+    setState(() {
+      _isSwitched = !_isSwitched;
+      print(_isSwitched);
+      onlineStatusGetter();
+    });
   }
 
   @override
@@ -133,23 +305,28 @@ class _HomeScreenDState extends State<HomeScreenD> {
                     ),
                     child: ElevatedButton(
                       onPressed: () {
-                        //getUserLocation();
+                        _toggleSwitch();
                       },
-            
-
-                                        style: ElevatedButton.styleFrom(
+                      style: ElevatedButton.styleFrom(
                         backgroundColor: Constants.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
-                      child: Text(
-                        "Go online".toUpperCase(),
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                      ),
+                      child: _isSwitched
+                          ? Text("Go offline".toUpperCase(),
+                          style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
+                          )
+                          : Text(
+                              "Go online".toUpperCase(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
+                            ),
                     ),
                   ),
                 ),
