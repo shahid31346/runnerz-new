@@ -8,8 +8,8 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_google_maps_webservices/places.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_controller/google_maps_controller.dart';
-import 'package:google_places_flutter/google_places_flutter.dart';
-import 'package:google_places_flutter/model/prediction.dart' as pred;
+// import 'package:google_places_flutter/google_places_flutter.dart';
+// import 'package:google_places_flutter/model/prediction.dart' as pred;
 import 'package:http/http.dart' as http;
 import 'package:location/location.dart' as loc;
 import 'package:runnerz/Utils/const.dart';
@@ -382,60 +382,60 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
     callme();
   }
 
-  void _getLatLngforPickup(pred.Prediction prediction) async {
-    GoogleMapsPlaces _places = new GoogleMapsPlaces(
-        apiKey:
-            'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y'); //Same API_KEY as above
-    PlacesDetailsResponse detail =
-        await _places.getDetailsByPlaceId(prediction.placeId!);
-    setState(() {
-      pickupCheckerCurrentLocation = false;
-      oR = false;
+  // void _getLatLngforPickup(pred.Prediction prediction) async {
+  //   GoogleMapsPlaces _places = new GoogleMapsPlaces(
+  //       apiKey:
+  //           'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y'); //Same API_KEY as above
+  //   PlacesDetailsResponse detail =
+  //       await _places.getDetailsByPlaceId(prediction.placeId!);
+  //   setState(() {
+  //     pickupCheckerCurrentLocation = false;
+  //     oR = false;
 
-      latitudeForPickup = detail.result.geometry!.location.lat;
-      longitudeForPickup = detail.result.geometry!.location.lng;
-      addressForPickup = prediction.description!;
-      mainAdressPickup = prediction.description;
-    });
+  //     latitudeForPickup = detail.result.geometry!.location.lat;
+  //     longitudeForPickup = detail.result.geometry!.location.lng;
+  //     addressForPickup = prediction.description!;
+  //     mainAdressPickup = prediction.description;
+  //   });
 
-    print(latitudeForPickup);
-    print(longitudeForPickup);
-    print(addressForPickup);
-    locationChecker();
+  //   print(latitudeForPickup);
+  //   print(longitudeForPickup);
+  //   print(addressForPickup);
+  //   locationChecker();
 
-    if (_selectedPackageCategory!.isNotEmpty) {
-      {
-        calculateDistance(latitudeForPickup, longitudeForPickup,
-            latitudeForDrop, longitudeForDrop);
-      }
-    }
-  }
+  //   if (_selectedPackageCategory!.isNotEmpty) {
+  //     {
+  //       calculateDistance(latitudeForPickup, longitudeForPickup,
+  //           latitudeForDrop, longitudeForDrop);
+  //     }
+  //   }
+  // }
 
-  void _getLatLngforDrop(pred.Prediction prediction) async {
-    GoogleMapsPlaces _places = new GoogleMapsPlaces(
-        apiKey:
-            'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y'); //Same API_KEY as above
-    PlacesDetailsResponse detail =
-        await _places.getDetailsByPlaceId(prediction.placeId!);
-    setState(() {
-      latitudeForDrop = detail.result.geometry!.location.lat;
-      longitudeForDrop = detail.result.geometry!.location.lng;
-      addressForDrop = prediction.description!;
-    });
+  // void _getLatLngforDrop(pred.Prediction prediction) async {
+  //   GoogleMapsPlaces _places = new GoogleMapsPlaces(
+  //       apiKey:
+  //           'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y'); //Same API_KEY as above
+  //   PlacesDetailsResponse detail =
+  //       await _places.getDetailsByPlaceId(prediction.placeId!);
+  //   setState(() {
+  //     latitudeForDrop = detail.result.geometry!.location.lat;
+  //     longitudeForDrop = detail.result.geometry!.location.lng;
+  //     addressForDrop = prediction.description!;
+  //   });
 
-    print(latitudeForDrop);
-    print(longitudeForDrop);
-    print(addressForDrop);
-    locationChecker();
-    locationCheckerForCurrentLocation();
+  //   print(latitudeForDrop);
+  //   print(longitudeForDrop);
+  //   print(addressForDrop);
+  //   locationChecker();
+  //   locationCheckerForCurrentLocation();
 
-    if (_selectedPackageCategory!.isNotEmpty) {
-      {
-        calculateDistance(latitudeForPickup, longitudeForPickup,
-            latitudeForDrop, longitudeForDrop);
-      }
-    }
-  }
+  //   if (_selectedPackageCategory!.isNotEmpty) {
+  //     {
+  //       calculateDistance(latitudeForPickup, longitudeForPickup,
+  //           latitudeForDrop, longitudeForDrop);
+  //     }
+  //   }
+  // }
 
   locationChecker() {
     if (addressForPickup != 'Enter PickUp Location' &&
@@ -702,7 +702,7 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
                             fontWeight: FontWeight.w400),
                       ),
                     ),
-                    pickupLocation(),
+                    //pickupLocation(),
                     // pickupChecker
                     //     ? Padding(
                     //         padding: const EdgeInsets.only(
@@ -824,7 +824,7 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
                             fontWeight: FontWeight.w400),
                       ),
                     ),
-                    placesAutoCompleteTextField(),
+                  //  placesAutoCompleteTextField(),
                     // Padding(
                     //   padding: const EdgeInsets.only(
                     //       left: 12.0, right: 12.0, top: 2.0),
@@ -1446,177 +1446,177 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
     );
   }
 
-  pickupLocation() {
-    return Card(
-      elevation: 3.0,
-      child: Container(
-        width: double.infinity,
-        height: 50,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(
-            Radius.circular(5.0),
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: GooglePlaceAutoCompleteTextField(
-                      textEditingController: pickUpcontroller,
-                      googleAPIKey: Constants.api_key,
-                      inputDecoration: InputDecoration(
-                        hintText: "Enter Pickup Location",
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                      ),
-                      debounceTime: 400,
-                      //countries: ["in", "fr"],
-                      isLatLngRequired: false,
-                      getPlaceDetailWithLatLng: (pred.Prediction prediction) {
-                        print("placeDetails" + prediction.lat.toString());
-                      },
+  // pickupLocation() {
+  //   return Card(
+  //     elevation: 3.0,
+  //     child: Container(
+  //       width: double.infinity,
+  //       height: 50,
+  //       decoration: BoxDecoration(
+  //         color: Colors.white,
+  //         borderRadius: BorderRadius.all(
+  //           Radius.circular(5.0),
+  //         ),
+  //       ),
+  //       child: Center(
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           children: [
+  //             Center(
+  //               child: Padding(
+  //                 padding: const EdgeInsets.only(left: 8.0),
+  //                 child: Container(
+  //                   padding: EdgeInsets.symmetric(horizontal: 20),
+  //                   child: GooglePlaceAutoCompleteTextField(
+  //                     textEditingController: pickUpcontroller,
+  //                     googleAPIKey: Constants.api_key,
+  //                     inputDecoration: InputDecoration(
+  //                       hintText: "Enter Pickup Location",
+  //                       border: InputBorder.none,
+  //                       enabledBorder: InputBorder.none,
+  //                     ),
+  //                     debounceTime: 400,
+  //                     //countries: ["in", "fr"],
+  //                     isLatLngRequired: false,
+  //                     getPlaceDetailWithLatLng: (pred.Prediction prediction) {
+  //                       print("placeDetails" + prediction.lat.toString());
+  //                     },
 
-                      itemClick: (pred.Prediction prediction) {
-                        controller.text = prediction.description ?? "";
-                        controller.selection = TextSelection.fromPosition(
-                            TextPosition(
-                                offset: prediction.description?.length ?? 0));
+  //                     itemClick: (pred.Prediction prediction) {
+  //                       controller.text = prediction.description ?? "";
+  //                       controller.selection = TextSelection.fromPosition(
+  //                           TextPosition(
+  //                               offset: prediction.description?.length ?? 0));
 
-                        _getLatLngforDrop(prediction);
-                      },
-                      seperatedBuilder: Divider(),
-                      // OPTIONAL// If you want to customize list view item builder
-                      itemBuilder:
-                          (context, index, pred.Prediction prediction) {
-                        return Container(
-                          padding: EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              Icon(Icons.location_on),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Expanded(
-                                  child:
-                                      Text("${prediction.description ?? ""}"))
-                            ],
-                          ),
-                        );
-                      },
+  //                       _getLatLngforDrop(prediction);
+  //                     },
+  //                     seperatedBuilder: Divider(),
+  //                     // OPTIONAL// If you want to customize list view item builder
+  //                     itemBuilder:
+  //                         (context, index, pred.Prediction prediction) {
+  //                       return Container(
+  //                         padding: EdgeInsets.all(10),
+  //                         child: Row(
+  //                           children: [
+  //                             Icon(Icons.location_on),
+  //                             SizedBox(
+  //                               width: 7,
+  //                             ),
+  //                             Expanded(
+  //                                 child:
+  //                                     Text("${prediction.description ?? ""}"))
+  //                           ],
+  //                         ),
+  //                       );
+  //                     },
 
-                      isCrossBtnShown: true,
+  //                     isCrossBtnShown: true,
 
-                      // default 600 ms ,
-                    ),
-                  ),
+  //                     // default 600 ms ,
+  //                   ),
+  //                 ),
 
-                  //  Text(
-                  //   '$addressForDrop',
-                  //   overflow: TextOverflow.ellipsis,
-                  //   style: TextStyle(
-                  //       color: Colors.grey,
-                  //       fontWeight: FontWeight.bold),
-                  // ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  //                 //  Text(
+  //                 //   '$addressForDrop',
+  //                 //   overflow: TextOverflow.ellipsis,
+  //                 //   style: TextStyle(
+  //                 //       color: Colors.grey,
+  //                 //       fontWeight: FontWeight.bold),
+  //                 // ),
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  placesAutoCompleteTextField() {
-    return Card(
-      elevation: 3.0,
-      child: Container(
-        width: double.infinity,
-        height: 50,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(
-            Radius.circular(5.0),
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: GooglePlaceAutoCompleteTextField(
-                      textEditingController: controller,
-                      googleAPIKey: Constants.api_key,
-                      inputDecoration: InputDecoration(
-                        hintText: "Enter Drop Location",
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                      ),
-                      debounceTime: 400,
-                      //countries: ["in", "fr"],
-                      isLatLngRequired: false,
-                      getPlaceDetailWithLatLng: (pred.Prediction prediction) {
-                        print("placeDetails" + prediction.lat.toString());
-                      },
+  // placesAutoCompleteTextField() {
+  //   return Card(
+  //     elevation: 3.0,
+  //     child: Container(
+  //       width: double.infinity,
+  //       height: 50,
+  //       decoration: BoxDecoration(
+  //         color: Colors.white,
+  //         borderRadius: BorderRadius.all(
+  //           Radius.circular(5.0),
+  //         ),
+  //       ),
+  //       child: Center(
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           children: [
+  //             Center(
+  //               child: Padding(
+  //                 padding: const EdgeInsets.only(left: 8.0),
+  //                 child: Container(
+  //                   padding: EdgeInsets.symmetric(horizontal: 20),
+  //                   child: GooglePlaceAutoCompleteTextField(
+  //                     textEditingController: controller,
+  //                     googleAPIKey: Constants.api_key,
+  //                     inputDecoration: InputDecoration(
+  //                       hintText: "Enter Drop Location",
+  //                       border: InputBorder.none,
+  //                       enabledBorder: InputBorder.none,
+  //                     ),
+  //                     debounceTime: 400,
+  //                     //countries: ["in", "fr"],
+  //                     isLatLngRequired: false,
+  //                     getPlaceDetailWithLatLng: (pred.Prediction prediction) {
+  //                       print("placeDetails" + prediction.lat.toString());
+  //                     },
 
-                      itemClick: (pred.Prediction prediction) {
-                        controller.text = prediction.description ?? "";
-                        controller.selection = TextSelection.fromPosition(
-                            TextPosition(
-                                offset: prediction.description?.length ?? 0));
+  //                     itemClick: (pred.Prediction prediction) {
+  //                       controller.text = prediction.description ?? "";
+  //                       controller.selection = TextSelection.fromPosition(
+  //                           TextPosition(
+  //                               offset: prediction.description?.length ?? 0));
 
-                        _getLatLngforDrop(prediction);
-                      },
-                      seperatedBuilder: Divider(),
-                      // OPTIONAL// If you want to customize list view item builder
-                      itemBuilder:
-                          (context, index, pred.Prediction prediction) {
-                        return Container(
-                          padding: EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              Icon(Icons.location_on),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Expanded(
-                                  child:
-                                      Text("${prediction.description ?? ""}"))
-                            ],
-                          ),
-                        );
-                      },
+  //                       _getLatLngforDrop(prediction);
+  //                     },
+  //                     seperatedBuilder: Divider(),
+  //                     // OPTIONAL// If you want to customize list view item builder
+  //                     itemBuilder:
+  //                         (context, index, pred.Prediction prediction) {
+  //                       return Container(
+  //                         padding: EdgeInsets.all(10),
+  //                         child: Row(
+  //                           children: [
+  //                             Icon(Icons.location_on),
+  //                             SizedBox(
+  //                               width: 7,
+  //                             ),
+  //                             Expanded(
+  //                                 child:
+  //                                     Text("${prediction.description ?? ""}"))
+  //                           ],
+  //                         ),
+  //                       );
+  //                     },
 
-                      isCrossBtnShown: true,
+  //                     isCrossBtnShown: true,
 
-                      // default 600 ms ,
-                    ),
-                  ),
+  //                     // default 600 ms ,
+  //                   ),
+  //                 ),
 
-                  //  Text(
-                  //   '$addressForDrop',
-                  //   overflow: TextOverflow.ellipsis,
-                  //   style: TextStyle(
-                  //       color: Colors.grey,
-                  //       fontWeight: FontWeight.bold),
-                  // ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  //                 //  Text(
+  //                 //   '$addressForDrop',
+  //                 //   overflow: TextOverflow.ellipsis,
+  //                 //   style: TextStyle(
+  //                 //       color: Colors.grey,
+  //                 //       fontWeight: FontWeight.bold),
+  //                 // ),
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   bool get wantKeepAlive => true;
