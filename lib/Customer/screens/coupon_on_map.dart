@@ -101,7 +101,7 @@ class _CouponMapState extends State<CouponMap> {
     return json.decode(response.body); // returns a List type
   }
 
-  void khan() async {
+  void sendRequest() async {
 //    getJson();
     String _body = "";
 
@@ -522,7 +522,7 @@ class _CouponMapState extends State<CouponMap> {
                                     onPressed: () {
                                       _formKey.currentState!.validate();
                                       if (_formKey.currentState!.validate()) {
-                                        khan();
+                                        sendRequest();
                                         setState(() {
                                           _isLoading = true;
                                         });

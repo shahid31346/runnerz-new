@@ -78,17 +78,9 @@ class _SplashScreenState extends State<SplashScreen> {
             Image.asset(
               'assets/logo.png',
             ),
+            SizedBox(height: 35,),
             Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),
-                child: Image.asset(
-                  'assets/images/logo-dark.png',
-                  fit: BoxFit.fill,
-                  //      height: mQ.height * 0.25,
-                  // width: mQ.width * 0.35,
-                  // color: primarylogo,
-                ),
-              ),
+              child: CircularProgressIndicator(color: Colors.white,),
             ),
           ],
         ),

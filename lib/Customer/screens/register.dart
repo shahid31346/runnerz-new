@@ -72,14 +72,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
     imageUploadRequest.fields['mobile'] = _mobileNo.text;
 
     imageUploadRequest.headers.addAll({
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
       'Authorization': Constants.authToken,
     });
+
+    print(imageUploadRequest.headers);
+    print(imageUploadRequest.fields);
 
     var response = await imageUploadRequest.send();
     if (response.statusCode == 200) print('Done!');
 
     final respStr = await response.stream.bytesToString();
+    print(json.decode(respStr));
 
     return json.decode(respStr);
   }
@@ -94,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             actions: [
               CupertinoDialogAction(
                 isDefaultAction: false,
-                child: Column(
+                child: const Column(
                   children: <Widget>[
                     Text('Okay'),
                   ],
@@ -106,7 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         });
   }
 
-  void khan() async {
+  void register() async {
 //    getJson();
 
     String _body = "";
@@ -137,14 +141,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               context: context,
               builder: (c) {
                 return AlertDialog(
-                  title: Text("oops"),
+                  title: const Text("oops"),
                   content: Text(values),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text("Close"),
+                      child: const Text("Close"),
                     )
                   ],
                 );
@@ -161,13 +165,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               builder: (c) {
                 return AlertDialog(
                   title: const Text('Congratulations'),
-                  content: Text("Check your Email, OTP send successfully."),
+                  content:
+                      const Text("Check your Email, OTP send successfully."),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Otp()),
+                          MaterialPageRoute(builder: (context) => const Otp()),
                         );
                       },
                       child: Text(
@@ -202,7 +207,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close"),
+                    child: const Text("Close"),
                   )
                 ],
               ));
@@ -232,7 +237,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ],
         )),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(20.0, 0, 20, 0),
+          padding: const EdgeInsets.fromLTRB(20.0, 0, 20, 0),
           child: ListView(
             shrinkWrap: true,
             children: <Widget>[
@@ -249,7 +254,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: Container(
-                        child: Row(
+                        child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               // Expanded(
@@ -266,7 +271,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 style: TextStyle(color: Colors.white38),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
+                                padding: EdgeInsets.only(top: 8.0),
                                 child: Text(
                                   "Sign Up",
                                   style: TextStyle(
@@ -294,7 +299,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ]),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               Center(
@@ -312,12 +317,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     InkWell(
                       onTap: _onAlertPress,
                       child: Container(
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(40.0),
                               color: Colors.grey.withOpacity(0.5)),
-                          margin: EdgeInsets.only(left: 70, top: 70),
-                          child: Icon(
+                          margin: const EdgeInsets.only(left: 70, top: 70),
+                          child: const Icon(
                             Icons.photo_camera,
                             size: 25,
                             color: Colors.white,
@@ -335,7 +340,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       padding: const EdgeInsets.only(top: 15.0, left: 5.0),
                       child: Text(
                         'Full Name'.toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w400),
@@ -347,34 +352,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Card(
                         elevation: 3.0,
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.0),
                             ),
                           ),
                           child: TextFormField(
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15.0,
                               color: Colors.black,
                             ),
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.0),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.white,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.white,
                                 ),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: "Enter your full name",
-                              hintStyle:
-                                  TextStyle(fontSize: 15.0, color: Colors.grey),
+                              hintStyle: const TextStyle(
+                                  fontSize: 15.0, color: Colors.grey),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -392,7 +397,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       padding: const EdgeInsets.only(top: 15.0, left: 5.0),
                       child: Text(
                         'User Name'.toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w400),
@@ -404,34 +409,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Card(
                         elevation: 3.0,
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.0),
                             ),
                           ),
                           child: TextFormField(
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15.0,
                               color: Colors.black,
                             ),
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.0),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.white,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.white,
                                 ),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: "Enter Username",
-                              hintStyle:
-                                  TextStyle(fontSize: 15.0, color: Colors.grey),
+                              hintStyle: const TextStyle(
+                                  fontSize: 15.0, color: Colors.grey),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -449,7 +454,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       padding: const EdgeInsets.only(top: 9.0, left: 5.0),
                       child: Text(
                         'Email Id'.toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w400),
@@ -461,34 +466,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Card(
                         elevation: 3.0,
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.0),
                             ),
                           ),
                           child: TextFormField(
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15.0,
                               color: Colors.black,
                             ),
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.0),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.white,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.white,
                                 ),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: "Enter Your Email",
-                              hintStyle:
-                                  TextStyle(fontSize: 15.0, color: Colors.grey),
+                              hintStyle: const TextStyle(
+                                  fontSize: 15.0, color: Colors.grey),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -506,7 +511,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       padding: const EdgeInsets.only(top: 9.0, left: 5.0),
                       child: Text(
                         'Password'.toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w400),
@@ -518,34 +523,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Card(
                         elevation: 3.0,
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.0),
                             ),
                           ),
                           child: TextFormField(
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15.0,
                               color: Colors.black,
                             ),
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.0),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.white,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.white,
                                 ),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: "Enter password",
-                              hintStyle:
-                                  TextStyle(fontSize: 15.0, color: Colors.grey),
+                              hintStyle: const TextStyle(
+                                  fontSize: 15.0, color: Colors.grey),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -564,7 +569,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       padding: const EdgeInsets.only(top: 9.0, left: 5.0),
                       child: Text(
                         'Confirm Password'.toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w400),
@@ -576,34 +581,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Card(
                         elevation: 3.0,
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.0),
                             ),
                           ),
                           child: TextFormField(
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15.0,
                               color: Colors.black,
                             ),
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.0),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.white,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.white,
                                 ),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: "Enter password again",
-                              hintStyle:
-                                  TextStyle(fontSize: 15.0, color: Colors.grey),
+                              hintStyle: const TextStyle(
+                                  fontSize: 15.0, color: Colors.grey),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -622,7 +627,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       padding: const EdgeInsets.only(top: 9.0, left: 5.0),
                       child: Text(
                         'Mobile Number'.toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w400),
@@ -634,34 +639,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Card(
                         elevation: 3.0,
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.0),
                             ),
                           ),
                           child: TextFormField(
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15.0,
                               color: Colors.black,
                             ),
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.0),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.white,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.white,
                                 ),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: "Enter your mobile number",
-                              hintStyle:
-                                  TextStyle(fontSize: 15.0, color: Colors.grey),
+                              hintStyle: const TextStyle(
+                                  fontSize: 15.0, color: Colors.grey),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -685,24 +690,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           top: 20,
                         ),
                         child: _isLoading
-                            ? Center(
+                            ? const Center(
                                 child: CircularProgressIndicator(
-                                  valueColor:
-                                      const AlwaysStoppedAnimation<Color>(
-                                          Colors.black54),
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.black54),
                                 ),
                               )
                             : ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
-                                      Color.fromARGB(255, 6, 101, 159),
+                                      const Color.fromARGB(255, 6, 101, 159),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                 ),
                                 child: Text(
                                   "Sign up".toUpperCase(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
                                   ),
@@ -711,7 +715,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   if (_formKey.currentState!.validate()) {
                                     setState(() {
                                       _isLoading = true;
-                                      khan();
+                                      register();
                                     });
                                   }
                                 },
@@ -724,7 +728,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Container(
                   margin:
                       const EdgeInsets.only(top: 03, left: 15.0, right: 15.0),
-                  child: Divider(
+                  child: const Divider(
                     color: Colors.white,
                   )),
               Padding(
@@ -736,7 +740,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(
+                        const Text(
                           'Already Registered?',
                           style: TextStyle(
                               color: Colors.white,
@@ -744,7 +748,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               fontWeight: FontWeight.w500),
                         ),
                         TextButton(
-                          child: Text(
+                          child: const Text(
                             'Sign In',
                             textAlign: TextAlign.left,
                             style: TextStyle(
@@ -778,7 +782,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             actions: [
               CupertinoDialogAction(
                 isDefaultAction: true,
-                child: Column(
+                child: const Column(
                   children: <Widget>[
                     Icon(Icons.photo),
                     SizedBox(
@@ -791,7 +795,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               CupertinoDialogAction(
                 isDefaultAction: true,
-                child: Column(
+                child: const Column(
                   children: <Widget>[
                     Icon(Icons.camera_alt),
                     SizedBox(
@@ -810,7 +814,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // ================================= Image from camera
   Future getCameraImage() async {
     final picker = ImagePicker();
-    var image = await picker.   pickImage(source: ImageSource.camera);
+    var image = await picker.pickImage(source: ImageSource.camera);
 
     setState(() {
       _image = File(image!.path);

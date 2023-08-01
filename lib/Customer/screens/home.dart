@@ -1,22 +1,20 @@
+import 'dart:async';
+
+import 'package:fl_geocoder/fl_geocoder.dart' as geo;
+import 'package:fl_geocoder/fl_geocoder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_google_maps_webservices/places.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_controller/google_maps_controller.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_places_flutter/model/prediction.dart';
+import 'package:google_places_flutter/google_places_flutter.dart';
+import 'package:google_places_flutter/model/prediction.dart' as pred;
 import 'package:location/location.dart' as loc;
-
 import 'package:runnerz/Customer/screens/packagess/add_package_one.dart';
 import 'package:runnerz/Customer/widgets/drawer.dart';
 import 'package:runnerz/Utils/base_appbar.dart';
-import 'dart:async';
-import 'dart:math';
-
-import 'package:fl_geocoder/fl_geocoder.dart';
-
-
-
-import 'package:google_maps_controller/google_maps_controller.dart';
 import 'package:runnerz/Utils/const.dart';
 import 'package:toast/toast.dart';
 
@@ -26,12 +24,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController controller = TextEditingController();
+  TextEditingController pickUpcontroller = TextEditingController();
 //pickup
   double? latitudeForPickup;
   double? longitudeForPickup;
   String addressForPickup = 'PickUp Location';
   String? mainAdressPickup;
-  final geocoder =  FlGeocoder(Constants.api_key);
+  final geocoder = FlGeocoder(Constants.api_key);
 
   LatLng? _center;
 
@@ -64,47 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return position!;
   }
 
-
-    getUserLocation() async {
-    currentLocation = await locateUser();
-    setState(() {
-      pickupChecker = false;
-      oR = false;
-
-      latitudeForPickup = currentLocation!.latitude;
-      longitudeForPickup = currentLocation!.longitude;
-    });
-
-    ///new code
-    final geocoder = FlGeocoder(Constants.api_key);
-
-    final coordinates = geo.Location(latitudeForPickup!, longitudeForPickup!);
-    final results = await geocoder.findAddressesFromLocationCoordinates(
-      location: coordinates,
-      useDefaultResultTypeFilter: false,
-      // resultType: 'route', // Optional. For custom filtering.
-    );
-
-    // final coordinates = Coordinates(latitudeForPickup, longitudeForPickup);
-    // var addresses =
-    //     await Geocoder.local.findAddressesFromCoordinates(coordinates);
-    var first = results[0];
-    print(first.formattedAddress);
-    // print("${first.featureName} : ${first.addressLine}");
-    setState(() {
-      currentLocationForPickup = first.formattedAddress ?? '';
-      mainAdressPickup = first.formattedAddress ?? '';
-    });
-
-    locationCheckerForCurrentLocation();
-    if (_selectedPackageCategory!.isNotEmpty) {
-      {
-        calculateDistance(latitudeForPickup, longitudeForPickup,
-            latitudeForDrop, longitudeForDrop);
-      }
-    }
-  }
-
   getUserLocation() async {
     currentLocation = await locateUser();
     setState(() {
@@ -113,21 +72,20 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     _center = LatLng(currentLocation!.latitude, currentLocation!.longitude);
 
-
-         final coordinates = Location(latitudeForPickup!, longitudeForPickup!);
+    final coordinates = geo.Location(latitudeForPickup!, longitudeForPickup!);
     final addresses = await geocoder.findAddressesFromLocationCoordinates(
       location: coordinates,
-    //  useDefaultResultTypeFilter: isFiltered,
+      //  useDefaultResultTypeFilter: isFiltered,
       // resultType: 'route', // Optional. For custom filtering.
     );
-   // final coordinates = new Coordinates(latitudeForPickup, longitudeForPickup);
+    // final coordinates = new Coordinates(latitudeForPickup, longitudeForPickup);
     // var addresses =
     //     await Geocoder.local.findAddressesFromCoordinates(coordinates);
     var first = addresses[0];
-    print("${first.} : ${first.addressLine}");
+
     setState(() {
-      addressForPickup = "${first.featureName} : ${first.addressLine}";
-      mainAdressPickup = "${first.featureName} : ${first.addressLine}";
+      addressForPickup = first.formattedAddress ?? '';
+      mainAdressPickup = first.formattedAddress ?? '';
       currentLocLoader = false;
     });
 
@@ -153,30 +111,30 @@ class _HomeScreenState extends State<HomeScreen> {
   //   });
   // }
 
-  void _getLatLngforPickup(Prediction prediction) async {
+  void _getLatLngforPickup(pred.Prediction prediction) async {
     GoogleMapsPlaces _places = new GoogleMapsPlaces(
         apiKey:
             'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y'); //Same API_KEY as above
     PlacesDetailsResponse detail =
-        await _places.getDetailsByPlaceId(prediction.placeId);
+        await _places.getDetailsByPlaceId(prediction.placeId!);
     setState(() {
-      latitudeForPickup = detail.result.geometry.location.lat;
-      longitudeForPickup = detail.result.geometry.location.lng;
-      addressForPickup = prediction.description;
+      latitudeForPickup = detail.result.geometry!.location.lat;
+      longitudeForPickup = detail.result.geometry!.location.lng;
+      addressForPickup = prediction.description!;
       mainAdressPickup = prediction.description;
     });
   }
 
-  void _getLatLngforDrop(Prediction prediction) async {
+  void _getLatLngforDrop(pred.Prediction prediction) async {
     GoogleMapsPlaces _places = new GoogleMapsPlaces(
         apiKey:
             'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y'); //Same API_KEY as above
     PlacesDetailsResponse detail =
-        await _places.getDetailsByPlaceId(prediction.placeId);
+        await _places.getDetailsByPlaceId(prediction.placeId!);
     setState(() {
-      latitudeForDrop = detail.result.geometry.location.lat;
-      longitudeForDrop = detail.result.geometry.location.lng;
-      addressForDrop = prediction.description;
+      latitudeForDrop = detail.result.geometry!.location.lat;
+      longitudeForDrop = detail.result.geometry!.location.lng;
+      addressForDrop = prediction.description!;
     });
   }
 
@@ -308,83 +266,85 @@ class _HomeScreenState extends State<HomeScreen> {
                                 left: 12.0, right: 12.0, top: 8.0),
                             child: Row(
                               children: [
-                                Expanded(
-                                  child: InkWell(
-                                    onTap: () async {
-                                      // show input autocomplete with selected mode
-                                      // then get the Prediction selected
-                                      // Prediction prediction = await PlacesAutocomplete.show(
-                                      //     context: context,
-                                      //     apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
-                                      //     mode: Mode.overlay, // Mode.overlay
-                                      //     language: "en",
-                                      //     radius: 10000000,
-                                      //     strictbounds: false,
-                                      //     components: [Component(Component.country, "pk")]);
+                                // Expanded(
+                                //   child: InkWell(
+                                //     onTap: () async {
+                                //       // show input autocomplete with selected mode
+                                //       // then get the Prediction selected
+                                //       // Prediction prediction = await PlacesAutocomplete.show(
+                                //       //     context: context,
+                                //       //     apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
+                                //       //     mode: Mode.overlay, // Mode.overlay
+                                //       //     language: "en",
+                                //       //     radius: 10000000,
+                                //       //     strictbounds: false,
+                                //       //     components: [Component(Component.country, "pk")]);
 
-                                      Prediction prediction =
-                                          await PlacesAutocomplete.show(
-                                        context: context,
-                                        apiKey:
-                                            'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
-                                        radius: 10000000,
-                                        types: [],
-                                        strictbounds: false,
-                                        mode: Mode.overlay,
-                                        language: "en",
-                                        decoration: InputDecoration(
-                                          hintText: 'Search',
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            borderSide: BorderSide(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                        components: [
-                                          //  Component(Component.country, "fr"),
-                                        ],
-                                      );
-                                      //displayPrediction(p);
-                                      _getLatLngforPickup(prediction);
-                                    },
-                                    child: Card(
-                                      elevation: 10,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(20),
-                                          ),
-                                          side: BorderSide(
-                                              width: 5, color: Colors.white)),
-                                      child: Container(
-                                        height: 60.0,
-                                        // width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          color: Colors.white,
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 30.0),
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.blur_linear_outlined),
-                                              SizedBox(width: 25),
-                                              Flexible(
-                                                child: Text('$addressForPickup',
-                                                    overflow: TextOverflow.fade,
-                                                    style: TextStyle(
-                                                        color: Colors.black54)),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                //       Prediction prediction =
+                                //           await PlacesAutocomplete.show(
+                                //         context: context,
+                                //         apiKey:
+                                //             'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
+                                //         radius: 10000000,
+                                //         types: [],
+                                //         strictbounds: false,
+                                //         mode: Mode.overlay,
+                                //         language: "en",
+                                //         decoration: InputDecoration(
+                                //           hintText: 'Search',
+                                //           focusedBorder: OutlineInputBorder(
+                                //             borderRadius:
+                                //                 BorderRadius.circular(20),
+                                //             borderSide: BorderSide(
+                                //               color: Colors.white,
+                                //             ),
+                                //           ),
+                                //         ),
+                                //         components: [
+                                //           //  Component(Component.country, "fr"),
+                                //         ],
+                                //       );
+                                //       //displayPrediction(p);
+                                //       _getLatLngforPickup(prediction);
+                                //     },
+                                //     child: Card(
+                                //       elevation: 10,
+                                //       shape: RoundedRectangleBorder(
+                                //           borderRadius: BorderRadius.all(
+                                //             Radius.circular(20),
+                                //           ),
+                                //           side: BorderSide(
+                                //               width: 5, color: Colors.white)),
+                                //       child: Container(
+                                //         height: 60.0,
+                                //         // width: double.infinity,
+                                //         decoration: BoxDecoration(
+                                //           borderRadius:
+                                //               BorderRadius.circular(10.0),
+                                //           color: Colors.white,
+                                //         ),
+                                //         child: Padding(
+                                //           padding:
+                                //               const EdgeInsets.only(left: 30.0),
+                                //           child: Row(
+                                //             children: [
+                                //               Icon(Icons.blur_linear_outlined),
+                                //               SizedBox(width: 25),
+                                //               Flexible(
+                                //                 child: Text('$addressForPickup',
+                                //                     overflow: TextOverflow.fade,
+                                //                     style: TextStyle(
+                                //                         color: Colors.black54)),
+                                //               )
+                                //             ],
+                                //           ),
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
+
+                                pickupLocation(),
                                 currentLocLoader
                                     ? Center(
                                         child: Padding(
@@ -415,83 +375,84 @@ class _HomeScreenState extends State<HomeScreen> {
                                 left: 12.0, right: 12.0, top: 2.0),
                             child: Row(
                               children: [
-                                Expanded(
-                                  child: InkWell(
-                                    onTap: () async {
-                                      // show input autocomplete with selected mode
-                                      // then get the Prediction selected
-                                      // Prediction prediction = await PlacesAutocomplete.show(
-                                      //     context: context,
-                                      //     apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
-                                      //     mode: Mode.overlay, // Mode.overlay
-                                      //     language: "en",
-                                      //     radius: 10000000,
-                                      //     strictbounds: false,
-                                      //     components: [Component(Component.country, "pk")]);
+                                placesAutoCompleteTextField(),
+                                // Expanded(
+                                //   child: InkWell(
+                                //     onTap: () async {
+                                //       // show input autocomplete with selected mode
+                                //       // then get the Prediction selected
+                                //       // Prediction prediction = await PlacesAutocomplete.show(
+                                //       //     context: context,
+                                //       //     apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
+                                //       //     mode: Mode.overlay, // Mode.overlay
+                                //       //     language: "en",
+                                //       //     radius: 10000000,
+                                //       //     strictbounds: false,
+                                //       //     components: [Component(Component.country, "pk")]);
 
-                                      Prediction prediction =
-                                          await PlacesAutocomplete.show(
-                                        context: context,
-                                        apiKey:
-                                            'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
-                                        radius: 10000000,
-                                        types: [],
-                                        strictbounds: false,
-                                        mode: Mode.overlay,
-                                        language: "en",
-                                        decoration: InputDecoration(
-                                          hintText: 'Search',
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            borderSide: BorderSide(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                        components: [
-                                          //  Component(Component.country, "fr"),
-                                        ],
-                                      );
-                                      //displayPrediction(p);
-                                      _getLatLngforDrop(prediction);
-                                    },
-                                    child: Card(
-                                      elevation: 10,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(20),
-                                          ),
-                                          side: BorderSide(
-                                              width: 5, color: Colors.white)),
-                                      child: Container(
-                                        height: 60.0,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          color: Colors.white,
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 30.0),
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.pin_drop),
-                                              SizedBox(width: 25),
-                                              Flexible(
-                                                child: Text('$addressForDrop',
-                                                    overflow: TextOverflow.fade,
-                                                    style: TextStyle(
-                                                        color: Colors.black54)),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                //       Prediction prediction =
+                                //           await PlacesAutocomplete.show(
+                                //         context: context,
+                                //         apiKey:
+                                //             'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
+                                //         radius: 10000000,
+                                //         types: [],
+                                //         strictbounds: false,
+                                //         mode: Mode.overlay,
+                                //         language: "en",
+                                //         decoration: InputDecoration(
+                                //           hintText: 'Search',
+                                //           focusedBorder: OutlineInputBorder(
+                                //             borderRadius:
+                                //                 BorderRadius.circular(20),
+                                //             borderSide: BorderSide(
+                                //               color: Colors.white,
+                                //             ),
+                                //           ),
+                                //         ),
+                                //         components: [
+                                //           //  Component(Component.country, "fr"),
+                                //         ],
+                                //       );
+                                //       //displayPrediction(p);
+                                //       _getLatLngforDrop(prediction);
+                                //     },
+                                //     child: Card(
+                                //       elevation: 10,
+                                //       shape: RoundedRectangleBorder(
+                                //           borderRadius: BorderRadius.all(
+                                //             Radius.circular(20),
+                                //           ),
+                                //           side: BorderSide(
+                                //               width: 5, color: Colors.white)),
+                                //       child: Container(
+                                //         height: 60.0,
+                                //         width: double.infinity,
+                                //         decoration: BoxDecoration(
+                                //           borderRadius:
+                                //               BorderRadius.circular(10.0),
+                                //           color: Colors.white,
+                                //         ),
+                                //         child: Padding(
+                                //           padding:
+                                //               const EdgeInsets.only(left: 30.0),
+                                //           child: Row(
+                                //             children: [
+                                //               Icon(Icons.pin_drop),
+                                //               SizedBox(width: 25),
+                                //               Flexible(
+                                //                 child: Text('$addressForDrop',
+                                //                     overflow: TextOverflow.fade,
+                                //                     style: TextStyle(
+                                //                         color: Colors.black54)),
+                                //               )
+                                //             ],
+                                //           ),
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                                 IconButton(
                                     splashColor: Colors.blue,
                                     icon: Icon(
@@ -505,12 +466,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         print('1243');
 
                                         Toast.show(
-                                            'Enter Pickup Location', context);
+                                          'Enter Pickup Location',
+                                        );
                                       } else if (addressForDrop ==
                                           'Drop Location') {
                                         print('123');
                                         Toast.show(
-                                            'Enter Drop Location', context);
+                                          'Enter Drop Location',
+                                        );
                                       } else {
                                         Constants.mainAdressPickup =
                                             addressForPickup;
@@ -559,6 +522,222 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ));
+  }
+
+  pickupLocation() {
+    return GooglePlaceAutoCompleteTextField(
+      textEditingController: pickUpcontroller,
+      googleAPIKey: Constants.api_key,
+      inputDecoration: InputDecoration(
+        hintText: "Enter Pickup Location",
+        border: InputBorder.none,
+        enabledBorder: InputBorder.none,
+      ),
+      debounceTime: 400,
+      //countries: ["in", "fr"],
+      isLatLngRequired: false,
+      getPlaceDetailWithLatLng: (pred.Prediction prediction) {
+        print("placeDetails" + prediction.lat.toString());
+      },
+
+      itemClick: (pred.Prediction prediction) {
+        controller.text = prediction.description ?? "";
+        controller.selection = TextSelection.fromPosition(
+            TextPosition(offset: prediction.description?.length ?? 0));
+
+        _getLatLngforDrop(prediction);
+      },
+      seperatedBuilder: Divider(),
+      // OPTIONAL// If you want to customize list view item builder
+      itemBuilder: (context, index, pred.Prediction prediction) {
+        return Container(
+          padding: EdgeInsets.all(10),
+          child: Row(
+            children: [
+              Icon(Icons.location_on),
+              SizedBox(
+                width: 7,
+              ),
+              Expanded(child: Text("${prediction.description ?? ""}"))
+            ],
+          ),
+        );
+      },
+
+      isCrossBtnShown: true,
+
+      // default 600 ms ,
+    );
+
+    // Card(
+    //   elevation: 3.0,
+    //   child: Container(
+    //     // width: double.infinity,
+    //      height: 50,
+    //     decoration: BoxDecoration(
+    //       color: Colors.white,
+    //       borderRadius: BorderRadius.all(
+    //         Radius.circular(5.0),
+    //       ),
+    //     ),
+    //     child: Center(
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.center,
+    //         children: [
+    //           Center(
+    //             child: Padding(
+    //               padding: const EdgeInsets.only(left: 8.0),
+    //               child: Container(
+    //                 padding: EdgeInsets.symmetric(horizontal: 20),
+    //                 child: GooglePlaceAutoCompleteTextField(
+    //                   textEditingController: pickUpcontroller,
+    //                   googleAPIKey: Constants.api_key,
+    //                   inputDecoration: InputDecoration(
+    //                     hintText: "Enter Pickup Location",
+    //                     border: InputBorder.none,
+    //                     enabledBorder: InputBorder.none,
+    //                   ),
+    //                   debounceTime: 400,
+    //                   //countries: ["in", "fr"],
+    //                   isLatLngRequired: false,
+    //                   getPlaceDetailWithLatLng: (pred.Prediction prediction) {
+    //                     print("placeDetails" + prediction.lat.toString());
+    //                   },
+
+    //                   itemClick: (pred.Prediction prediction) {
+    //                     controller.text = prediction.description ?? "";
+    //                     controller.selection = TextSelection.fromPosition(
+    //                         TextPosition(
+    //                             offset: prediction.description?.length ?? 0));
+
+    //                     _getLatLngforDrop(prediction);
+    //                   },
+    //                   seperatedBuilder: Divider(),
+    //                   // OPTIONAL// If you want to customize list view item builder
+    //                   itemBuilder:
+    //                       (context, index, pred.Prediction prediction) {
+    //                     return Container(
+    //                       padding: EdgeInsets.all(10),
+    //                       child: Row(
+    //                         children: [
+    //                           Icon(Icons.location_on),
+    //                           SizedBox(
+    //                             width: 7,
+    //                           ),
+    //                           Expanded(
+    //                               child:
+    //                                   Text("${prediction.description ?? ""}"))
+    //                         ],
+    //                       ),
+    //                     );
+    //                   },
+
+    //                   isCrossBtnShown: true,
+
+    //                   // default 600 ms ,
+    //                 ),
+    //               ),
+
+    //               //  Text(
+    //               //   '$addressForDrop',
+    //               //   overflow: TextOverflow.ellipsis,
+    //               //   style: TextStyle(
+    //               //       color: Colors.grey,
+    //               //       fontWeight: FontWeight.bold),
+    //               // ),
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
+  }
+
+  placesAutoCompleteTextField() {
+    return Card(
+      elevation: 3.0,
+      child: Container(
+        width: double.infinity,
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(5.0),
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: GooglePlaceAutoCompleteTextField(
+                      textEditingController: controller,
+                      googleAPIKey: Constants.api_key,
+                      inputDecoration: InputDecoration(
+                        hintText: "Enter Drop Location",
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                      ),
+                      debounceTime: 400,
+                      //countries: ["in", "fr"],
+                      isLatLngRequired: false,
+                      getPlaceDetailWithLatLng: (pred.Prediction prediction) {
+                        print("placeDetails" + prediction.lat.toString());
+                      },
+
+                      itemClick: (pred.Prediction prediction) {
+                        controller.text = prediction.description ?? "";
+                        controller.selection = TextSelection.fromPosition(
+                            TextPosition(
+                                offset: prediction.description?.length ?? 0));
+
+                        _getLatLngforDrop(prediction);
+                      },
+                      seperatedBuilder: Divider(),
+                      // OPTIONAL// If you want to customize list view item builder
+                      itemBuilder:
+                          (context, index, pred.Prediction prediction) {
+                        return Container(
+                          padding: EdgeInsets.all(10),
+                          child: Row(
+                            children: [
+                              Icon(Icons.location_on),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Expanded(
+                                  child:
+                                      Text("${prediction.description ?? ""}"))
+                            ],
+                          ),
+                        );
+                      },
+
+                      isCrossBtnShown: true,
+
+                      // default 600 ms ,
+                    ),
+                  ),
+
+                  //  Text(
+                  //   '$addressForDrop',
+                  //   overflow: TextOverflow.ellipsis,
+                  //   style: TextStyle(
+                  //       color: Colors.grey,
+                  //       fontWeight: FontWeight.bold),
+                  // ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   // searchandNavigate() {

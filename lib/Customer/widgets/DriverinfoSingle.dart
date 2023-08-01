@@ -75,7 +75,7 @@ class _DriverInfoSingleState extends State<DriverInfoSingle> {
     return json.decode(response.body); // returns a List type
   }
 
-  void khan() async {
+  void sendRequest() async {
 //    getJson();
     String _body = "";
 
@@ -359,7 +359,7 @@ class _DriverInfoSingleState extends State<DriverInfoSingle> {
                                   onPressed: () {
                                     setState(() {
                                       _isLoading = true;
-                                      khan();
+                                      sendRequest();
                                     });
                                   },
                                   style: OutlinedButton.styleFrom(

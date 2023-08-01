@@ -35,12 +35,12 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
   // Variables
   Size? _screenSize;
   int? _currentDigit;
-  int? _firstDigit;
-  int? _secondDigit;
-  int? _thirdDigit;
-  int? _fourthDigit;
-  int? _fifthDigit;
-  int? _sixthDigit;
+  String _firstDigit = '';
+  String _secondDigit = '';
+  String _thirdDigit = '';
+  String _fourthDigit = '';
+  String _fifthDigit = '';
+  String _sixthDigit = '';
 
   Timer? timer;
   int? totalTimeInSeconds;
@@ -58,7 +58,7 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
         left: 25,
         right: 25.0,
       ),
-      child: Text(
+      child: const Text(
         'Enter the OTP sent to your registered mobile number',
         style: TextStyle(
             color: Colors.black54, fontSize: 18, fontWeight: FontWeight.w500),
@@ -73,12 +73,12 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
     return new Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        _otpTextField(_firstDigit!),
-        _otpTextField(_secondDigit!),
-        _otpTextField(_thirdDigit!),
-        _otpTextField(_fourthDigit!),
-        _otpTextField(_fifthDigit!),
-        _otpTextField(_sixthDigit!),
+        _otpTextField(_firstDigit),
+        _otpTextField(_secondDigit),
+        _otpTextField(_thirdDigit),
+        _otpTextField(_fourthDigit),
+        _otpTextField(_fifthDigit),
+        _otpTextField(_sixthDigit),
       ],
     );
   }
@@ -117,13 +117,13 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
                     ),
                     child: Text(
                       "Verify Otp".toUpperCase(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                       ),
                     ),
                     onPressed: () {
-                      khan();
+                      sendOtp();
                       _isLoading = true;
                       // Navigator.push(
                       //   context,
@@ -276,18 +276,18 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
                       ),
                       onPressed: () {
                         setState(() {
-                          if (_sixthDigit != null) {
-                            _sixthDigit = null;
-                          } else if (_fifthDigit != null) {
-                            _fifthDigit = null;
-                          } else if (_fourthDigit != null) {
-                            _fourthDigit = null;
-                          } else if (_thirdDigit != null) {
-                            _thirdDigit = null;
-                          } else if (_secondDigit != null) {
-                            _secondDigit = null;
-                          } else if (_firstDigit != null) {
-                            _firstDigit = null;
+                          if (_sixthDigit != '') {
+                            _sixthDigit = '';
+                          } else if (_fifthDigit != '') {
+                            _fifthDigit = '';
+                          } else if (_fourthDigit != '') {
+                            _fourthDigit = '';
+                          } else if (_thirdDigit != '') {
+                            _thirdDigit = '';
+                          } else if (_secondDigit != '') {
+                            _secondDigit = '';
+                          } else if (_firstDigit != '') {
+                            _firstDigit = '';
                           }
                         });
                       }),
@@ -303,7 +303,7 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
     SharedPreferences pref1 = await SharedPreferences.getInstance();
     value = pref1.getString("user_id")!;
     var uri = Uri.parse(
-        'http://35.158.106.116/api/customers/verification?user_id=' + value);
+        '${Constants.baseUrl}customers/verification?user_id=' + value);
     print(otp);
     var request = http.MultipartRequest('POST', uri)..fields['code'] = otp;
 
@@ -317,10 +317,12 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
 
     final respStr = await response.stream.bytesToString();
 
+    print(json.decode(respStr));
+
     return json.decode(respStr);
   }
 
-  void khan() async {
+  void sendOtp() async {
 //    getJson();
 
     String _body = "";
@@ -352,14 +354,14 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
             context: context,
             builder: (c) {
               return AlertDialog(
-                title: Text("oops"),
+                title: const Text("oops"),
                 content: Text(values),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close"),
+                    child: const Text("Close"),
                   )
                 ],
               );
@@ -373,8 +375,9 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
             context: context,
             builder: (c) {
               return AlertDialog(
-                title: Text('Verification Successfull'),
-                content: Text("Now you can login with your new credentials"),
+                title: const Text('Verification Successfull'),
+                content:
+                    const Text("Now you can login with your new credentials"),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
@@ -387,7 +390,7 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
                       "Login",
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        color: Theme.of(context).colorScheme.secondary ,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   )
@@ -411,7 +414,7 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close"),
+                    child: const Text("Close"),
                   )
                 ],
               ));
@@ -422,8 +425,8 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
     String value = '';
     SharedPreferences pref1 = await SharedPreferences.getInstance();
     value = pref1.getString("user_id")!;
-    Uri apiUrl = Uri.parse(
-        'http://35.158.106.116/api/customers/resend_code?user_id=' + value);
+    Uri apiUrl =
+        Uri.parse('${Constants.baseUrl}customers/resend_code?user_id=' + value);
     //Constants.restId;
 
     Map<String, String> headers = {
@@ -471,14 +474,14 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
             context: context,
             builder: (c) {
               return AlertDialog(
-                title: Text("oops"),
+                title: const Text("oops"),
                 content: Text(values),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close"),
+                    child: const Text("Close"),
                   )
                 ],
               );
@@ -491,8 +494,8 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
             context: context,
             builder: (c) {
               return AlertDialog(
-                title: Text('Code sent Successfully'),
-                content: Text("Please check your email"),
+                title: const Text('Code sent Successfully'),
+                content: const Text("Please check your email"),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
@@ -502,7 +505,7 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
                       "OK",
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        color: Theme.of(context).colorScheme.secondary ,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   )
@@ -526,7 +529,7 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close"),
+                    child: const Text("Close"),
                   )
                 ],
               ));
@@ -547,8 +550,8 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
               });
             }
           });
-    _controller!.reverse(
-        from: _controller!.value == 0.0 ? 1.0 : _controller!.value);
+    _controller!
+        .reverse(from: _controller!.value == 0.0 ? 1.0 : _controller!.value);
     _startCountdown();
   }
 
@@ -586,13 +589,13 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
   }
 
   // Returns "Otp custom text field"
-  Widget _otpTextField(int digit) {
+  Widget _otpTextField(String digit) {
     return new Container(
       width: 35.0,
       height: 45.0,
       alignment: Alignment.center,
       child: new Text(
-        digit != null ? digit.toString() : "",
+        digit != "" ? digit.toString() : "",
         style: new TextStyle(
           fontSize: 30.0,
           color: Colors.black,
@@ -609,7 +612,8 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
   }
 
   // Returns "Otp keyboard input Button"
-  Widget _otpKeyboardInputButton({required String label, required VoidCallback onPressed}) {
+  Widget _otpKeyboardInputButton(
+      {required String label, required VoidCallback onPressed}) {
     return new Material(
       color: Colors.transparent,
       child: new InkWell(
@@ -636,7 +640,8 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
   }
 
   // Returns "Otp keyboard action Button"
-  _otpKeyboardActionButton({required Widget label, required VoidCallback onPressed}) {
+  _otpKeyboardActionButton(
+      {required Widget label, required VoidCallback onPressed}) {
     return new InkWell(
       onTap: onPressed,
       borderRadius: new BorderRadius.circular(40.0),
@@ -657,18 +662,18 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
   void _setCurrentDigit(int i) {
     setState(() {
       _currentDigit = i;
-      if (_firstDigit == null) {
-        _firstDigit = _currentDigit;
-      } else if (_secondDigit == null) {
-        _secondDigit = _currentDigit;
-      } else if (_thirdDigit == null) {
-        _thirdDigit = _currentDigit;
-      } else if (_fourthDigit == null) {
-        _fourthDigit = _currentDigit;
-      } else if (_fifthDigit == null) {
-        _fifthDigit = _currentDigit;
-      } else if (_sixthDigit == null) {
-        _sixthDigit = _currentDigit;
+      if (_firstDigit == '') {
+        _firstDigit = _currentDigit.toString();
+      } else if (_secondDigit == '') {
+        _secondDigit = _currentDigit.toString();
+      } else if (_thirdDigit == '') {
+        _thirdDigit = _currentDigit.toString();
+      } else if (_fourthDigit == '') {
+        _fourthDigit = _currentDigit.toString();
+      } else if (_fifthDigit == '') {
+        _fifthDigit = _currentDigit.toString();
+      } else if (_sixthDigit == '') {
+        _sixthDigit = _currentDigit.toString();
 
         otp = _firstDigit.toString() +
             _secondDigit.toString() +
@@ -689,17 +694,17 @@ class _OtpState extends State<Otp> with SingleTickerProviderStateMixin {
       _hideResendButton = true;
       totalTimeInSeconds = time;
     });
-    _controller!.reverse(
-        from: _controller!.value == 0.0 ? 1.0 : _controller!.value);
+    _controller!
+        .reverse(from: _controller!.value == 0.0 ? 1.0 : _controller!.value);
   }
 
   void clearOtp() {
-    _sixthDigit = null;
-    _fifthDigit = null;
-    _fourthDigit = null;
-    _thirdDigit = null;
-    _secondDigit = null;
-    _firstDigit = null;
+    _sixthDigit = '';
+    _fifthDigit = '';
+    _fourthDigit = '';
+    _thirdDigit = '';
+    _secondDigit = '';
+    _firstDigit = '';
     setState(() {});
   }
 }

@@ -44,6 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
     );
     //  .timeout(Duration(seconds: 20));
 
+    print(headers);
+    print(msg);
+    print(json.decode(response.body));
+
     return json.decode(response.body); // returns a List type
   }
 
@@ -77,12 +81,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius:
                         BorderRadius.circular(20.0)), //this right here
                 child: Container(
-                  height: 250,
+                 // height: 250,
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(height: 15),
                         Container(
@@ -145,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
         preferences.setString("created_at", _data['data']['created_at']);
         preferences.setString("name", _data['data']['name']);
         preferences.setString("username", _data['data']['username']);
-        preferences.setString("photo", _data['photo']);
+        preferences.setString("photo", _data['data']['photo']);
 
         setState(() {
           _isLoading = false;
@@ -181,6 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     // mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(height: 15),
                       Container(

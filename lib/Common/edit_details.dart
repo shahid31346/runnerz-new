@@ -100,7 +100,7 @@ class _EditDetailsState extends State<EditDetails> {
         });
   }
 
-  void khan() async {
+  void sendRequest() async {
 //    getJson();
 
     String _body = "";
@@ -482,7 +482,7 @@ class _EditDetailsState extends State<EditDetails> {
                                     onPressed: () {
                                       setState(() {
                                         _isLoading = true;
-                                        khan();
+                                        sendRequest();
                                       });
                                     }),
                           ),

@@ -197,7 +197,7 @@ class _DropMapState extends State<DropMap> {
     return json.decode(response.body); // returns a List type
   }
 
-  void khan() async {
+  void sendRequest() async {
 //    getJson();
     String _body = "";
 
@@ -666,7 +666,7 @@ class _DropMapState extends State<DropMap> {
                                 onPressed: () {
                                   setState(() {
                                     _isLoading = true;
-                                    khan();
+                                    sendRequest();
                                   });
                                 },
                               ),

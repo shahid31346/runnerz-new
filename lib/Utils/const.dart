@@ -25,7 +25,7 @@ class Constants {
   static Color primary = Color(0xff1fa2f2);
   static String currency = "\$";
   //static String baseUrl = 'http://35.158.106.116/api/';
-  static String baseUrl = 'https://gocourier.iaoai.io/';
+  static String baseUrl = 'https://gocourier.iaoai.io/api/';
 
   
   static String authToken =

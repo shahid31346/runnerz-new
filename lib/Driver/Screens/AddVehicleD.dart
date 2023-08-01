@@ -208,7 +208,7 @@ class _AddvehicleState extends State<Addvehicle> {
 
     // string to uri
     var uri = Uri.parse(
-        'http://35.158.106.116/api/vehicle/add_vehicle_process_one?user_id=7');
+        '${Constants.baseUrl}vehicle/add_vehicle_process_one?user_id=7');
 
     var request = new http.MultipartRequest("POST", uri);
 
