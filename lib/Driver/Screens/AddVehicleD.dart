@@ -208,19 +208,18 @@ class _AddvehicleState extends State<Addvehicle> {
 
     // string to uri
     var uri = Uri.parse(
-        '${Constants.baseUrl}vehicle/add_vehicle_process_one?user_id=7');
+        '${Constants.baseUrl}vehicle/add_vehicle_process_one?user_id=14');
 
     var request = new http.MultipartRequest("POST", uri);
 
     //vechile registration
-
     List<MultipartFile> newList = [];
     for (int i = 0; i < _imgs.length; i++) {
       var stream =
-          new http.ByteStream(DelegatingStream.typed(_imgs[i].openRead()));
+           http.ByteStream(DelegatingStream.typed(_imgs[i].openRead()));
       print(imagesName[i].toString() + _imgs[i].path);
       var length = await _imgs[i].length();
-      var multipartFile = new http.MultipartFile("reg_images[]", stream, length,
+      var multipartFile =  http.MultipartFile("reg_images[]", stream, length,
           filename: imagesName[i]);
       newList.add(multipartFile);
     }
@@ -344,19 +343,23 @@ class _AddvehicleState extends State<Addvehicle> {
             context: context,
             builder: (c) {
               return AlertDialog(
-                title: Text("oops"),
+                title: const Text("oops"),
                 content: Text(values),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close"),
+                    child: const Text("Close"),
                   )
                 ],
               );
             });
       } else {
+         setState(() {
+          _isLoading1 = false;
+          _isLoadingsave = false;
+        });
         messageAllert('Vechile details added successfully', 'Congratulation');
       }
     } catch (e) {
@@ -376,7 +379,7 @@ class _AddvehicleState extends State<Addvehicle> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close"),
+                    child: const Text("Close"),
                   )
                 ],
               ));
@@ -393,7 +396,7 @@ class _AddvehicleState extends State<Addvehicle> {
             actions: [
               CupertinoDialogAction(
                 isDefaultAction: false,
-                child: Column(
+                child: const Column(
                   children: <Widget>[
                     Text('Okay'),
                   ],
@@ -426,7 +429,7 @@ class _AddvehicleState extends State<Addvehicle> {
             child: Container(
               width: double.infinity,
               height: 50,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
@@ -439,8 +442,8 @@ class _AddvehicleState extends State<Addvehicle> {
                   Radius.circular(0.0),
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 12.0, left: 15.0),
+              child: const Padding(
+                padding: EdgeInsets.only(top: 12.0, left: 15.0),
                 child: Text(
                   'Add Vehicle',
                   style: TextStyle(
@@ -455,18 +458,18 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 28.0, left: 25.0, right: 20),
             child: Text(
               'Add vehicle details'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xff1fa2f2),
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
             ),
           ),
-          Divider(),
+          const Divider(),
           Padding(
             padding: const EdgeInsets.only(top: 10.0, left: 25.0, right: 20),
             child: Text(
               'Registration Number'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -478,7 +481,7 @@ class _AddvehicleState extends State<Addvehicle> {
               elevation: 3.0,
               child: Container(
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(5.0),
@@ -487,26 +490,26 @@ class _AddvehicleState extends State<Addvehicle> {
                 child: Form(
                   key: _formKey,
                   child: TextFormField(
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15.0,
                       color: Colors.black,
                     ),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
+                      contentPadding: const EdgeInsets.all(10.0),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.white,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.white,
                         ),
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                       hintText: "Enter Registration Number",
-                      hintStyle: TextStyle(fontSize: 15.0, color: Colors.grey),
+                      hintStyle: const TextStyle(fontSize: 15.0, color: Colors.grey),
                     ),
                     maxLines: 1,
                     controller: _registraionNo,
@@ -523,7 +526,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Registration Date'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -556,7 +559,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Icon(
+                              const Icon(
                                 Icons.date_range,
                                 size: 18.0,
                                 color: Colors.teal,
@@ -565,7 +568,7 @@ class _AddvehicleState extends State<Addvehicle> {
                                 padding: const EdgeInsets.only(left: 5.0),
                                 child: Text(
                                   "${registrationDate.toLocal()}".split(' ')[0],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.blue,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0),
@@ -576,7 +579,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         )
                       ],
                     ),
-                    Text(
+                    const Text(
                       "Registration Date",
                       style: TextStyle(
                           color: Colors.black54,
@@ -592,7 +595,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Registration Expiry Date'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -625,7 +628,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Icon(
+                              const Icon(
                                 Icons.date_range,
                                 size: 18.0,
                                 color: Colors.teal,
@@ -635,7 +638,7 @@ class _AddvehicleState extends State<Addvehicle> {
                                 child: Text(
                                   "${registrationExpiryDate.toLocal()}"
                                       .split(' ')[0],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.blue,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0),
@@ -646,7 +649,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         )
                       ],
                     ),
-                    Text(
+                    const Text(
                       "Expiry Date",
                       style: TextStyle(
                           color: Colors.black54,
@@ -662,7 +665,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Vehicle Registration images'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -696,8 +699,8 @@ class _AddvehicleState extends State<Addvehicle> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
                     child: Text(
                       'Upload',
                       style: TextStyle(color: Colors.black54, fontSize: 18),
@@ -713,7 +716,7 @@ class _AddvehicleState extends State<Addvehicle> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Choose',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -729,18 +732,18 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Driver License Details'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xff1fa2f2),
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
             ),
           ),
-          Divider(),
+          const Divider(),
           Padding(
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Driver license number'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -751,33 +754,33 @@ class _AddvehicleState extends State<Addvehicle> {
             child: Card(
               elevation: 3.0,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(5.0),
                   ),
                 ),
                 child: TextFormField(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15.0,
                     color: Colors.black,
                   ),
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10.0),
+                    contentPadding: const EdgeInsets.all(10.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     hintText: "Enter Driver license number",
-                    hintStyle: TextStyle(fontSize: 15.0, color: Colors.grey),
+                    hintStyle: const TextStyle(fontSize: 15.0, color: Colors.grey),
                   ),
                   maxLines: 1,
                   // obscureText: true,
@@ -790,7 +793,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'License issuance date'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -822,7 +825,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Icon(
+                              const Icon(
                                 Icons.date_range,
                                 size: 18.0,
                                 color: Colors.teal,
@@ -832,7 +835,7 @@ class _AddvehicleState extends State<Addvehicle> {
                                 child: Text(
                                   "${licenseIssuanceDate.toLocal()}"
                                       .split(' ')[0],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.blue,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0),
@@ -843,7 +846,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         )
                       ],
                     ),
-                    Text(
+                    const Text(
                       "Issuance Date",
                       style: TextStyle(
                           color: Colors.black54,
@@ -859,7 +862,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'License Expiry date'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -891,7 +894,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Icon(
+                              const Icon(
                                 Icons.date_range,
                                 size: 18.0,
                                 color: Colors.teal,
@@ -901,7 +904,7 @@ class _AddvehicleState extends State<Addvehicle> {
                                 child: Text(
                                   "${licenseExpiryDate.toLocal()}"
                                       .split(' ')[0],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.blue,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0),
@@ -912,7 +915,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         )
                       ],
                     ),
-                    Text(
+                    const Text(
                       "Expiry Date",
                       style: TextStyle(
                           color: Colors.black54,
@@ -928,7 +931,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Driving License Images'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -962,8 +965,8 @@ class _AddvehicleState extends State<Addvehicle> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
                     child: Text(
                       'Upload',
                       style: TextStyle(color: Colors.black54, fontSize: 18),
@@ -977,7 +980,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Constants.primary,
                         ),
-                        child: Text(
+                        child: const Text(
                           'Choose',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -996,19 +999,19 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Passport Details'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xff1fa2f2),
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
             ),
           ),
-          Divider(),
+          const Divider(),
 
           Padding(
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Passport issuance date'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -1041,7 +1044,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Icon(
+                              const Icon(
                                 Icons.date_range,
                                 size: 18.0,
                                 color: Colors.teal,
@@ -1050,7 +1053,7 @@ class _AddvehicleState extends State<Addvehicle> {
                                 padding: const EdgeInsets.only(left: 5.0),
                                 child: Text(
                                   "${passportIssuance.toLocal()}".split(' ')[0],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.blue,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0),
@@ -1061,7 +1064,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         )
                       ],
                     ),
-                    Text(
+                    const Text(
                       "Issuance Date",
                       style: TextStyle(
                           color: Colors.black54,
@@ -1077,7 +1080,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Passport expiry date'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -1109,7 +1112,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Icon(
+                              const Icon(
                                 Icons.date_range,
                                 size: 18.0,
                                 color: Colors.teal,
@@ -1118,7 +1121,7 @@ class _AddvehicleState extends State<Addvehicle> {
                                 padding: const EdgeInsets.only(left: 5.0),
                                 child: Text(
                                   "${passportExpiry.toLocal()}".split(' ')[0],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.blue,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0),
@@ -1129,7 +1132,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         )
                       ],
                     ),
-                    Text(
+                    const Text(
                       "Expiry Date",
                       style: TextStyle(
                           color: Colors.black54,
@@ -1145,7 +1148,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Passport Images'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -1179,8 +1182,8 @@ class _AddvehicleState extends State<Addvehicle> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
                     child: Text(
                       'Upload',
                       style: TextStyle(color: Colors.black54, fontSize: 18),
@@ -1194,7 +1197,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Constants.primary,
                         ),
-                        child: Text(
+                        child: const Text(
                           'Choose',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -1212,19 +1215,19 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Driver Visa Details'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xff1fa2f2),
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
             ),
           ),
-          Divider(),
+          const Divider(),
 
           Padding(
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Visa issuance date'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -1256,7 +1259,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Icon(
+                              const Icon(
                                 Icons.date_range,
                                 size: 18.0,
                                 color: Colors.teal,
@@ -1265,7 +1268,7 @@ class _AddvehicleState extends State<Addvehicle> {
                                 padding: const EdgeInsets.only(left: 5.0),
                                 child: Text(
                                   "${visaIssuance.toLocal()}".split(' ')[0],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.blue,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0),
@@ -1276,7 +1279,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         )
                       ],
                     ),
-                    Text(
+                    const Text(
                       "Issuance Date",
                       style: TextStyle(
                           color: Colors.black54,
@@ -1292,7 +1295,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Visa Expiry date'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -1324,7 +1327,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         Container(
                           child: Row(
                             children: <Widget>[
-                              Icon(
+                              const Icon(
                                 Icons.date_range,
                                 size: 18.0,
                                 color: Colors.teal,
@@ -1333,7 +1336,7 @@ class _AddvehicleState extends State<Addvehicle> {
                                 padding: const EdgeInsets.only(left: 5.0),
                                 child: Text(
                                   "${visaExpiry.toLocal()}".split(' ')[0],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.blue,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0),
@@ -1344,7 +1347,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         )
                       ],
                     ),
-                    Text(
+                    const Text(
                       "Expiry Date",
                       style: TextStyle(
                           color: Colors.black54,
@@ -1360,7 +1363,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
             child: Text(
               'Visa  Images'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -1394,8 +1397,8 @@ class _AddvehicleState extends State<Addvehicle> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
                     child: Text(
                       'Upload',
                       style: TextStyle(color: Colors.black54, fontSize: 18),
@@ -1408,7 +1411,7 @@ class _AddvehicleState extends State<Addvehicle> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Constants.primary,
                         ),
-                        child: Text(
+                        child: const Text(
                           'Choose',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -1427,13 +1430,13 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 28.0, left: 25.0, right: 20),
             child: Text(
               'Driver Phone Numbers'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xff1fa2f2),
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
             ),
           ),
-          Divider(),
+          const Divider(),
           Padding(
             padding: const EdgeInsets.only(left: 26.0),
             child: Text(
@@ -1448,7 +1451,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 10.0, left: 25.0, right: 20),
             child: Text(
               'Phone Number 1'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -1460,33 +1463,33 @@ class _AddvehicleState extends State<Addvehicle> {
               elevation: 3.0,
               child: Container(
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(5.0),
                   ),
                 ),
                 child: TextFormField(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15.0,
                     color: Colors.black,
                   ),
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10.0),
+                    contentPadding: const EdgeInsets.all(10.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     hintText: "Enter Phone Number",
-                    hintStyle: TextStyle(fontSize: 15.0, color: Colors.grey),
+                    hintStyle: const TextStyle(fontSize: 15.0, color: Colors.grey),
                   ),
                   maxLines: 1,
                   controller: _phoneNo1,
@@ -1498,7 +1501,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 10.0, left: 25.0, right: 20),
             child: Text(
               'Phone Number 2'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -1510,33 +1513,33 @@ class _AddvehicleState extends State<Addvehicle> {
               elevation: 3.0,
               child: Container(
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(5.0),
                   ),
                 ),
                 child: TextFormField(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15.0,
                     color: Colors.black,
                   ),
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10.0),
+                    contentPadding: const EdgeInsets.all(10.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     hintText: "Enter Phone Number",
-                    hintStyle: TextStyle(fontSize: 15.0, color: Colors.grey),
+                    hintStyle: const TextStyle(fontSize: 15.0, color: Colors.grey),
                   ),
                   maxLines: 1,
                   controller: _phoneNo2,
@@ -1548,7 +1551,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 10.0, left: 25.0, right: 20),
             child: Text(
               'Phone Number 3'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -1560,33 +1563,33 @@ class _AddvehicleState extends State<Addvehicle> {
               elevation: 3.0,
               child: Container(
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(5.0),
                   ),
                 ),
                 child: TextFormField(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15.0,
                     color: Colors.black,
                   ),
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10.0),
+                    contentPadding: const EdgeInsets.all(10.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     hintText: "Enter Phone Number",
-                    hintStyle: TextStyle(fontSize: 15.0, color: Colors.grey),
+                    hintStyle: const TextStyle(fontSize: 15.0, color: Colors.grey),
                   ),
                   maxLines: 1,
                   controller: _phoneNo3,
@@ -1598,7 +1601,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 10.0, left: 25.0, right: 20),
             child: Text(
               'Phone Number 4'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -1610,33 +1613,33 @@ class _AddvehicleState extends State<Addvehicle> {
               elevation: 3.0,
               child: Container(
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(5.0),
                   ),
                 ),
                 child: TextFormField(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15.0,
                     color: Colors.black,
                   ),
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10.0),
+                    contentPadding: const EdgeInsets.all(10.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     hintText: "Enter Phone Number",
-                    hintStyle: TextStyle(fontSize: 15.0, color: Colors.grey),
+                    hintStyle: const TextStyle(fontSize: 15.0, color: Colors.grey),
                   ),
                   maxLines: 1,
                   controller: _phoneNo4,
@@ -1648,7 +1651,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 10.0, left: 25.0, right: 20),
             child: Text(
               'Phone Number 5'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -1660,33 +1663,33 @@ class _AddvehicleState extends State<Addvehicle> {
               elevation: 3.0,
               child: Container(
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(5.0),
                   ),
                 ),
                 child: TextFormField(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15.0,
                     color: Colors.black,
                   ),
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10.0),
+                    contentPadding: const EdgeInsets.all(10.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     hintText: "Enter Phone Number",
-                    hintStyle: TextStyle(fontSize: 15.0, color: Colors.grey),
+                    hintStyle: const TextStyle(fontSize: 15.0, color: Colors.grey),
                   ),
                   maxLines: 1,
                   controller: _phoneNo5,
@@ -1698,7 +1701,7 @@ class _AddvehicleState extends State<Addvehicle> {
             padding: const EdgeInsets.only(top: 10.0, left: 25.0, right: 20),
             child: Text(
               'Phone Number 6'.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
@@ -1710,33 +1713,33 @@ class _AddvehicleState extends State<Addvehicle> {
               elevation: 3.0,
               child: Container(
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(5.0),
                   ),
                 ),
                 child: TextFormField(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15.0,
                     color: Colors.black,
                   ),
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10.0),
+                    contentPadding: const EdgeInsets.all(10.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     hintText: "Enter Phone Number",
-                    hintStyle: TextStyle(fontSize: 15.0, color: Colors.grey),
+                    hintStyle: const TextStyle(fontSize: 15.0, color: Colors.grey),
                   ),
                   maxLines: 1,
                   controller: _phoneNo6,
@@ -1754,18 +1757,18 @@ class _AddvehicleState extends State<Addvehicle> {
                 top: 20,
               ),
               child: _isLoadingsave
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton(
                       // shape: RoundedRectangleBorder(
                       //   borderRadius: BorderRadius.circular(10.0),
                       // ),
 
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xff1fa2f2)),
+                          backgroundColor: const Color(0xff1fa2f2)),
 
                       child: Text(
                         "next".toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                         ),
@@ -1801,7 +1804,7 @@ class _AddvehicleState extends State<Addvehicle> {
                 right: 5,
                 top: 5,
                 child: InkWell(
-                    child: Icon(
+                    child: const Icon(
                       Icons.remove_circle_outline,
                       size: 30,
                       color: Colors.red,
@@ -1829,13 +1832,13 @@ class _AddvehicleState extends State<Addvehicle> {
         selectedAssets: images,
         //cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
         materialOptions: MaterialOptions(
-          actionBarColor: Color(0xffabcdef),
+          actionBarColor: const Color(0xffabcdef),
           actionBarTitle: Constants.appname,
           maxImages: 4,
           enableCamera: true,
           allViewTitle: "All Photos",
           useDetailsView: false,
-          selectCircleStrokeColor: Color(0xff000000),
+          selectCircleStrokeColor: const Color(0xff000000),
         ),
       );
     } on Exception catch (e) {
@@ -1870,13 +1873,13 @@ class _AddvehicleState extends State<Addvehicle> {
         selectedAssets: images,
         //cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
         materialOptions: MaterialOptions(
-          actionBarColor: Color(0xffabcdef),
+          actionBarColor: const Color(0xffabcdef),
           actionBarTitle: Constants.appname,
           maxImages: 4,
           enableCamera: true,
           allViewTitle: "All Photos",
           useDetailsView: false,
-          selectCircleStrokeColor: Color(0xff000000),
+          selectCircleStrokeColor: const Color(0xff000000),
         ),
       );
     } on Exception catch (e) {
@@ -1919,7 +1922,7 @@ class _AddvehicleState extends State<Addvehicle> {
                 right: 5,
                 top: 5,
                 child: InkWell(
-                    child: Icon(
+                    child: const Icon(
                       Icons.remove_circle_outline,
                       size: 30,
                       color: Colors.red,
@@ -1949,13 +1952,13 @@ class _AddvehicleState extends State<Addvehicle> {
         selectedAssets: images,
         //cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
         materialOptions: MaterialOptions(
-          actionBarColor: Color(0xffabcdef),
+          actionBarColor: const Color(0xffabcdef),
           actionBarTitle: Constants.appname,
           maxImages: 4,
           enableCamera: true,
           allViewTitle: "All Photos",
           useDetailsView: false,
-          selectCircleStrokeColor: Color(0xff000000),
+          selectCircleStrokeColor: const Color(0xff000000),
         ),
       );
     } on Exception catch (e) {
@@ -1999,7 +2002,7 @@ class _AddvehicleState extends State<Addvehicle> {
                 right: 5,
                 top: 5,
                 child: InkWell(
-                    child: Icon(
+                    child: const Icon(
                       Icons.remove_circle_outline,
                       size: 30,
                       color: Colors.red,
@@ -2029,13 +2032,13 @@ class _AddvehicleState extends State<Addvehicle> {
         selectedAssets: images,
         //cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
         materialOptions: MaterialOptions(
-          actionBarColor: Color(0xffabcdef),
+          actionBarColor: const Color(0xffabcdef),
           actionBarTitle: Constants.appname,
           maxImages: 4,
           enableCamera: true,
           allViewTitle: "All Photos",
           useDetailsView: false,
-          selectCircleStrokeColor: Color(0xff000000),
+          selectCircleStrokeColor: const Color(0xff000000),
         ),
       );
     } on Exception catch (e) {
@@ -2078,7 +2081,7 @@ class _AddvehicleState extends State<Addvehicle> {
                 right: 5,
                 top: 5,
                 child: InkWell(
-                    child: Icon(
+                    child: const Icon(
                       Icons.remove_circle_outline,
                       size: 30,
                       color: Colors.red,

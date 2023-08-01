@@ -17,7 +17,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:google_places_flutter/model/prediction.dart' as pred;
 import 'package:location/location.dart' as loc;
 import 'package:runnerz/Customer/screens/packagess/add_package_one.dart';
-import 'package:runnerz/Customer/widgets/drawer.dart';  
+import 'package:runnerz/Customer/widgets/drawer.dart';
 import 'package:runnerz/Utils/base_appbar.dart';
 import 'package:runnerz/Utils/const.dart';
 import 'package:toast/toast.dart';
@@ -87,6 +87,13 @@ class _HomeScreenState extends State<HomeScreen> {
       longitudeForPickup = currentLocation!.longitude;
     });
     _center = LatLng(currentLocation!.latitude, currentLocation!.longitude);
+       _markers.clear();
+    final marker = Marker(
+      markerId: MarkerId("curr_loc"),
+      position: LatLng(currentLocation!.latitude, currentLocation!.longitude),
+      infoWindow: InfoWindow(title: 'Your Location'),
+    );
+    _markers["Current Location"] = marker;
 
     final coordinates = geo.Location(latitudeForPickup!, longitudeForPickup!);
     final addresses = await geocoder.findAddressesFromLocationCoordinates(
@@ -115,42 +122,74 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Future<void> _handlePressButton({required String destinationChecker}) async {
+    void onError(PlacesAutocompleteResponse response) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.errorMessage ?? 'Unknown error'),
+        ),
+      );
+    }
 
-  // void _getLocation() async {
-  //   var currentLocation = await Geolocator()
-  //       .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    final p = await PlacesAutocomplete.show(
+      context: context,
+      apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
+      radius: 10000000,
+      types: [],
+      strictbounds: false,
+      mode: Mode.overlay,
+      language: "en",
+    );
 
-  //   setState(() {
+    if (destinationChecker == 'pickup') {
+      await _getLatLngforPickup(p, ScaffoldMessenger.of(context));
+    } else {
+      await _getLatLngforDrop(p, ScaffoldMessenger.of(context));
+    }
+  }
 
-  //   });
-  // }
+  Future<void> _getLatLngforPickup(newWebServices.Prediction? p,
+      ScaffoldMessengerState messengerState) async {
+    if (p == null) {
+      return;
+    }
 
-  // void _getLatLngforPickup(Prediction prediction) async {
-  //   GoogleMapsPlaces _places = new GoogleMapsPlaces(
-  //       apiKey:
-  //           'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y'); //Same API_KEY as above
-  //   PlacesDetailsResponse detail =
-  //       await _places.getDetailsByPlaceId(prediction.placeId!);
-  //   setState(() {
-  //     latitudeForPickup = detail.result.geometry!.location.lat;
-  //     longitudeForPickup = detail.result.geometry!.location.lng;
-  //     addressForPickup = prediction.description!;
-  //     mainAdressPickup = prediction.description;
-  //   });
-  // }
+    // get detail (lat/lng)
+    final _places = GoogleMapsPlaces(
+      apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
+      // apiHeaders: await const GoogleApiHeaders().getHeaders(),
+    );
 
-  // void _getLatLngforDrop(Prediction prediction) async {
-  //   GoogleMapsPlaces _places = new GoogleMapsPlaces(
-  //       apiKey:
-  //           'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y'); //Same API_KEY as above
-  //   PlacesDetailsResponse detail =
-  //       await _places.getDetailsByPlaceId(prediction.placeId!);
-  //   setState(() {
-  //     latitudeForDrop = detail.result.geometry!.location.lat;
-  //     longitudeForDrop = detail.result.geometry!.location.lng;
-  //     addressForDrop = prediction.description!;
-  //   });
-  // }
+    final detail = await _places.getDetailsByPlaceId(p.placeId!);
+
+    setState(() {
+      latitudeForPickup = detail.result.geometry!.location.lat;
+      longitudeForPickup = detail.result.geometry!.location.lng;
+      addressForPickup = p.description!;
+      mainAdressPickup = p.description;
+    });
+  }
+
+  Future<void> _getLatLngforDrop(newWebServices.Prediction? p,
+      ScaffoldMessengerState messengerState) async {
+    if (p == null) {
+      return;
+    }
+
+    // get detail (lat/lng)
+    final _places = GoogleMapsPlaces(
+      apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
+      // apiHeaders: await const GoogleApiHeaders().getHeaders(),
+    );
+
+    final detail = await _places.getDetailsByPlaceId(p.placeId!);
+
+    setState(() {
+      latitudeForDrop = detail.result.geometry!.location.lat;
+      longitudeForDrop = detail.result.geometry!.location.lng;
+      addressForDrop = p.description!;
+    });
+  }
 
   @override
   void initState() {
@@ -235,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   target: LatLng(40.7128, -74.0060),
                   zoom: 5.0,
                 ),
-                //markers: _markers.values.toSet(),
+                markers: _markers.values.toSet(),
               ),
               Positioned(
                 bottom: 0.0,
@@ -282,43 +321,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Expanded(
                                   child: InkWell(
                                     onTap: () async {
-                                      // show input autocomplete with selected mode
-                                      // then get the Prediction selected
-                                      // Prediction prediction = await PlacesAutocomplete.show(
-                                      //     context: context,
-                                      //     apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
-                                      //     mode: Mode.overlay, // Mode.overlay
-                                      //     language: "en",
-                                      //     radius: 10000000,
-                                      //     strictbounds: false,
-                                      //     components: [Component(Component.country, "pk")]);
-
-                                      // Prediction prediction =
-                                      //     await PlacesAutocomplete.show(
-                                      //   context: context,
-                                      //   apiKey:
-                                      //       'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
-                                      //   radius: 10000000,
-                                      //   types: [],
-                                      //   strictbounds: false,
-                                      //   mode: Mode.overlay,
-                                      //   language: "en",
-                                      //   decoration: InputDecoration(
-                                      //     hintText: 'Search',
-                                      //     focusedBorder: OutlineInputBorder(
-                                      //       borderRadius:
-                                      //           BorderRadius.circular(20),
-                                      //       borderSide: BorderSide(
-                                      //         color: Colors.white,
-                                      //       ),
-                                      //     ),
-                                      //   ),
-                                      //   components: [
-                                      //     //  Component(Component.country, "fr"),
-                                      //   ],
-                                      // );
-                                      // //displayPrediction(p);
-                                      // _getLatLngforPickup(prediction);
+                                      _handlePressButton(
+                                          destinationChecker: 'pickup');
                                     },
                                     child: Card(
                                       elevation: 10,
@@ -376,7 +380,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           setState(() {
                                             currentLocLoader = true;
                                           });
-                                         
+
                                           getUserLocation();
                                         }),
                               ],
@@ -392,45 +396,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Expanded(
                                   child: InkWell(
                                     onTap: () async {
-                                      _handlePressButton();
-
-                                      // show input autocomplete with selected mode
-                                      // then get the Prediction selected
-                                      // Prediction prediction = await PlacesAutocomplete.show(
-                                      //     context: context,
-                                      //     apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
-                                      //     mode: Mode.overlay, // Mode.overlay
-                                      //     language: "en",
-                                      //     radius: 10000000,
-                                      //     strictbounds: false,
-                                      //     components: [Component(Component.country, "pk")]);
-
-                                      // Prediction prediction =
-                                      //     await PlacesAutocomplete.show(
-                                      //   context: context,
-                                      //   apiKey:
-                                      //       'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
-                                      //   radius: 10000000,
-                                      //   types: [],
-                                      //   strictbounds: false,
-                                      //   mode: Mode.overlay,
-                                      //   language: "en",
-                                      //   decoration: InputDecoration(
-                                      //     hintText: 'Search',
-                                      //     focusedBorder: OutlineInputBorder(
-                                      //       borderRadius:
-                                      //           BorderRadius.circular(20),
-                                      //       borderSide: BorderSide(
-                                      //         color: Colors.white,
-                                      //       ),
-                                      //     ),
-                                      //   ),
-                                      //   components: [
-                                      //     //  Component(Component.country, "fr"),
-                                      //   ],
-                                      // );
-                                      // //displayPrediction(p);
-                                      // _getLatLngforDrop(prediction);
+                                      _handlePressButton(
+                                          destinationChecker: 'destination');
                                     },
                                     child: Card(
                                       elevation: 10,
@@ -482,6 +449,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                         Toast.show(
                                           'Enter Pickup Location',
+                                          
                                         );
                                       } else if (addressForDrop ==
                                           'Drop Location') {
@@ -490,6 +458,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           'Enter Drop Location',
                                         );
                                       } else {
+
                                         Constants.mainAdressPickup =
                                             addressForPickup;
                                         Constants.addressForDrop =
@@ -537,51 +506,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ));
-  }
-
-  Future<void> _handlePressButton() async {
-    void onError(PlacesAutocompleteResponse response) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(response.errorMessage ?? 'Unknown error'),
-        ),
-      );
-    }
-
-    final p = await PlacesAutocomplete.show(
-      context: context,
-      apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
-      radius: 10000000,
-      types: [],
-      strictbounds: false,
-      mode: Mode.overlay,
-      language: "en",
-    );
-    await displayPrediction(p, ScaffoldMessenger.of(context));
-  }
-
-  Future<void> displayPrediction(newWebServices.Prediction? p,
-      ScaffoldMessengerState messengerState) async {
-    if (p == null) {
-      return;
-    }
-
-    // get detail (lat/lng)
-    final _places = GoogleMapsPlaces(
-      apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
-      // apiHeaders: await const GoogleApiHeaders().getHeaders(),
-    );
-
-    final detail = await _places.getDetailsByPlaceId(p.placeId!);
-    final geometry = detail.result.geometry!;
-    final lat = geometry.location.lat;
-    final lng = geometry.location.lng;
-
-    messengerState.showSnackBar(
-      SnackBar(
-        content: Text('${p.description} - $lat/$lng'),
-      ),
-    );
   }
 
   // searchandNavigate() {

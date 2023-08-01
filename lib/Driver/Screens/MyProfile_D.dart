@@ -28,7 +28,7 @@ class _ProfileScreenDState extends State<ProfileScreenD> {
     value = pref1.getString("user_id")!;
 
     Uri apiUrl = Uri.parse(
-        'https://gocourier.iaoai.io/api/customers/driver_profile_info?driver_id=' +
+        '${Constants.baseUrl}customers/driver_profile_info?driver_id=' +
             value);
     //Constants.baseUrl + 'customers/driver_profile_info?driver_id=' + value;
 
