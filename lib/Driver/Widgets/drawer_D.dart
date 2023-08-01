@@ -79,11 +79,11 @@ class _AppDrawerDState extends State<AppDrawerD> {
       onlineStatus = '15';
       pref1.setBool("online_status", true);
 
-     // _toggleListening(value);
+      // _toggleListening(value);
     } else {
       onlineStatus = '16';
       pref1.setBool("online_status", false);
-     // _toggleListening(value);
+      // _toggleListening(value);
     }
 
     Uri apiUrl = Uri.parse(Constants.baseUrl +
@@ -177,6 +177,27 @@ class _AppDrawerDState extends State<AppDrawerD> {
     }
   }
 
+  void initState() {
+    super.initState();
+    _loadSwitchState();
+  }
+
+  void _loadSwitchState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _isSwitched = prefs.getBool('switch_state') ?? false;
+    });
+  }
+
+  void _toggleSwitch(bool newValue) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _isSwitched = newValue;
+    });
+
+    prefs.setBool('switch_state', newValue);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -251,16 +272,12 @@ class _AppDrawerDState extends State<AppDrawerD> {
           Divider(),
 
           _createDrawerItem(
-            icon: Icons.account_balance_wallet,
-            text: 'track',
-            onTap: (){
-
-            }
-            // onTap: () => Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => Dummy()),
-            // ),
-          ),
+              icon: Icons.account_balance_wallet, text: 'track', onTap: () {}
+              // onTap: () => Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => Dummy()),
+              // ),
+              ),
           Divider(),
           _createDrawerItem(
               icon: Icons.card_membership,
@@ -451,23 +468,25 @@ class _AppDrawerDState extends State<AppDrawerD> {
                 Row(
                   children: <Widget>[
                     Column(
-                      children: <Widget>[
-                        Text(
-                          "Go online".toUpperCase(),
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 10.0,
-                              fontWeight: FontWeight.w500),
-                        ),
+                      children: [
+                        _isSwitched
+                            ? Text(
+                                "Go offline".toUpperCase(),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10.0,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            : Text(
+                                "Go online".toUpperCase(),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10.0,
+                                    fontWeight: FontWeight.w500),
+                              ),
                         Switch(
                           value: _isSwitched,
-                          onChanged: (value) {
-                            setState(() {
-                              _isSwitched = value;
-                              print(_isSwitched);
-                              onlineStatusGetter();
-                            });
-                          },
+                          onChanged: _toggleSwitch,
                           activeTrackColor: Color(0xff7eb923),
                           activeColor: Colors.green,
                         ),
@@ -511,7 +530,8 @@ class _AppDrawerDState extends State<AppDrawerD> {
   }
 
   Widget _createDrawerItem(
-      {required IconData icon, required String text,
+      {required IconData icon,
+      required String text,
       required GestureTapCallback onTap}) {
     return ListTile(
       title: Row(
