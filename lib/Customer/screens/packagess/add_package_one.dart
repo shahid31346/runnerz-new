@@ -1821,8 +1821,9 @@ class _AddPackageOneState extends State<AddPackageOne> {
       imagesName.add(fileName);
       _imgs.add(File(path));
     }
-      setState(() {});
-
+ 
+    setState(() {});
     if (!mounted) return;
+
   }
 }

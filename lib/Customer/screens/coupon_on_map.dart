@@ -187,10 +187,11 @@ class _CouponMapState extends State<CouponMap> {
     _packageid = pref1.getString("package_id")!;
     _identifier = pref1.getString("identifier")!;
 
-    Uri apiUrl = Uri.parse(Constants.baseUrl +
-        'packages/add_package_process_six?user_id=' +
-        value +
-        '&package_id=$_identifier');
+    Uri apiUrl = Uri.parse(
+        '${Constants.baseUrl}packages/add_package_process_six?user_id=$value&package_id=$_identifier');
+
+    print(
+        '${Constants.baseUrl}packages/add_package_process_six?user_id=$value&package_id=$_identifier');
     Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Authorization': Constants.authToken,
@@ -204,6 +205,9 @@ class _CouponMapState extends State<CouponMap> {
     final msg = jsonEncode({
       "amount": sendinAmount,
     });
+
+    print(msg);
+
 
     http.Response response = await http.post(
       apiUrl,
@@ -327,7 +331,7 @@ class _CouponMapState extends State<CouponMap> {
                     elevation: 3.0,
                     child: Container(
                       width: double.infinity,
-                      height: 44,
+                      height: 50,
                       decoration: BoxDecoration(
                         color: Color(0xffececec),
                         borderRadius: BorderRadius.all(
@@ -582,9 +586,7 @@ class _CouponMapState extends State<CouponMap> {
                         padding: const EdgeInsets.only(
                             left: 23.0, right: 23.0, top: 10, bottom: 5),
                         child: ElevatedButton(
- 
-
-                                 style: ElevatedButton.styleFrom(
+                          style: ElevatedButton.styleFrom(
                             backgroundColor: Constants.primary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),

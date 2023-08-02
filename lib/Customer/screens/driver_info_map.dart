@@ -36,10 +36,10 @@ class _DriverInfoMapState extends State<DriverInfoMap> {
   int _index = 0;
 
   Future<Map> _getJson() async {
-    String vechiletype = '';
+    // String vechiletype = '';
 
-    SharedPreferences prefv = await SharedPreferences.getInstance();
-    vechiletype = prefv.getString("vechile_id")!;
+    // SharedPreferences prefv = await SharedPreferences.getInstance();
+    // vechiletype = prefv.getString("vechile_id")!;
 
     Uri apiUrl = Uri.parse(Constants.baseUrl +
         'customers/fetch_driver_by_vehicle_type?vehicle_type_id=1'); // +
@@ -196,12 +196,12 @@ class _DriverInfoMapState extends State<DriverInfoMap> {
 
                               return DriverInfoSingle(
                                 name: cat.name,
-                                vehicleName: cat.vehicleName,
-                                vehicleNumber: cat.vehicleNumber,
-                                phone: cat.phone,
+                                vehicleName: cat.vehicleName ?? '',
+                                vehicleNumber: cat.vehicleNumber ?? '',
+                                phone: cat.phone ?? '',
                                 email: cat.email,
-                                profielPic: cat.profielPic,
-                                rating: cat.rating,
+                                profielPic: cat.profielPic ?? '',
+                                rating: cat.rating ?? '',
                                 id: cat.id,
                               );
                             },

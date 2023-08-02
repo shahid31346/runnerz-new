@@ -877,9 +877,12 @@ class _MyFormmState extends State<MyFormmss> {
         setState(() {
           _isLoading = false;
         });
+        
 
         print('donee');
         Navigator.pop(context);
+    ToastContext().init(context);
+
         Toast.show(
           'Ride Cancelled Successfully',
         );
@@ -1096,6 +1099,8 @@ class _MyFormmState extends State<MyFormmss> {
                                   backgroundColor: Constants.primary,
                                 ),
                                 onPressed: () {
+    ToastContext().init(context);
+
                                   setState(() {
                                     if (value != 'foo') {
                                       _isLoading = true;
@@ -1218,9 +1223,12 @@ class _DriverRAtingBoxxState extends State<DriverRAatingBoxxx> {
         setState(() {
           _isLoading = false;
         });
+    ToastContext().init(context);
 
         print('donee');
         Navigator.pop(context);
+    ToastContext().init(context);
+
         Toast.show(
           'Ride Cancelled Successfully',
         );

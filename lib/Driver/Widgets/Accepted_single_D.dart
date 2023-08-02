@@ -112,6 +112,8 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
               );
             });
       } else {
+    ToastContext().init(context);
+
         setState(() {
           Toast.show(
             'Package delivery is in progress',
@@ -597,6 +599,8 @@ class _MyFormState extends State<MyForm> {
               );
             });
       } else {
+    ToastContext().init(context);
+
         setState(() {
           _isLoading = false;
         });
@@ -819,6 +823,8 @@ class _MyFormState extends State<MyForm> {
                                   backgroundColor: Constants.primary,
                                 ),
                                 onPressed: () {
+    ToastContext().init(context);
+
                                   setState(() {
                                     if (value != 'foo') {
                                       _isLoading = true;
@@ -931,6 +937,8 @@ class _DriverRAtingBoxState extends State<DriverRAatingBox> {
               );
             });
       } else {
+    ToastContext().init(context);
+
         setState(() {
           _isLoading = false;
         });
