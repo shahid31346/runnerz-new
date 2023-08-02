@@ -15,14 +15,15 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  bool loading = false;
+  bool loading = true;
   bool apiCalled = false;
   UserDetail? detail;
 
   Future<Map> _getJson() async {
     String value = '';
     SharedPreferences pref1 = await SharedPreferences.getInstance();
-    print(value);
+    value = pref1.getString("user_id")!;
+
     Uri apiUrl = Uri.parse(
         Constants.baseUrl + 'customers/get_user_detail?user_id=' + value);
 
@@ -36,31 +37,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
       headers: headers,
     );
 
+    print(apiUrl);
     return json.decode(response.body); // returns a List type
   }
 
+  List user = [];
+
   _getDetail() async {
     setState(() {
-      loading = true;
       apiCalled = true;
     });
     try {
-      Map _data1 = await _getJson();
-      print(_data1['user'][0]);
+      Map? _data2 = await _getJson();
 
-      if (_data1['user'] is List) {
-        UserDetailsResponse prodDetailResponse =
-            UserDetailsResponse.fromJson(_data1);
-        setState(() {
-          loading = false;
-          detail = prodDetailResponse.data![0];
-        });
-      } else {
-        setState(() {
-          detail = UserDetail();
-          loading = false;
-        });
-      }
+      user = _data2['user'];
+      print("valueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+      print(user);
+
+      setState(() {
+        loading = false;
+      });
     } catch (e) {
       setState(() {
         detail = null;
@@ -73,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     // TODO: implement initState
 
-    //_getDetail();
+    _getDetail();
   }
 
   @override
@@ -87,279 +83,275 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: BaseAppBar(
         appBar: AppBar(),
       ),
-      body: _getDetailWidget(context),
+      body: loading
+          ? Center(child: CircularProgressIndicator())
+          : _getDetailWidget(context),
     );
   }
 
   Widget _getDetailWidget(BuildContext context) {
-    if (!loading) {
-      return Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: ListView(
-          shrinkWrap: true,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 0.0, left: 0.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(0.0, 1.0), //(x,y)
-                          blurRadius: 6.0,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(0.0),
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: ListView(
+        shrinkWrap: true,
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 0.0, left: 0.0),
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0.0, 1.0), //(x,y)
+                        blurRadius: 6.0,
                       ),
+                    ],
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(0.0),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 12.0, left: 15.0),
-                      child: Text(
-                        'My Profile',
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 12.0, left: 15.0),
+                    child: Text(
+                      'My Profile',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-                Stack(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 25.0),
-                      child: Center(
-                        child: ClipOval(
-                          child: Image.network(
-                            "${detail!.profilePic}",
-                            height: 150,
-                            width: 150,
-                            fit: BoxFit.cover,
-                          ),
+              ),
+              Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 25.0),
+                    child: Center(
+                      child: ClipOval(
+                        child: Image.network(
+                          "${user[0]['photo'].toString()}",
+                          height: 150,
+                          width: 150,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
+                  ),
 
-                    //  CircleAvatar(
-                    //       radius: 20,
-                    //       backgroundImage: AssetImage(
-                    //         'assets/splash_screen.jpg',
-                    //       ),
-                    //     ),
+                  //  CircleAvatar(
+                  //       radius: 20,
+                  //       backgroundImage: AssetImage(
+                  //         'assets/splash_screen.jpg',
+                  //       ),
+                  //     ),
 
-                    // Positioned(
-                    //   right: -10.0,
-                    //   bottom: 3.0,
-                    //   child: RawMaterialButton(
-                    //     onPressed: null,
-                    //     fillColor: Colors.white,
-                    //     shape: CircleBorder(),
-                    //     elevation: 4.0,
-                    //     child: Padding(
-                    //       padding: EdgeInsets.all(5),
-                    //       child: Icon(Icons.favorite),
-                    //     ),
-                    //   ),
-                    // ),
+                  // Positioned(
+                  //   right: -10.0,
+                  //   bottom: 3.0,
+                  //   child: RawMaterialButton(
+                  //     onPressed: null,
+                  //     fillColor: Colors.white,
+                  //     shape: CircleBorder(),
+                  //     elevation: 4.0,
+                  //     child: Padding(
+                  //       padding: EdgeInsets.all(5),
+                  //       child: Icon(Icons.favorite),
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 15.0, right: 15.0, top: 50),
+                child: Divider(
+                  thickness: 1.0,
+                  color: Colors.black26,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25, top: 8.0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.phone,
+                      color: Colors.grey,
+                      size: 40,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 11),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Mobile',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: Colors.black45,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 2.0),
+                            child: Text(
+                              "${user[0]['phone'].toString()}",
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 15.0, right: 15.0, top: 50),
-                  child: Divider(
-                    thickness: 1.0,
-                    color: Colors.black26,
-                  ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0),
+                child: Divider(
+                  thickness: 1.0,
+                  color: Colors.black26,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 25, top: 8.0),
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.phone,
-                        color: Colors.grey,
-                        size: 40,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 11),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Mobile',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Colors.black45,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 2.0),
-                              child: Text(
-                                "${detail!.mobileNo}",
-                                style: TextStyle(
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0),
-                  child: Divider(
-                    thickness: 1.0,
-                    color: Colors.black26,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 25, top: 10.0),
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.email,
-                        color: Colors.grey,
-                        size: 40,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 18),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Email ID',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Colors.black45,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 2.0),
-                              child: Text(
-                                "${detail!.email}",
-                                style: TextStyle(
-                                    color: Color(0xff1fa2f2),
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 15.0, right: 15.0, top: 11),
-                  child: Divider(
-                    thickness: 1.0,
-                    color: Colors.black26,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 6.0),
-                  child: Container(
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: SizedBox(
-                            // width: double.infinity,
-                            height: 47, // match_parent
-
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20.0, right: 15.0),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(0xff1fa2f2),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                ),
-                                child: Text(
-                                  "Edit Details",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => EditDetails()),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: SizedBox(
-                            // width: double.infinity,
-                            height: 47, // match_parent
-
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 15.0, right: 20.0),
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      side: BorderSide(
-                                          color: Colors.grey, width: 2)),
-                                  backgroundColor: Colors.white,
-                                  textStyle: TextStyle(color: Colors.black),
-                                  padding: EdgeInsets.all(8.0),
-                                ),
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ChangePassword()),
-                                  );
-                                },
-                                child: Text(
-                                  "Change Password".toUpperCase(),
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25, top: 10.0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.email,
+                      color: Colors.grey,
+                      size: 40,
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Email ID',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: Colors.black45,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 2.0),
+                            child: Text(
+                              "${user[0]['email'].toString()}",
+                              style: TextStyle(
+                                  color: Color(0xff1fa2f2),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 15.0, right: 15.0, top: 11),
+                child: Divider(
+                  thickness: 1.0,
+                  color: Colors.black26,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 6.0),
+                child: Container(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: SizedBox(
+                          // width: double.infinity,
+                          height: 47, // match_parent
+
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 15.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xff1fa2f2),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                              child: Text(
+                                "Edit Details",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EditDetails()),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          // width: double.infinity,
+                          height: 47, // match_parent
+
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 15.0, right: 20.0),
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    side: BorderSide(
+                                        color: Colors.grey, width: 2)),
+                                backgroundColor: Colors.white,
+                                textStyle: TextStyle(color: Colors.black),
+                                padding: EdgeInsets.all(8.0),
+                              ),
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChangePassword()),
+                                );
+                              },
+                              child: Text(
+                                "Change Password".toUpperCase(),
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            )
-          ],
-        ),
-      );
-    } else {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    }
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
 }
 

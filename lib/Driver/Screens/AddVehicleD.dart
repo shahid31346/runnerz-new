@@ -1873,7 +1873,7 @@ class _AddvehicleState extends State<Addvehicle> {
       error = e.toString();
     }
 
-    if (!mounted) return;
+
 
     setState(() {
       images = resultList;
@@ -1890,6 +1890,10 @@ class _AddvehicleState extends State<Addvehicle> {
       imagesName.add(fileName);
       _imgs.add(File(path));
     }
+       setState(() {
+      
+    });
+     if (!mounted) return;
   }
 
   Future<void> vechilelicenseloadAssets() async {
@@ -1914,7 +1918,7 @@ class _AddvehicleState extends State<Addvehicle> {
       error = e.toString();
     }
 
-    if (!mounted) return;
+
 
     setState(() {
       imagesLicense = resultList1;
@@ -1931,6 +1935,10 @@ class _AddvehicleState extends State<Addvehicle> {
       imagesNameLicense.add(fileName);
       _imgsLicense.add(File(path));
     }
+       setState(() {
+      
+    });
+     if (!mounted) return;
   }
 
   Widget buildGridViewLicense() {
@@ -1993,7 +2001,7 @@ class _AddvehicleState extends State<Addvehicle> {
       error = e.toString();
     }
 
-    if (!mounted) return;
+   
 
     setState(() {
       imagesVisa = resultList1;
@@ -2011,6 +2019,10 @@ class _AddvehicleState extends State<Addvehicle> {
       imagesNameVisa.add(fileName);
       _imgsVisa.add(File(path));
     }
+    setState(() {
+      
+    });
+     if (!mounted) return;
   }
 
   Widget buildGridViewVisa() {
