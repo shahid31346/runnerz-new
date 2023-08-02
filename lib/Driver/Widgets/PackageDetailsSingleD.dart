@@ -134,6 +134,8 @@ class _PackageDetailSingleDState extends State<PackageDetailSingleD> {
               );
             });
       } else {
+    ToastContext().init(context);
+
         setState(() {
           Toast.show(
             'Package Accepted Successfully',

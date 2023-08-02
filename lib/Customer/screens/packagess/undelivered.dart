@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:runnerz/Common/listCons/undeliveredCons.dart';
+import 'package:runnerz/Common/listCons/undelivered_model.dart';
 import 'package:runnerz/Customer/screens/packagess/add_package_one.dart';
 import 'package:runnerz/Customer/widgets/undeliveredicon.dart';
 import 'package:runnerz/Utils/const.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Undelivered extends StatefulWidget {
@@ -34,12 +36,12 @@ class UndeliveredState extends State<Undelivered> {
     return json.decode(response.body); // returns a List type
   }
 
-  Future<List<UnDeliveredCons>> getUndelivered() async {
+  Future<List<UndeliveredData>> getUndelivered() async {
     Map _data = await getJson();
     print(_data);
 
-    UndeliveredResponse prodResponse = UndeliveredResponse.fromJson(_data);
-    if (prodResponse.status == 'SUCCESS') return prodResponse.data!;
+    UnDeliveredModel dataResponse = UnDeliveredModel.fromJson(_data);
+    if (dataResponse.status == 'SUCCESS') return dataResponse.data;
 
     return [];
   }
@@ -119,34 +121,34 @@ class UndeliveredState extends State<Undelivered> {
               ),
             ),
             Expanded(
-              child: FutureBuilder<List<UnDeliveredCons>>(
+              child: FutureBuilder<List<UndeliveredData>>(
                 future: getUndelivered(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done ||
                       snapshot.hasData) {
                     if (snapshot.data!.length > 0) {
-                      List<UnDeliveredCons> cateee = snapshot.data!;
+                      List<UndeliveredData> items = snapshot.data!;
                       return ListView.builder(
                         shrinkWrap: true,
                         primary: false,
                         //physics: NeverScrollableScrollPhysics(),
-                        itemCount: cateee == null ? 0 : cateee.length,
+                        itemCount: items == null ? 0 : items.length,
                         itemBuilder: (BuildContext context, int index) {
-                          UnDeliveredCons cat = cateee[index];
+                          UndeliveredData cat = items[index];
 
                           return UndeliveredSingle(
-                            packageId: cat.packageId,
-                            profilePic: cat.profielPic,
+                            packageId: cat.id,
+                            profilePic: cat.driverImage,
                             driverName: cat.driverName,
-                            vechilename: cat.vechileName,
+                            vechilename: cat.vehicleName,
                             mobileNo: cat.phone,
                             email: cat.email,
-                            pickUpLocation: cat.pickUpLocation,
-                            dropLocation: cat.dropLocation,
+                            pickUpLocation: cat.pickupAddress,
+                            dropLocation: cat.dropAddress,
                             date: cat.pickTime,
                             time: cat.pickDate,
-                            totalAmount: cat.amount,
-                            couponapplied: cat.couponCode,
+                            totalAmount: cat.farePrice,
+                            couponapplied: 'false',
                           );
                         },
                       );
@@ -178,7 +180,7 @@ class UndeliveredResponse {
   final List<UnDeliveredCons>? data;
   final String status;
 
-  UndeliveredResponse({ this.data, required this.status});
+  UndeliveredResponse({this.data, required this.status});
 
   factory UndeliveredResponse.fromJson(Map<dynamic, dynamic> json) {
     return UndeliveredResponse(

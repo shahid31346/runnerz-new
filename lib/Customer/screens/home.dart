@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
       longitudeForPickup = currentLocation!.longitude;
     });
     _center = LatLng(currentLocation!.latitude, currentLocation!.longitude);
-       _markers.clear();
+    _markers.clear();
     final marker = Marker(
       markerId: MarkerId("curr_loc"),
       position: LatLng(currentLocation!.latitude, currentLocation!.longitude),
@@ -198,6 +198,12 @@ class _HomeScreenState extends State<HomeScreen> {
     // getUserLocation();
     getUserLocation();
     //_getLocation();
+  }
+
+  @override
+  void dispose() {
+    mapController!.dispose();
+    super.dispose();
   }
 
   messageAllertExit(String msg, String ttl) {
@@ -443,13 +449,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: Colors.blue,
                                     ),
                                     onPressed: () {
+    ToastContext().init(context);
+
                                       if (addressForPickup ==
                                           'PickUp Location') {
                                         print('1243');
 
                                         Toast.show(
                                           'Enter Pickup Location',
-                                          
                                         );
                                       } else if (addressForDrop ==
                                           'Drop Location') {
@@ -458,11 +465,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                           'Enter Drop Location',
                                         );
                                       } else {
-
                                         Constants.mainAdressPickup =
                                             addressForPickup;
                                         Constants.addressForDrop =
-                                            mainAdressPickup;
+                                            addressForDrop;
                                         Constants.latitudeForPickup =
                                             latitudeForPickup;
                                         Constants.longitudeForPickup =

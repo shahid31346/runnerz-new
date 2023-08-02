@@ -2,21 +2,21 @@ class DriverinfoCons {
   final String id;
   final String name;
   final String email;
-  final String phone;
-  final String profielPic;
-  final String rating;
-  final String vehicleName;
-  final String vehicleNumber;
+  final String? phone;
+  final String? profielPic;
+  final String? rating;
+  final String? vehicleName;
+  final String? vehicleNumber;
 
   DriverinfoCons({
     required this.id,
     required this.name,
     required this.email,
-    required this.phone,
-    required this.profielPic,
-    required this.rating,
-    required this.vehicleName,
-    required this.vehicleNumber,
+     this.phone,
+     this.profielPic,
+     this.rating,
+     this.vehicleName,
+     this.vehicleNumber,
   });
 
   factory DriverinfoCons.fromJson(Map<String, dynamic> json) {
@@ -26,7 +26,7 @@ class DriverinfoCons {
       email: json['email'],
       phone: json['phone'],
       profielPic: json['photo'],
-      rating: json['rating'],
+      rating: json['rating'] ??'',
       vehicleName: json['vehicle_name'],
       vehicleNumber: json['vehicle_number'],
     );

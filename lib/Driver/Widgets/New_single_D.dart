@@ -132,6 +132,10 @@ class _NewSingleDState extends State<NewSingleD> {
               );
             });
       } else {
+    ToastContext().init(context);
+
+    ToastContext().init(context);
+
         setState(() {
           if (status == '7') {
             Toast.show(

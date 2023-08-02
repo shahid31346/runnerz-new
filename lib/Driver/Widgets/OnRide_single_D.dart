@@ -99,6 +99,8 @@ class _OnRideSingleDState extends State<OnRideSingleD> {
               );
             });
       } else {
+    ToastContext().init(context);
+
         setState(() {});
 
         print('donee');
