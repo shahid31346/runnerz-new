@@ -60,16 +60,16 @@ class _DeliveredSingleState extends State<DeliveredSingle> {
     return InkWell(
       splashColor: Colors.green,
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (BuildContext context) {
-              return PackageDetails(
-                cancelChecker: false,
-                id: widget.packageId,
-              );
-            },
-          ),
-        );
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (BuildContext context) {
+        //       return PackageDetails(
+        //         cancelChecker: false,
+        //         id: widget.packageId,
+        //       );
+        //     },
+        //   ),
+        // );
       },
       child: Card(
         shape:

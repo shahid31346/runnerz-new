@@ -99,14 +99,14 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
             context: context,
             builder: (c) {
               return AlertDialog(
-                title: Text("oops"),
+                title: const Text("oops"),
                 content: Text(responseDynamic),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close"),
+                    child: const Text("Close"),
                   )
                 ],
               );
@@ -146,14 +146,14 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
           context: context,
           builder: (c) {
             return AlertDialog(
-              title: Text("oops"),
+              title: const Text("oops"),
               content: Text(error),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text("Close"),
+                  child: const Text("Close"),
                 )
               ],
             );
@@ -171,7 +171,7 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(05.0)),
         elevation: 4.0,
         child: Padding(
-          padding: EdgeInsets.fromLTRB(15.0, 15.0, 13.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(15.0, 15.0, 13.0, 0.0),
           child: Column(
             children: <Widget>[
               Row(
@@ -199,38 +199,38 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
                           children: <Widget>[
                             Text(
                               "${widget.userName}".toUpperCase(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
-                            SizedBox(height: 5.0),
+                            const SizedBox(height: 5.0),
                             Text(
                               "\$${widget.totalAmount}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xff1fa2f2),
                                 fontSize: 17,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
-                            SizedBox(height: 3.0),
+                            const SizedBox(height: 3.0),
                             Text(
                               "${widget.mobileNo}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            SizedBox(height: 2.0),
+                            const SizedBox(height: 2.0),
                             Text(
                               "${widget.email}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xff1fa2f2),
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            SizedBox(height: 5.0),
+                            const SizedBox(height: 5.0),
                           ],
                         ),
                       ),
@@ -246,7 +246,7 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
                                 _selection = value;
                               });
                             },
-                            child: Icon(
+                            child: const Icon(
                               Icons.more_vert,
                               size: 35,
                               color: Colors.black54,
@@ -269,7 +269,7 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       // Column(
@@ -302,7 +302,7 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
                   ),
                 ],
               ),
-              Divider(),
+              const Divider(),
               Padding(
                 padding: const EdgeInsets.only(
                   right: 8.0,
@@ -314,10 +314,10 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
+                        const Row(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 5.0),
+                              padding: EdgeInsets.only(bottom: 5.0),
                               child: Text(
                                 'o',
                                 style: TextStyle(
@@ -362,10 +362,10 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
+                        const Row(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 5.0),
+                              padding: EdgeInsets.only(bottom: 5.0),
                               child: Text(
                                 'o',
                                 style: TextStyle(
@@ -411,7 +411,7 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
                   ],
                 ),
               ),
-              Divider(),
+              const Divider(),
               // SizedBox(height: 10.0),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -426,7 +426,7 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
                     Row(
                       children: <Widget>[
                         _isLoading
-                            ? Center(
+                            ? const Center(
                                 child: CircularProgressIndicator(
                                   valueColor: AlwaysStoppedAnimation<Color>(
                                       Colors.black54),
@@ -434,16 +434,16 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
                               )
                             : ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(0xff1fa2f2),
+                                  backgroundColor: const Color(0xff1fa2f2),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                 ),
                                 child: Text(
                                   "start".toUpperCase(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
-                                    fontSize: 16,
+                                    fontSize: 14,
                                   ),
                                 ),
                                 onPressed: _isSwitched
@@ -456,17 +456,17 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
                                         });
                                       },
                               ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         TextButton(
                           style: TextButton.styleFrom(
-                            backgroundColor: Color(0xff1fa2f2),
-                            textStyle: TextStyle(color: Colors.black),
-                            padding: EdgeInsets.all(8.0),
+                            backgroundColor: const Color(0xff1fa2f2),
+                            textStyle: const TextStyle(color: Colors.black),
+                            padding: const EdgeInsets.all(8.0),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
-                                side: BorderSide(color: Colors.grey, width: 2)),
+                                side: const BorderSide(color: Colors.grey, width: 2)),
                           ),
                           onPressed: _isSwitched
                               ? null
@@ -483,8 +483,9 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
                                 },
                           child: Text(
                             "cancel".toUpperCase(),
-                            style: TextStyle(
-                              fontSize: 16.0,
+                            style: const TextStyle(
+                              fontSize: 14.0,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -494,7 +495,7 @@ class _AcceptedSingleDState extends State<AcceptedSingleD> {
                   ],
                 ),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
             ],
           ),
         ),
@@ -586,14 +587,14 @@ class _MyFormState extends State<MyForm> {
             context: context,
             builder: (c) {
               return AlertDialog(
-                title: Text("oops"),
+                title: const Text("oops"),
                 content: Text(responseDynamic),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close"),
+                    child: const Text("Close"),
                   )
                 ],
               );
@@ -633,14 +634,14 @@ class _MyFormState extends State<MyForm> {
           context: context,
           builder: (c) {
             return AlertDialog(
-              title: Text("oops"),
+              title: const Text("oops"),
               content: Text(error),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text("Close"),
+                  child: const Text("Close"),
                 )
               ],
             );
@@ -671,7 +672,7 @@ class _MyFormState extends State<MyForm> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.departure_board,
                         size: 40,
                         color: Colors.white,
@@ -680,15 +681,15 @@ class _MyFormState extends State<MyForm> {
                       onPressed: () {},
                       tooltip: "Cancellation",
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 15.0),
                       child: Text(
                         'Why did you Cancel?',
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 3.0),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 3.0),
                       child: Text(
                         'Let us know so we can improve',
                         style: TextStyle(
@@ -726,13 +727,13 @@ class _MyFormState extends State<MyForm> {
                                   setState(() => this.value = value!),
                               value: "I expected a shorter wait time",
                             ),
-                            Text(
+                            const Text(
                               'I expected a shorter wait time',
                               style: TextStyle(fontSize: 14),
                             )
                           ],
                         ),
-                        Divider(),
+                        const Divider(),
                         Row(
                           children: <Widget>[
                             Radio(
@@ -741,13 +742,13 @@ class _MyFormState extends State<MyForm> {
                                   setState(() => this.value = value!),
                               value: "Driver going in wrong direction",
                             ),
-                            Text(
+                            const Text(
                               'Driver going in wrong direction',
                               style: TextStyle(fontSize: 14),
                             ),
                           ],
                         ),
-                        Divider(),
+                        const Divider(),
                         Row(
                           children: <Widget>[
                             Radio(
@@ -756,13 +757,13 @@ class _MyFormState extends State<MyForm> {
                                   setState(() => this.value = value!),
                               value: "I couldn\'t find my driver",
                             ),
-                            Text(
+                            const Text(
                               'I couldn\'t find my driver',
                               style: TextStyle(fontSize: 14),
                             )
                           ],
                         ),
-                        Divider(),
+                        const Divider(),
                         Row(
                           children: <Widget>[
                             Radio(
@@ -771,13 +772,13 @@ class _MyFormState extends State<MyForm> {
                                   setState(() => this.value = value!),
                               value: "I was not ready for my ride",
                             ),
-                            Text(
+                            const Text(
                               'I was not ready for my ride',
                               style: TextStyle(fontSize: 14),
                             )
                           ],
                         ),
-                        Divider(),
+                        const Divider(),
                         Row(
                           children: <Widget>[
                             Radio(
@@ -786,13 +787,13 @@ class _MyFormState extends State<MyForm> {
                                   setState(() => this.value = value!),
                               value: "My driver asked me to cancel",
                             ),
-                            Text(
+                            const Text(
                               'My driver asked me to cancel',
                               style: TextStyle(fontSize: 14),
                             )
                           ],
                         ),
-                        Divider(),
+                        const Divider(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -803,14 +804,14 @@ class _MyFormState extends State<MyForm> {
                                     context: context,
                                     builder: (context) => DriverRAatingBox());
                               },
-                              child: Text('My reason isn\'t listed'),
+                              child: const Text('My reason isn\'t listed'),
                             )
                           ],
                         ),
                         // Divider(),
                         _isLoading
-                            ? Padding(
-                                padding: const EdgeInsets.only(bottom: 10.0),
+                            ? const Padding(
+                                padding: EdgeInsets.only(bottom: 10.0),
                                 child: Center(
                                   child: CircularProgressIndicator(
                                     valueColor: AlwaysStoppedAnimation<Color>(
@@ -841,7 +842,7 @@ class _MyFormState extends State<MyForm> {
                                 },
                                 child: Text(
                                   "submit".toUpperCase(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white, fontSize: 15),
                                 ),
                               )
@@ -924,14 +925,14 @@ class _DriverRAtingBoxState extends State<DriverRAatingBox> {
             context: context,
             builder: (c) {
               return AlertDialog(
-                title: Text("oops"),
+                title: const Text("oops"),
                 content: Text(responseDynamic),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close"),
+                    child: const Text("Close"),
                   )
                 ],
               );
@@ -971,14 +972,14 @@ class _DriverRAtingBoxState extends State<DriverRAatingBox> {
           context: context,
           builder: (c) {
             return AlertDialog(
-              title: Text("oops"),
+              title: const Text("oops"),
               content: Text(error),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text("Close"),
+                  child: const Text("Close"),
                 )
               ],
             );
@@ -1011,7 +1012,7 @@ class _DriverRAtingBoxState extends State<DriverRAatingBox> {
                   children: <Widget>[
                     Text(
                       'My Reason isn\'t listed'.toUpperCase(),
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
@@ -1019,12 +1020,12 @@ class _DriverRAtingBoxState extends State<DriverRAatingBox> {
                   ],
                 ),
               ),
-              SizedBox(height: 25.0),
-              Row(
+              const SizedBox(height: 25.0),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(left: 25.0),
+                    padding: EdgeInsets.only(left: 25.0),
                     child: Text(
                       'Reason',
                       style: TextStyle(fontSize: 17),
@@ -1051,17 +1052,17 @@ class _DriverRAtingBoxState extends State<DriverRAatingBox> {
                             color: Theme.of(context).colorScheme.secondary,
                             width: 2.0),
                       ),
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.grey,
                           width: 2.0,
                         ),
                       ),
                       helperText: 'Enter your reason here',
-                      contentPadding: EdgeInsets.all(10.0),
+                      contentPadding: const EdgeInsets.all(10.0),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6.0),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.white,
                         ),
                       ),
@@ -1071,7 +1072,7 @@ class _DriverRAtingBoxState extends State<DriverRAatingBox> {
                 ),
               ),
               _isLoading
-                  ? Center(
+                  ? const Center(
                       child: CircularProgressIndicator(
                         valueColor:
                             AlwaysStoppedAnimation<Color>(Colors.black54),
@@ -1092,7 +1093,7 @@ class _DriverRAtingBoxState extends State<DriverRAatingBox> {
                       },
                       child: Text(
                         "submit".toUpperCase(),
-                        style: TextStyle(color: Colors.white, fontSize: 15),
+                        style: const TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     )
             ],

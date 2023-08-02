@@ -11,11 +11,11 @@ class CancelledSingleD extends StatefulWidget {
 
   CancelledSingleD({
     Key? key,
-   required this.pickUpLocation,
-   required this.dropLocation,
-   required this.date,
-   required this.totalAmount,
-   required this.packageId,
+    required this.pickUpLocation,
+    required this.dropLocation,
+    required this.date,
+    required this.totalAmount,
+    required this.packageId,
   }) : super(key: key);
 
   @override
@@ -47,7 +47,7 @@ class _CancelledSingleDState extends State<CancelledSingleD> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(05.0)),
         elevation: 4.0,
         child: Padding(
-          padding: EdgeInsets.fromLTRB(5.0, 15.0, 13.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(5.0, 15.0, 13.0, 0.0),
           child: Column(
             children: <Widget>[
               Padding(
@@ -62,10 +62,10 @@ class _CancelledSingleDState extends State<CancelledSingleD> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
+                        const Row(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 5.0),
+                              padding: EdgeInsets.only(bottom: 5.0),
                               child: Text(
                                 'o',
                                 style: TextStyle(
@@ -89,13 +89,14 @@ class _CancelledSingleDState extends State<CancelledSingleD> {
                         Container(
                           padding: const EdgeInsets.only(left: 16.0, right: 16),
                           width: c_width,
-                          child: new Column(
+                          child: Column(
                             children: <Widget>[
-                              new Text('${widget.pickUpLocation}',
+                              Text(widget.pickUpLocation,
                                   textAlign: TextAlign.left),
                             ],
                           ),
                         ),
+
                         // Text(
                         //   '$pickUpLocation',
                         //   overflow: TextOverflow.ellipsis,
@@ -110,10 +111,10 @@ class _CancelledSingleDState extends State<CancelledSingleD> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
+                        const Row(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 5.0),
+                              padding: EdgeInsets.only(bottom: 5.0),
                               child: Text(
                                 'o',
                                 style: TextStyle(
@@ -137,9 +138,9 @@ class _CancelledSingleDState extends State<CancelledSingleD> {
                         Container(
                           padding: const EdgeInsets.only(left: 16.0, right: 16),
                           width: c_width,
-                          child: new Column(
+                          child:  Column(
                             children: <Widget>[
-                              new Text('${widget.dropLocation}',
+                               Text(widget.dropLocation,
                                   textAlign: TextAlign.left),
                             ],
                           ),
@@ -164,7 +165,7 @@ class _CancelledSingleDState extends State<CancelledSingleD> {
                               _selection = value;
                             });
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.more_vert,
                             size: 35,
                             color: Colors.black54,
@@ -190,15 +191,15 @@ class _CancelledSingleDState extends State<CancelledSingleD> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
-              Divider(),
-              SizedBox(
+              const Divider(),
+              const SizedBox(
                 height: 5,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              const Padding(
+                padding: EdgeInsets.only(left: 8.0, right: 8.0),
                 child: Row(
                   children: <Widget>[
                     Column(
@@ -215,11 +216,11 @@ class _CancelledSingleDState extends State<CancelledSingleD> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
-              Divider(),
-              SizedBox(height: 5.0),
+              const Divider(),
+              const SizedBox(height: 5.0),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                 child: Row(
@@ -227,7 +228,7 @@ class _CancelledSingleDState extends State<CancelledSingleD> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Icon(Icons.motorcycle),
+                        const Icon(Icons.motorcycle),
                         Text('  ${widget.date}'),
                       ],
                     ),
@@ -235,7 +236,7 @@ class _CancelledSingleDState extends State<CancelledSingleD> {
                       children: <Widget>[
                         Text(
                           ' \$${widget.totalAmount}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Color(0xff1fa2f2),
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
@@ -245,7 +246,7 @@ class _CancelledSingleDState extends State<CancelledSingleD> {
                   ],
                 ),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
             ],
           ),
         ),

@@ -34,16 +34,16 @@ class _CancelledSingleState extends State<CancelledSingle> {
 
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (BuildContext context) {
-              return PackageDetails(
-                cancelChecker: true,
-                id: widget.packageId,
-              );
-            },
-          ),
-        );
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (BuildContext context) {
+        //       return PackageDetails(
+        //         cancelChecker: true,
+        //         id: widget.packageId,
+        //       );
+        //     },
+        //   ),
+        // );
       },
       child: Card(
         shape:

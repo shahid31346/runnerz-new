@@ -12,7 +12,7 @@ Future<void> main() async {
       primarySwatch: Colors.blue,
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
-    home: HomeScreen(),
+    home: SplashScreen(),
   ));
 }
 

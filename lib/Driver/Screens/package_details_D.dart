@@ -24,7 +24,7 @@ class _PackageDetailsDState extends State<PackageDetailsD> {
     SharedPreferences pref1 = await SharedPreferences.getInstance();
     _value = pref1.getString("user_id")!;
     Uri apiUrl = Uri.parse(
-        'http://35.158.106.116/api/summary/single_ride?package_id=' +
+        '${Constants.baseUrl}summary/single_ride?package_id=' +
             widget.id);
     print(apiUrl);
     Map<String, String> headers = {
