@@ -14,9 +14,12 @@ class CouponScreen extends StatefulWidget {
 }
 
 class _CouponScreenState extends State<CouponScreen> {
+  bool isStatus = false;
+  String error = "Error Occured";
+  bool isError = false;
+
   Future<Map> _getJson() async {
-    Uri apiUrl = Uri.parse(
-        Constants.baseUrl + 'customers/fetch_all_coupon');
+    Uri apiUrl = Uri.parse(Constants.baseUrl + 'customers/fetch_all_coupon');
     Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Authorization': Constants.authToken,
@@ -26,16 +29,29 @@ class _CouponScreenState extends State<CouponScreen> {
       apiUrl,
       headers: headers,
     );
-
-    return json.decode(response.body); // returns a List type
+    return json.decode(response.body); //
   }
 
   Future<List<CouponCons>> getUndelivered() async {
     Map _data = await _getJson();
     print(_data);
 
-    CouponResponse prodResponse = CouponResponse.fromJson(_data);
-    if (prodResponse.status == 'SUCCESS') return prodResponse.data!;
+    try {
+      CouponResponse prodResponse = CouponResponse.fromJson(_data);
+      if (prodResponse.status == 'SUCCESS') {
+        return prodResponse.data!;
+      } else {
+        setState(() {
+          isError = true;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        isError = true;
+      });
+
+      error = e.toString();
+    }
 
     return [];
   }
@@ -87,49 +103,59 @@ class _CouponScreenState extends State<CouponScreen> {
                 ),
               ),
             ),
-            Expanded(
-              child: FutureBuilder<List<CouponCons>>(
-                future: getUndelivered(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done ||
-                      snapshot.hasData) {
-                    if (snapshot.data!.length > 0) {
-                      List<CouponCons> cateee = snapshot.data!;
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        primary: false,
-                        //physics: NeverScrollableScrollPhysics(),
-                        itemCount: cateee == null ? 0 : cateee.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          CouponCons cat = cateee[index];
+            isStatus
+                ? Center(
+                    child: Text(
+                      'No Coupons Found',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  )
+                : Expanded(
+                    child: FutureBuilder<List<CouponCons>>(
+                      future: getUndelivered(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done ||
+                            snapshot.hasData) {
+                          if (snapshot.data!.length > 0) {
+                            List<CouponCons> cateee = snapshot.data!;
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              primary: false,
+                              //physics: NeverScrollableScrollPhysics(),
+                              itemCount: cateee == null ? 0 : cateee.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                CouponCons cat = cateee[index];
 
-                          return CouponsSingle(
-                              id: cat.id,
-                              coupon: cat.coupon,
-                              fromDate: cat.fromDate,
-                              toDate: cat.toDate,
-                              amount: cat.amount,
-                              usedUpto: cat.usedUpto,
-                              couponStatus: cat.couponStatus);
-                        },
-                      );
-                    } else {
-                      return Center(
-                        child: Text(
-                          'No Packages are cancelled yet',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      );
-                    }
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
-            ),
+                                return CouponsSingle(
+                                    id: cat.id,
+                                    coupon: cat.coupon,
+                                    fromDate: cat.fromDate,
+                                    toDate: cat.toDate,
+                                    amount: cat.amount,
+                                    usedUpto: cat.usedUpto,
+                                    couponStatus: cat.couponStatus);
+                              },
+                            );
+                          } else {
+                            return Center(
+                              child: Text(
+                                'No Coupons Found',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            );
+                          }
+                        } else {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                      },
+                    ),
+                  ),
           ],
         ),
       ),
@@ -141,8 +167,7 @@ class CouponResponse {
   final List<CouponCons>? data;
   final String status;
 
-  CouponResponse({required
-   this.data, required this.status});
+  CouponResponse({required this.data, required this.status});
 
   factory CouponResponse.fromJson(Map<dynamic, dynamic> json) {
     return CouponResponse(

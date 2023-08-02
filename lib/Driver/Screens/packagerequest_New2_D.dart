@@ -31,6 +31,7 @@ class NewTrip2DState extends State<NewTrip2D> {
       apiUrl,
       headers: headers,
     );
+    print(apiUrl);
 
     return json.decode(response.body); // returns a List type
   }
