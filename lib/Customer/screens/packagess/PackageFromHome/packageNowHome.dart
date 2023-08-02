@@ -811,7 +811,7 @@ class _PackageNowState extends State<PackageNowFromHome>
                                               padding: const EdgeInsets.only(
                                                   top: 30.0),
                                               child: Text(
-                                                'Enter Pickup and Destination Above',
+                                                'Select Vehicle',
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w600,
