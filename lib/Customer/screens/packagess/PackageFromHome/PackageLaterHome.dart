@@ -110,6 +110,8 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
       "drop_address": addressForDrop,
     });
 
+    print(msg);
+
     http.Response response = await http.post(
       apiUrl,
       headers: headers,
@@ -213,6 +215,8 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
       // _isLoading = false;
 
       Map _data = await _getVehicle();
+
+      print(_data);
 
       categories = _data["vehicles"];
 
@@ -692,193 +696,193 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
                       height: 1,
                     ),
                     Divider(),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 3.0, left: 20.0),
-                      child: Text(
-                        'Pickup Location'.toUpperCase(),
-                        style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                    //pickupLocation(),
-                    // pickupChecker
-                    //     ? Padding(
-                    //         padding: const EdgeInsets.only(
-                    //             left: 12.0, right: 12.0, top: 2.0),
-                    //         child: InkWell(
-                    //           onTap: () async {
-                    //             // show input autocomplete with selected mode
-                    //             // then get the Prediction selected
-                    //             pred.Prediction prediction =
-                    //                 await PlacesAutocomplete.show(
-                    //               context: context,
-                    //               apiKey:
-                    //                   'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
-                    //               mode: Mode.overlay, // Mode.overlay
-                    //               language: "en",
-                    //               // components: [Component(Component.country, "ae")]
-                    //             );
+                    // Padding(
+                    //   padding: const EdgeInsets.only(top: 3.0, left: 20.0),
+                    //   child: Text(
+                    //     'Pickup Location'.toUpperCase(),
+                    //     style: TextStyle(
+                    //         color: Colors.black54,
+                    //         fontSize: 14,
+                    //         fontWeight: FontWeight.w400),
+                    //   ),
+                    // ),
 
-                    //             //ae for emirates and sa for saudi
-                    //             //displayPrediction(p);
-                    //             _getLatLngforPickup(prediction);
-                    //           },
-                    //           child: Card(
-                    //             elevation: 3.0,
-                    //             child: Container(
-                    //               width: double.infinity,
-                    //               height: 50,
-                    //               decoration: BoxDecoration(
-                    //                 color: Colors.white,
-                    //                 borderRadius: BorderRadius.all(
-                    //                   Radius.circular(5.0),
+                    //   pickupChecker
+                    //       ? Padding(
+                    //           padding: const EdgeInsets.only(
+                    //               left: 12.0, right: 12.0, top: 2.0),
+                    //           child: InkWell(
+                    //             onTap: () async {
+                    //               // show input autocomplete with selected mode
+                    //               // then get the Prediction selected
+                    //               // pred.Prediction prediction =
+                    //               //     await PlacesAutocomplete.show(
+                    //               //   context: context,
+                    //               //   apiKey:
+                    //               //       'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
+                    //               //   mode: Mode.overlay, // Mode.overlay
+                    //               //   language: "en",
+                    //               //   // components: [Component(Component.country, "ae")]
+                    //               // );
+
+                    //               // //ae for emirates and sa for saudi
+                    //               // //displayPrediction(p);
+                    //               // _getLatLngforPickup(prediction);
+                    //             },
+                    //             child: Card(
+                    //               elevation: 3.0,
+                    //               child: Container(
+                    //                 width: double.infinity,
+                    //                 height: 50,
+                    //                 decoration: BoxDecoration(
+                    //                   color: Colors.white,
+                    //                   borderRadius: BorderRadius.all(
+                    //                     Radius.circular(5.0),
+                    //                   ),
                     //                 ),
-                    //               ),
-                    //               child: Center(
-                    //                 child: Column(
-                    //                   mainAxisAlignment:
-                    //                       MainAxisAlignment.center,
-                    //                   children: [
-                    //                     Center(
-                    //                       child: Padding(
-                    //                         padding: const EdgeInsets.only(
-                    //                             left: 8.0),
-                    //                         child: Text(
-                    //                           '$addressForPickup',
-                    //                           overflow: TextOverflow.ellipsis,
-                    //                           style: TextStyle(
-                    //                               color: Colors.grey,
-                    //                               fontWeight: FontWeight.bold),
+                    //                 child: Center(
+                    //                   child: Column(
+                    //                     mainAxisAlignment:
+                    //                         MainAxisAlignment.center,
+                    //                     children: [
+                    //                       Center(
+                    //                         child: Padding(
+                    //                           padding: const EdgeInsets.only(
+                    //                               left: 8.0),
+                    //                           child: Text(
+                    //                             '$addressForPickup',
+                    //                             overflow: TextOverflow.ellipsis,
+                    //                             style: TextStyle(
+                    //                                 color: Colors.grey,
+                    //                                 fontWeight: FontWeight.bold),
+                    //                           ),
                     //                         ),
                     //                       ),
-                    //                     ),
-                    //                   ],
+                    //                     ],
+                    //                   ),
                     //                 ),
                     //               ),
                     //             ),
                     //           ),
-                    //         ),
-                    //       )
-                    //     : Container(),
-                    oR
-                        ? Center(
-                            child: Text('OR'),
-                          )
-                        : Container(),
-                    pickupCheckerCurrentLocation
-                        ? Padding(
-                            padding: const EdgeInsets.only(
-                                left: 12.0, right: 12.0, top: 2.0),
-                            child: InkWell(
-                              onTap: () async {
-                                _checkGps();
-                                getUserLocation();
-                              },
-                              child: Card(
-                                elevation: 3.0,
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(5.0),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Center(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0),
-                                            child: Text(
-                                              '$currentLocationForPickup',
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container(),
-                    Divider(),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 3.0, left: 20.0),
-                      child: Text(
-                        'Destination'.toUpperCase(),
-                        style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  //  placesAutoCompleteTextField(),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(
-                    //       left: 12.0, right: 12.0, top: 2.0),
-                    //   child: InkWell(
-                    //     onTap: () async {
-                    //       // show input autocomplete with selected mode
-                    //       // then get the Prediction selected
-                    //       Prediction prediction = await PlacesAutocomplete.show(
-                    //           context: context,
-                    //           apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
-                    //           mode: Mode.overlay, // Mode.overlay
-                    //           language: "en",
-                    //           components: [Component(Component.country, "pk")]);
-                    //       //displayPrediction(p);
-                    //       _getLatLngforDrop(prediction);
-                    //     },
-                    //     child: Card(
-                    //       elevation: 3.0,
-                    //       child: Container(
-                    //         width: double.infinity,
-                    //         height: 50,
-                    //         decoration: BoxDecoration(
-                    //           color: Colors.white,
-                    //           borderRadius: BorderRadius.all(
-                    //             Radius.circular(5.0),
-                    //           ),
-                    //         ),
-                    //         child: Center(
-                    //           child: Column(
-                    //             mainAxisAlignment: MainAxisAlignment.center,
-                    //             children: [
-                    //               Center(
-                    //                 child: Padding(
-                    //                   padding: const EdgeInsets.only(left: 8.0),
-                    //                   child: Text(
-                    //                     '$addressForDrop',
-                    //                     overflow: TextOverflow.ellipsis,
-                    //                     style: TextStyle(
-                    //                         color: Colors.grey,
-                    //                         fontWeight: FontWeight.bold),
+                    //         )
+                    //       : Container(),
+                    //   oR
+                    //       ? Center(
+                    //           child: Text('OR'),
+                    //         )
+                    //       : Container(),
+                    //   pickupCheckerCurrentLocation
+                    //       ? Padding(
+                    //           padding: const EdgeInsets.only(
+                    //               left: 12.0, right: 12.0, top: 2.0),
+                    //           child: InkWell(
+                    //             onTap: () async {
+                    //               _checkGps();
+                    //               getUserLocation();
+                    //             },
+                    //             child: Card(
+                    //               elevation: 3.0,
+                    //               child: Container(
+                    //                 width: double.infinity,
+                    //                 height: 50,
+                    //                 decoration: BoxDecoration(
+                    //                   color: Colors.white,
+                    //                   borderRadius: BorderRadius.all(
+                    //                     Radius.circular(5.0),
+                    //                   ),
+                    //                 ),
+                    //                 child: Center(
+                    //                   child: Column(
+                    //                     mainAxisAlignment:
+                    //                         MainAxisAlignment.center,
+                    //                     children: [
+                    //                       Center(
+                    //                         child: Padding(
+                    //                           padding: const EdgeInsets.only(
+                    //                               left: 8.0),
+                    //                           child: Text(
+                    //                             '$currentLocationForPickup',
+                    //                             overflow: TextOverflow.ellipsis,
+                    //                             style: TextStyle(
+                    //                                 color: Colors.grey,
+                    //                                 fontWeight: FontWeight.bold),
+                    //                           ),
+                    //                         ),
+                    //                       ),
+                    //                     ],
                     //                   ),
                     //                 ),
                     //               ),
-                    //             ],
+                    //             ),
+                    //           ),
+                    //         )
+                    //       : Container(),
+                    //   Divider(),
+                    //   Padding(
+                    //     padding: const EdgeInsets.only(top: 3.0, left: 20.0),
+                    //     child: Text(
+                    //       'Destination'.toUpperCase(),
+                    //       style: TextStyle(
+                    //           color: Colors.black54,
+                    //           fontSize: 14,
+                    //           fontWeight: FontWeight.w400),
+                    //     ),
+                    //   ),
+                    // //  placesAutoCompleteTextField(),
+                    //   Padding(
+                    //     padding: const EdgeInsets.only(
+                    //         left: 12.0, right: 12.0, top: 2.0),
+                    //     child: InkWell(
+                    //       onTap: () async {
+                    //         // show input autocomplete with selected mode
+                    //         // then get the Prediction selected
+                    //         // Prediction prediction = await PlacesAutocomplete.show(
+                    //         //     context: context,
+                    //         //     apiKey: 'AIzaSyCqi_-GdzTVjwKqvjxmTLyry-EgUHegE1Y',
+                    //         //     mode: Mode.overlay, // Mode.overlay
+                    //         //     language: "en",
+                    //         //     components: [Component(Component.country, "pk")]);
+                    //         // //displayPrediction(p);
+                    //         // _getLatLngforDrop(prediction);
+                    //       },
+                    //       child: Card(
+                    //         elevation: 3.0,
+                    //         child: Container(
+                    //           width: double.infinity,
+                    //           height: 50,
+                    //           decoration: BoxDecoration(
+                    //             color: Colors.white,
+                    //             borderRadius: BorderRadius.all(
+                    //               Radius.circular(5.0),
+                    //             ),
+                    //           ),
+                    //           child: Center(
+                    //             child: Column(
+                    //               mainAxisAlignment: MainAxisAlignment.center,
+                    //               children: [
+                    //                 Center(
+                    //                   child: Padding(
+                    //                     padding: const EdgeInsets.only(left: 8.0),
+                    //                     child: Text(
+                    //                       '$addressForDrop',
+                    //                       overflow: TextOverflow.ellipsis,
+                    //                       style: TextStyle(
+                    //                           color: Colors.grey,
+                    //                           fontWeight: FontWeight.bold),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //               ],
+                    //             ),
                     //           ),
                     //         ),
                     //       ),
                     //     ),
                     //   ),
-                    // ),
-                    SizedBox(
-                      height: 0.3,
-                    ),
-                    Divider(),
+                    //   SizedBox(
+                    //     height: 0.3,
+                    //   ),
+                    //   Divider(),
                     SizedBox(
                       height: 0.3,
                     ),
@@ -891,7 +895,8 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
                         ? Center(
                             child: CircularProgressIndicator(),
                           )
-                        : Column(
+                        : 
+                        Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
@@ -931,24 +936,22 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
                                               color: Colors
                                                   .blue), // Not necessary for Option 1
                                           value: _selectedPackageCategory,
-                                          onChanged: vehicleReleaser
-                                              ? (String? newValue) {
-                                                  setState(() {
-                                                    // vehicleTypeChecker = true;
-                                                    // loadingForTypes = true;
-                                                    totalRoundAmount = '0.00';
-                                                    _selectedPackageType = null;
-                                                    vehicleTypeChecker = true;
-                                                    loadingForTypes = true;
-                                                    vehicleTypes = [];
-                                                    _selectedPackageCategory =
-                                                        newValue;
-                                                    vehicleTypesDropDown();
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              // vehicleTypeChecker = true;
+                                              // loadingForTypes = true;
+                                              totalRoundAmount = '0.00';
+                                              _selectedPackageType = null;
+                                              vehicleTypeChecker = true;
+                                              loadingForTypes = true;
+                                              vehicleTypes = [];
+                                              _selectedPackageCategory =
+                                                  newValue;
+                                              vehicleTypesDropDown();
 
 //
-                                                  });
-                                                }
-                                              : null,
+                                            });
+                                          },
 
                                           items: categories.map((location) {
                                             return new DropdownMenuItem(
@@ -982,7 +985,8 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
                             ? Center(
                                 child: CircularProgressIndicator(),
                               )
-                            : Column(
+                            :
+                            Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
@@ -1030,10 +1034,13 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
                                                       newValue;
 
                                                   calculateDistance(
-                                                      latitudeForPickup,
-                                                      longitudeForPickup,
-                                                      latitudeForDrop,
-                                                      longitudeForDrop);
+                                                      Constants
+                                                          .latitudeForPickup,
+                                                      Constants
+                                                          .longitudeForPickup,
+                                                      Constants.latitudeForDrop,
+                                                      Constants
+                                                          .longitudeForDrop);
                                                   // if (
                                                   //     addressForDrop !=
                                                   //         'Enter Drop Location') {
@@ -1140,7 +1147,7 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
                                               padding: const EdgeInsets.only(
                                                   top: 30.0),
                                               child: Text(
-                                                'Enter Pickup and Destination Above',
+                                                'Select Vehicle',
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w600,
@@ -1205,7 +1212,7 @@ class _PackageLaterHomeState extends State<PackageLaterHome>
             backgroundColor: Theme.of(context).colorScheme.secondary,
           ),
           onPressed: () {
-    ToastContext().init(context);
+            ToastContext().init(context);
 
             if (_time == "Not set") {
               Toast.show(

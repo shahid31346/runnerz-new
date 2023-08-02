@@ -44,9 +44,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   List user = [];
 
   _getDetail() async {
-    setState(() {
-      apiCalled = true;
-    });
     try {
       Map? _data2 = await _getJson();
 
@@ -55,10 +52,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       print(user);
 
       setState(() {
+        apiCalled = true;
+
         loading = false;
       });
     } catch (e) {
       setState(() {
+        apiCalled = true;
+
         detail = null;
         loading = false;
       });
@@ -293,7 +294,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 "Edit Details",
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 18,
+                                  fontSize: 14,
                                 ),
                               ),
                               onPressed: () {
@@ -335,7 +336,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: Text(
                                 "Change Password".toUpperCase(),
                                 style: TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize: 12.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
