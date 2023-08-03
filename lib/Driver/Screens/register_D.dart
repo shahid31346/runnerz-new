@@ -160,9 +160,9 @@ class _RegisterScreenDState extends State<RegisterScreenD> {
               context: context,
               builder: (c) {
                 return AlertDialog(
-                  title:  Text('Congratulations'),
+                  title:  const Text('Congratulations'),
                   content: Text(
-                      "Check your Email, OTP send successfully.  For now enter this code ${_data['code']}"),
+                      "Check your Email, OTP send successfully. For now enter this code ${_data['code']}"),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
