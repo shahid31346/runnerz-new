@@ -2,21 +2,21 @@ class NewForDriverCons {
   final String profielPic;
   final String customerName;
   final String pickDate;
-  final String amount;
-  final String pickUpLocation;
-  final String dropLocation;
+  final String? amount;
+  final String? pickUpLocation;
+  final String? dropLocation;
   final String rideId;
   final String packageId;
 
   NewForDriverCons({
-  required  this.profielPic,
-  required  this.customerName,
-  required  this.pickDate,
-  required  this.amount,
-  required  this.pickUpLocation,
-  required  this.dropLocation,
-  required  this.rideId,
-  required  this.packageId,
+    required this.profielPic,
+    required this.customerName,
+    required this.pickDate,
+    this.amount,
+    this.pickUpLocation,
+    this.dropLocation,
+    required this.rideId,
+    required this.packageId,
   });
 
   factory NewForDriverCons.fromJson(Map<String, dynamic> json) {

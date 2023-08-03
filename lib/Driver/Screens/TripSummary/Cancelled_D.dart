@@ -106,10 +106,10 @@ class CancelledDState extends State<CancelledD> {
                           CancelledForDriverCons cat = cateee[index];
 
                           return CancelledSingleD(
-                            pickUpLocation: cat.pickUpLocation,
-                            dropLocation: cat.dropLocation,
+                            pickUpLocation: cat.pickUpLocation?? '',
+                            dropLocation: cat.dropLocation ?? '',
                             date: cat.pickDate,
-                            totalAmount: cat.amount,
+                            totalAmount: cat.amount?? '0.00',
                             packageId: cat.packageId,
                           );
                         },

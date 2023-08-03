@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:runnerz/Common/dummylist/undelivereddummy.dart';
-import 'package:runnerz/Common/listCons/Later_DCons.dart';
-import 'package:runnerz/Driver/Widgets/Later_single_D.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:runnerz/Common/listCons/Later_DCons.dart';
+import 'package:runnerz/Driver/Widgets/Later_single_D.dart';
 import 'package:runnerz/Utils/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -109,10 +108,10 @@ class LaterTripDState extends State<LaterTripD> {
                             profilePic: cat.profielPic,
                             customerName: cat.customerName,
                             email: cat.email,
-                            pickUpLocation: cat.pickUpLocation,
-                            dropLocation: cat.dropLocation,
+                            pickUpLocation: cat.pickUpLocation ?? '',
+                            dropLocation: cat.dropLocation ?? '',
                             date: cat.pickDate,
-                            totalAmount: cat.amount,
+                            totalAmount: cat.amount ?? '0.00',
                             packageId: cat.packageId,
                           );
                         },

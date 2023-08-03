@@ -21,12 +21,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
 
-  TextEditingController _fullName = new TextEditingController();
-  TextEditingController _username = new TextEditingController();
-  TextEditingController _email = new TextEditingController();
-  TextEditingController _passwordControl = new TextEditingController();
-  TextEditingController _confirmPasswordControl = new TextEditingController();
-  TextEditingController _mobileNo = new TextEditingController();
+  TextEditingController _fullName = TextEditingController();
+  TextEditingController _username = TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _passwordControl = TextEditingController();
+  TextEditingController _confirmPasswordControl = TextEditingController();
+  TextEditingController _mobileNo = TextEditingController();
 
   File? _image;
 
@@ -92,7 +92,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return new CupertinoAlertDialog(
+          return CupertinoAlertDialog(
             title: Text(ttl),
             content: Text(msg),
             actions: [
@@ -166,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 return AlertDialog(
                   title: const Text('Congratulations'),
                   content:
-                      const Text("Check your Email, OTP send successfully."),
+                       Text("Check your Email, OTP send successfully. For now enter this code ${_data['code']}"),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
@@ -227,8 +227,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: new BoxDecoration(
-            gradient: const LinearGradient(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
@@ -778,7 +778,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return new CupertinoAlertDialog(
+          return CupertinoAlertDialog(
             actions: [
               CupertinoDialogAction(
                 isDefaultAction: true,

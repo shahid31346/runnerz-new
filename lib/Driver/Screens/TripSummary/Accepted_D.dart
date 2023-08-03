@@ -106,15 +106,15 @@ class AcceptedTripDState extends State<AcceptedTripD> {
                         itemBuilder: (BuildContext context, int index) {
                           AcceptedForDriverCons cat = cateee[index];
 
-                          return new AcceptedSingleD(
+                          return  AcceptedSingleD(
                             profilePic: cat.profielPic,
                             userName: cat.customerName,
                             mobileNo: cat.phone,
                             email: cat.email,
-                            pickUpLocation: cat.pickUpLocation,
-                            dropLocation: cat.dropLocation,
+                            pickUpLocation: cat.pickUpLocation ?? '',
+                            dropLocation: cat.dropLocation ?? '',
                             date: cat.pickDate,
-                            totalAmount: cat.amount,
+                            totalAmount: cat.amount ?? '0.00',
                             rideId: cat.rideId,
                             packageId: cat.packageId,
                           );

@@ -77,7 +77,7 @@ class _UndeliveredSingleState extends State<UndeliveredSingle> {
                         child: ClipOval(
                           child: FadeInImage.assetNetwork(
                             placeholder: 'assets/placeholder.png',
-                            image: "${widget.profilePic}",
+                            image: widget.profilePic,
                             height: 30,
                             width: 15,
                             fit: BoxFit.fitHeight,

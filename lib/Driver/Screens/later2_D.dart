@@ -114,10 +114,10 @@ class LaterTrip2State extends State<LaterTrip2> {
                             profilePic: cat.profielPic,
                             customerName: cat.customerName,
                             email: cat.email,
-                            pickUpLocation: cat.pickUpLocation,
-                            dropLocation: cat.dropLocation,
+                            pickUpLocation: cat.pickUpLocation ?? '',
+                            dropLocation: cat.dropLocation ?? '',
                             date: cat.pickDate,
-                            totalAmount: cat.amount,
+                            totalAmount: cat.amount ?? '0.00',
                             packageId: cat.packageId,
                           );
                         },

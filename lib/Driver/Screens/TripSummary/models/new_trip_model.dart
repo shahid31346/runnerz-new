@@ -38,8 +38,8 @@ class NewTripData {
   String userImage;
   String pickTime;
   dynamic amount;
-  String pickupLocation;
-  String dropLocation;
+  String? pickupLocation;
+  String? dropLocation;
   String status;
   String rideId;
   String userId;
@@ -52,8 +52,8 @@ class NewTripData {
     required this.userImage,
     required this.pickTime,
     this.amount,
-    required this.pickupLocation,
-    required this.dropLocation,
+     this.pickupLocation,
+     this.dropLocation,
     required this.status,
     required this.rideId,
     required this.userId,

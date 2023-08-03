@@ -2,9 +2,9 @@ class OnRideForDriverCons {
   final String profielPic;
   final String customerName;
   final String pickDate;
-  final String amount;
-  final String pickUpLocation;
-  final String dropLocation;
+  final String? amount;
+  final String? pickUpLocation;
+  final String? dropLocation;
   final String rideId;
   final String phone;
   final String email;
@@ -14,9 +14,9 @@ class OnRideForDriverCons {
     required this.profielPic,
     required this.customerName,
     required this.pickDate,
-    required this.amount,
-    required this.pickUpLocation,
-    required this.dropLocation,
+     this.amount,
+     this.pickUpLocation,
+     this.dropLocation,
     required this.rideId,
     required this.phone,
     required this.email,

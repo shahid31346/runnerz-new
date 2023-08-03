@@ -130,14 +130,14 @@ class _CouponMapState extends State<CouponMap> {
             context: context,
             builder: (c) {
               return AlertDialog(
-                title: Text("oops"),
+                title: const Text("oops"),
                 content: Text(responseDynamic),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close"),
+                    child: const Text("Close"),
                   )
                 ],
               );
@@ -161,14 +161,14 @@ class _CouponMapState extends State<CouponMap> {
           context: context,
           builder: (c) {
             return AlertDialog(
-              title: Text("oops"),
+              title: const Text("oops"),
               content: Text(error),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text("Close"),
+                  child: const Text("Close"),
                 )
               ],
             );
@@ -247,14 +247,14 @@ class _CouponMapState extends State<CouponMap> {
             context: context,
             builder: (c) {
               return AlertDialog(
-                title: Text("oops"),
+                title: const Text("oops"),
                 content: Text(responseDynamic),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close"),
+                    child: const Text("Close"),
                   )
                 ],
               );
@@ -283,14 +283,14 @@ class _CouponMapState extends State<CouponMap> {
           context: context,
           builder: (c) {
             return AlertDialog(
-              title: Text("oops"),
+              title: const Text("oops"),
               content: Text(error),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text("Close"),
+                  child: const Text("Close"),
                 )
               ],
             );
@@ -332,7 +332,7 @@ class _CouponMapState extends State<CouponMap> {
                     child: Container(
                       width: double.infinity,
                       height: 50,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Color(0xffececec),
                         borderRadius: BorderRadius.all(
                           Radius.circular(5.0),
@@ -341,13 +341,13 @@ class _CouponMapState extends State<CouponMap> {
                       child: Center(
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 0.0),
+                            const Padding(
+                              padding: EdgeInsets.only(bottom: 0.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(bottom: 3.0),
+                                    padding: EdgeInsets.only(bottom: 3.0),
                                     child: Text(
                                       'o',
                                       style: TextStyle(
@@ -374,7 +374,7 @@ class _CouponMapState extends State<CouponMap> {
                                 child: Text(
                                   '${widget.pickUpLocation}',
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.grey,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -390,7 +390,7 @@ class _CouponMapState extends State<CouponMap> {
                     child: Container(
                       width: double.infinity,
                       height: 50,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(
                           Radius.circular(5.0),
@@ -399,13 +399,13 @@ class _CouponMapState extends State<CouponMap> {
                       child: Center(
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 0.0),
+                            const Padding(
+                              padding: EdgeInsets.only(bottom: 0.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(bottom: 3.0),
+                                    padding: EdgeInsets.only(bottom: 3.0),
                                     child: Text(
                                       'o',
                                       style: TextStyle(
@@ -432,7 +432,7 @@ class _CouponMapState extends State<CouponMap> {
                                 child: Text(
                                   '${widget.dropLocation}',
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.grey,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -475,11 +475,11 @@ class _CouponMapState extends State<CouponMap> {
                               child: Form(
                                 key: _formKey,
                                 child: TextFormField(
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 15.0,
                                   ),
                                   decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(10.0),
+                                    contentPadding: const EdgeInsets.all(10.0),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           color: Colors.white, width: 2.0),
@@ -487,18 +487,18 @@ class _CouponMapState extends State<CouponMap> {
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5.0),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.white,
                                       ),
                                     ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.white,
                                       ),
                                       borderRadius: BorderRadius.circular(5.0),
                                     ),
                                     hintText: "Coupon Code",
-                                    hintStyle: TextStyle(
+                                    hintStyle: const TextStyle(
                                       fontSize: 18.0,
                                       color: Colors.grey,
                                     ),
@@ -555,7 +555,7 @@ class _CouponMapState extends State<CouponMap> {
                         children: [
                           Text(
                             '${Constants.currency}'.toUpperCase(),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.black54,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
@@ -563,14 +563,14 @@ class _CouponMapState extends State<CouponMap> {
                           amountChecker
                               ? Text(
                                   '$amounterr'.toUpperCase(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black54,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
                                 )
                               : Text(
                                   '${widget.farePrice}'.toUpperCase(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black54,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -578,7 +578,7 @@ class _CouponMapState extends State<CouponMap> {
                         ],
                       ),
                     ),
-                    Text('Total Amount'),
+                    const Text('Total Amount'),
                     SizedBox(
                       width: double.infinity,
                       height: 77, // match_parent
@@ -594,7 +594,7 @@ class _CouponMapState extends State<CouponMap> {
                           ),
                           child: Text(
                             "Request of Delivery".toUpperCase(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                             ),
@@ -627,13 +627,13 @@ class _CouponMapState extends State<CouponMap> {
       markerId: markerId,
       icon: descriptor,
       position: position,
-      infoWindow: InfoWindow(title: 'Location'),
+      infoWindow: const InfoWindow(title: 'Location'),
     );
     markers[markerId] = marker;
   }
 
   _addPolyLine() {
-    PolylineId id = PolylineId("poly");
+    PolylineId id = const PolylineId("poly");
     Polyline polyline = Polyline(
         polylineId: id,
         color: Constants.primary,

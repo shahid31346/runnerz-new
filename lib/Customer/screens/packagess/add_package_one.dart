@@ -743,7 +743,7 @@ class _AddPackageOneState extends State<AddPackageOne> {
                       ),
                       const SizedBox(height: 20),
                       Text(
-                        'oops'.toUpperCase(),
+                        'oopss'.toUpperCase(),
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 5),
@@ -784,12 +784,11 @@ class _AddPackageOneState extends State<AddPackageOne> {
       appBar: BaseAppBar(
         appBar: AppBar(),
       ),
-      body: ListView(
-        shrinkWrap: true,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 0.0, left: 0.0),
-            child: Container(
+      body: SingleChildScrollView(
+        child: Column(
+          //shrinkWrap: true,
+          children: <Widget>[
+            Container(
               width: double.infinity,
               height: 50,
               decoration: const BoxDecoration(
@@ -816,912 +815,906 @@ class _AddPackageOneState extends State<AddPackageOne> {
                 ),
               ),
             ),
-          ),
-          Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 28.0, left: 25.0, right: 20),
-                  child: Text(
-                    'Contact person'.toUpperCase(),
-                    style: const TextStyle(
-                        color: Color(0xff1fa2f2),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
+            Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 28.0, left: 25.0, right: 20),
+                    child: Text(
+                      'Contact person'.toUpperCase(),
+                      style: const TextStyle(
+                          color: Color(0xff1fa2f2),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
                   ),
-                ),
-                const Divider(),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 10.0, left: 25.0, right: 20),
-                  child: Text(
-                    'Name'.toUpperCase(),
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 20.0, right: 20.0, top: 2),
-                  child: Card(
-                    elevation: 3.0,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(5.0),
-                        ),
-                      ),
-                      child: TextFormField(
-                        style: const TextStyle(
-                          fontSize: 15.0,
+                  const Divider(),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 10.0, left: 25.0, right: 20),
+                    child: Text(
+                      'Name'.toUpperCase(),
+                      style: const TextStyle(
                           color: Colors.black,
-                        ),
-                        validator: (value) {
-                          if (value!.length > 0) return null;
-                          return 'This field is required';
-                        },
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(10.0),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                            borderSide: const BorderSide(
-                              color: Colors.white,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.white,
-                            ),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: "Enter Name",
-                          hintStyle: const TextStyle(
-                              fontSize: 15.0, color: Colors.grey),
-                        ),
-                        maxLines: 1,
-                        controller: _name,
-                      ),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
                     ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
-                  child: Text(
-                    'Mobile Number'.toUpperCase(),
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 20.0, right: 20.0, top: 2.0),
-                  child: Card(
-                    elevation: 3.0,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(5.0),
-                        ),
-                      ),
-                      child: TextFormField(
-                        style: const TextStyle(
-                          fontSize: 15.0,
-                          color: Colors.black,
-                        ),
-                        keyboardType: TextInputType.number,
-                        validator: (value) {
-                          if (value!.length > 0) return null;
-                          return 'This field is required';
-                        },
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(10.0),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                            borderSide: const BorderSide(
-                              color: Colors.white,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.white,
-                            ),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: "Mobile Number.",
-                          hintStyle: const TextStyle(
-                              fontSize: 15.0, color: Colors.grey),
-                        ),
-                        maxLines: 1,
-                        // obscureText: true,
-                        controller: _mobile,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
-                  child: Text(
-                    'Package Details'.toUpperCase(),
-                    style: const TextStyle(
-                        color: Color(0xff1fa2f2),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-                const Divider(),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 17.0, left: 25.0, right: 20),
-                      child: Text(
-                        'Package Category'.toUpperCase(),
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-
-                    loading
-                        ? const Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : Padding(
-                            padding: const EdgeInsets.only(
-                                left: 20.0, right: 20.0, top: 2.0),
-                            child: Card(
-                              elevation: 3.0,
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5.0),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20.0, right: 20),
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                      isExpanded: true,
-                                      hint: const Text('Select Category'),
-                                      style: const TextStyle(
-                                          color: Colors
-                                              .blue), // Not necessary for Option 1
-                                      value: _selectedPackageCategory,
-                                      onChanged: (newValue) {
-                                        setState(() {
-                                          FocusScope.of(context).unfocus();
-
-                                          _selectedPackageCategory = newValue;
-                                          print(_selectedPackageCategory);
-                                        });
-                                      },
-                                      items: categories.map((location) {
-                                        return DropdownMenuItem(
-                                          child: Text(location['name']),
-                                          value: location['id'].toString(),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 17.0, right: 20, left: 25.0),
-                      child: Text(
-                        'Package Type'.toUpperCase(),
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                    loading
-                        ? const Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : Padding(
-                            padding: const EdgeInsets.only(
-                                left: 20.0, right: 20.0, top: 2.0),
-                            child: Card(
-                              elevation: 3.0,
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5.0),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20.0, right: 20),
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                      isExpanded: true,
-                                      hint: const Text('Select Type'),
-                                      style: const TextStyle(
-                                          color: Colors
-                                              .blue), // Not necessary for Option 1
-                                      value: _selectedPackageType,
-                                      onChanged: (newValue) {
-                                        FocusScope.of(context).unfocus();
-                                        setState(() {
-                                          _selectedPackageType = newValue;
-                                          print(_selectedPackageType);
-                                        });
-                                      },
-                                      items: type.map((location) {
-                                        return DropdownMenuItem(
-                                          child: Text(location['type_name']),
-                                          value: location['id'].toString(),
-                                        );
-                                      }).toList(),
-                                      // items: packageType.map((location) {
-                                      //   return DropdownMenuItem(
-                                      //     child: new Text(location),
-                                      //     value: location,
-                                      //   );
-                                      // }).toList(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 17.0, left: 25.0, right: 20),
-                      child: Text(
-                        'Package Weight'.toUpperCase(),
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20.0, right: 20.0, top: 2.0),
-                      child: Card(
-                        elevation: 3.0,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.0),
-                            ),
-                          ),
-                          child: TextFormField(
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                              color: Colors.black,
-                            ),
-
-                            validator: (value) {
-                              if (value!.length > 0) return null;
-                              return 'This field is required';
-                            },
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.all(10.0),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5.0),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              hintText: "Weight in KG",
-                              hintStyle: const TextStyle(
-                                  fontSize: 15.0, color: Colors.grey),
-                            ),
-                            maxLines: 1,
-                            // obscureText: true,
-                            keyboardType: TextInputType.number,
-
-                            controller: _weight,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 17.0, left: 25.0, right: 20),
-                      child: Text(
-                        'Package Size'.toUpperCase(),
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15.0, right: 15),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Card(
-                                  elevation: 3.0,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(5.0),
-                                      ),
-                                    ),
-                                    child: TextFormField(
-                                      style: const TextStyle(
-                                        fontSize: 15.0,
-                                        color: Colors.black,
-                                      ),
-                                      keyboardType: TextInputType.number,
-                                      validator: (value) {
-                                        if (value!.length > 0) return null;
-                                        return 'This field is required';
-                                      },
-                                      decoration: InputDecoration(
-                                        contentPadding:
-                                            const EdgeInsets.all(10.0),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                        ),
-                                        hintText: "Enter length",
-                                        hintStyle: const TextStyle(
-                                            fontSize: 15.0, color: Colors.grey),
-                                      ),
-                                      maxLines: 1,
-                                      // obscureText: true,
-                                      controller: _length,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Card(
-                                  elevation: 3.0,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(5.0),
-                                      ),
-                                    ),
-                                    child: TextFormField(
-                                      style: const TextStyle(
-                                        fontSize: 15.0,
-                                        color: Colors.black,
-                                      ),
-                                      keyboardType: TextInputType.number,
-                                      validator: (value) {
-                                        if (value!.length > 0) return null;
-                                        return 'This field is required';
-                                      },
-                                      decoration: InputDecoration(
-                                        contentPadding:
-                                            const EdgeInsets.all(10.0),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                        ),
-                                        hintText: "Enter Height",
-                                        hintStyle: const TextStyle(
-                                            fontSize: 15.0, color: Colors.grey),
-                                      ),
-                                      maxLines: 1,
-                                      // obscureText: true,
-                                      controller: _height,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Card(
-                                  elevation: 3.0,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(5.0),
-                                      ),
-                                    ),
-                                    child: TextFormField(
-                                      style: const TextStyle(
-                                        fontSize: 15.0,
-                                        color: Colors.black,
-                                      ),
-                                      keyboardType: TextInputType.number,
-                                      validator: (value) {
-                                        if (value!.length > 0) return null;
-                                        return 'This field is required';
-                                      },
-                                      decoration: InputDecoration(
-                                        contentPadding:
-                                            const EdgeInsets.all(10.0),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Colors.white,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                        ),
-                                        hintText: "Enter width",
-                                        hintStyle: const TextStyle(
-                                            fontSize: 15.0, color: Colors.grey),
-                                      ),
-                                      maxLines: 1,
-                                      // obscureText: true,
-                                      controller: _width,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15.0, right: 50),
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton(
-                                      isExpanded: true,
-                                      hint: const Text('CM'),
-                                      style: const TextStyle(
-                                          color: Colors
-                                              .blue), // Not necessary for Option 1
-                                      value: _selectedMeasurment,
-                                      onChanged: (newValue) {
-                                        setState(() {
-                                          _selectedMeasurment = newValue!;
-                                          print(_selectedMeasurment);
-                                        });
-                                      },
-                                      items: sizeAttributes.map((location) {
-                                        return DropdownMenuItem(
-                                          child: Text(location),
-                                          value: location,
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 17.0, left: 25.0, right: 20),
-                      child: Text(
-                        'Package Description'.toUpperCase(),
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0, right: 20),
-                      child: Card(
-                        elevation: 3.0,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.0),
-                            ),
-                          ),
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value!.length > 0) return null;
-                              return 'This field is required';
-                            },
-                            keyboardType: TextInputType.multiline,
-                            maxLines: 4,
-                            maxLength: 500,
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    width: 2.0),
-                              ),
-                              // enabledBorder: OutlineInputBorder(
-                              //   borderSide: BorderSide(
-                              //     color: Colors.grey,
-                              //     width: 2.0,
-                              //   ),
-                              // ),
-                              hintText: 'Description',
-                              contentPadding: const EdgeInsets.all(10.0),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            controller: _description,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 17.0, left: 25.0, right: 20),
-                      child: Text(
-                        'Upload images'.toUpperCase(),
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 12, right: 15, top: 7),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20.0, right: 20.0, top: 2),
+                    child: Card(
+                      elevation: 3.0,
                       child: Container(
-                        margin: const EdgeInsets.all(15.0),
-                        padding: const EdgeInsets.all(3.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(3.5)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            const Padding(
-                              padding: EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                'Upload',
-                                style: TextStyle(
-                                    color: Colors.black54, fontSize: 18),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5.0),
+                          ),
+                        ),
+                        child: TextFormField(
+                          style: const TextStyle(
+                            fontSize: 15.0,
+                            color: Colors.black,
+                          ),
+                          validator: (value) {
+                            if (value!.length > 0) return null;
+                            return 'This field is required';
+                          },
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(10.0),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                              borderSide: const BorderSide(
+                                color: Colors.white,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 10.0),
-                              child: ElevatedButton(
-                                  //minSize: 5,
-
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Constants.primary,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: Colors.white,
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            hintText: "Enter Name",
+                            hintStyle: const TextStyle(
+                                fontSize: 15.0, color: Colors.grey),
+                          ),
+                          maxLines: 1,
+                          controller: _name,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
+                    child: Text(
+                      'Mobile Number'.toUpperCase(),
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20.0, right: 20.0, top: 2.0),
+                    child: Card(
+                      elevation: 3.0,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5.0),
+                          ),
+                        ),
+                        child: TextFormField(
+                          style: const TextStyle(
+                            fontSize: 15.0,
+                            color: Colors.black,
+                          ),
+                          keyboardType: TextInputType.number,
+                          validator: (value) {
+                            if (value!.length > 0) return null;
+                            return 'This field is required';
+                          },
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(10.0),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                              borderSide: const BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: Colors.white,
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            hintText: "Mobile Number.",
+                            hintStyle: const TextStyle(
+                                fontSize: 15.0, color: Colors.grey),
+                          ),
+                          maxLines: 1,
+                          // obscureText: true,
+                          controller: _mobile,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 17.0, left: 25.0, right: 20),
+                    child: Text(
+                      'Package Details'.toUpperCase(),
+                      style: const TextStyle(
+                          color: Color(0xff1fa2f2),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                  const Divider(),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 17.0, left: 25.0, right: 20),
+                    child: Text(
+                      'Package Category'.toUpperCase(),
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+            
+                  loading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20.0, right: 20.0, top: 2.0),
+                          child: Card(
+                            elevation: 3.0,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5.0),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20.0, right: 20),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    hint: const Text('Select Category'),
+                                    style: const TextStyle(
+                                        color: Colors
+                                            .blue), // Not necessary for Option 1
+                                    value: _selectedPackageCategory,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        FocusScope.of(context).unfocus();
+            
+                                        _selectedPackageCategory = newValue;
+                                        print(_selectedPackageCategory);
+                                      });
+                                    },
+                                    items: categories.map((location) {
+                                      return DropdownMenuItem(
+                                        child: Text(location['name']),
+                                        value: location['id'].toString(),
+                                      );
+                                    }).toList(),
                                   ),
-                                  child: const Text(
-                                    'Choose',
-                                    style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 17.0, right: 20, left: 25.0),
+                    child: Text(
+                      'Package Type'.toUpperCase(),
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                  loading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20.0, right: 20.0, top: 2.0),
+                          child: Card(
+                            elevation: 3.0,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5.0),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20.0, right: 20),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    hint: const Text('Select Type'),
+                                    style: const TextStyle(
+                                        color: Colors
+                                            .blue), // Not necessary for Option 1
+                                    value: _selectedPackageType,
+                                    onChanged: (newValue) {
+                                      FocusScope.of(context).unfocus();
+                                      setState(() {
+                                        _selectedPackageType = newValue;
+                                        print(_selectedPackageType);
+                                      });
+                                    },
+                                    items: type.map((location) {
+                                      return DropdownMenuItem(
+                                        child: Text(location['type_name']),
+                                        value: location['id'].toString(),
+                                      );
+                                    }).toList(),
+                                    // items: packageType.map((location) {
+                                    //   return DropdownMenuItem(
+                                    //     child: new Text(location),
+                                    //     value: location,
+                                    //   );
+                                    // }).toList(),
                                   ),
-                                  onPressed: () {
-                                    loadAssets();
-
-                                    //_onAlertPress();
-                                  }),
-                            )
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 17.0, left: 25.0, right: 20),
+                    child: Text(
+                      'Package Weight'.toUpperCase(),
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, right: 20.0, top: 2.0),
+                    child: Card(
+                      elevation: 3.0,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5.0),
+                          ),
+                        ),
+                        child: TextFormField(
+                          style: const TextStyle(
+                            fontSize: 15.0,
+                            color: Colors.black,
+                          ),
+            
+                          validator: (value) {
+                            if (value!.length > 0) return null;
+                            return 'This field is required';
+                          },
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(10.0),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                              borderSide: const BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: Colors.white,
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            hintText: "Weight in KG",
+                            hintStyle: const TextStyle(
+                                fontSize: 15.0, color: Colors.grey),
+                          ),
+                          maxLines: 1,
+                          // obscureText: true,
+                          keyboardType: TextInputType.number,
+            
+                          controller: _weight,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 17.0, left: 25.0, right: 20),
+                    child: Text(
+                      'Package Size'.toUpperCase(),
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0, right: 15),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Card(
+                                elevation: 3.0,
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.0),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: const TextStyle(
+                                      fontSize: 15.0,
+                                      color: Colors.black,
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    validator: (value) {
+                                      if (value!.length > 0) return null;
+                                      return 'This field is required';
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.all(10.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        borderSide: const BorderSide(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.white,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      hintText: "Enter length",
+                                      hintStyle: const TextStyle(
+                                          fontSize: 15.0, color: Colors.grey),
+                                    ),
+                                    maxLines: 1,
+                                    // obscureText: true,
+                                    controller: _length,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Card(
+                                elevation: 3.0,
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.0),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: const TextStyle(
+                                      fontSize: 15.0,
+                                      color: Colors.black,
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    validator: (value) {
+                                      if (value!.length > 0) return null;
+                                      return 'This field is required';
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.all(10.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        borderSide: const BorderSide(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.white,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      hintText: "Enter Height",
+                                      hintStyle: const TextStyle(
+                                          fontSize: 15.0, color: Colors.grey),
+                                    ),
+                                    maxLines: 1,
+                                    // obscureText: true,
+                                    controller: _height,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 26.0),
-                      child: Text(
-                        'Maximum four images-size(60x60px) -20kb',
-                        style: TextStyle(
-                            color: Constants.primary,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-
-                  _imgs.isEmpty ? Container():  Padding(
-                      padding: const EdgeInsets.only(
-                          top: 8.0, right: 8.0, left: 8.0),
-                      child: Container(
-                          height: _imgs.length > 0 ? 200 : 0,
-                          width: double.infinity,
-                          child: buildGridView()),
-                    ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 26.0, top: 8),
-                    //   child: Row(
-                    //     children: <Widget>[
-                    //       Text(
-                    //         'Add Image',
-                    //         style: TextStyle(
-                    //             color: Constants.primary,
-                    //             fontSize: 18,
-                    //             fontWeight: FontWeight.w400),
-                    //       ),
-                    //       IconButton(
-                    //         icon: Icon(
-                    //           Icons.add_circle_outline,
-                    //           color: Constants.primary,
-                    //         ),
-                    //         //color: Colors.black,
-                    //         onPressed: () {},
-                    //         tooltip: "Notification",
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15.0, left: 25.0, right: 20),
-                      child: Text(
-                        'Handle with care'.toUpperCase(),
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12.0),
-                          child: Row(
-                            children: <Widget>[
-                              Radio<int>(
-                                  activeColor: Constants.primary,
-                                  value: 0,
-                                  groupValue: radioValue,
-                                  onChanged: (r) {
-                                    handleRadioValueChanged(r!);
-                                  }),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 0.0),
-                                child: Text(
-                                  "Yes",
-                                  style: TextStyle(
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 18,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Card(
+                                elevation: 3.0,
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.0),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: const TextStyle(
+                                      fontSize: 15.0,
+                                      color: Colors.black,
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    validator: (value) {
+                                      if (value!.length > 0) return null;
+                                      return 'This field is required';
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.all(10.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        borderSide: const BorderSide(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.white,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      hintText: "Enter width",
+                                      hintStyle: const TextStyle(
+                                          fontSize: 15.0, color: Colors.grey),
+                                    ),
+                                    maxLines: 1,
+                                    // obscureText: true,
+                                    controller: _width,
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        const Divider(),
-                        //radiobuttons go here
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Row(
-                            children: <Widget>[
-                              Radio<int>(
-                                  activeColor: Constants.primary,
-                                  value: 1,
-                                  groupValue: radioValue,
-                                  onChanged: (r) {
-                                    handleRadioValueChanged(r!);
-                                  }),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 0.0),
-                                child: Text(
-                                  "No",
-                                  style: TextStyle(
-                                      color: Colors.black54,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, right: 50),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    hint: const Text('CM'),
+                                    style: const TextStyle(
+                                        color: Colors
+                                            .blue), // Not necessary for Option 1
+                                    value: _selectedMeasurment,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        _selectedMeasurment = newValue!;
+                                        print(_selectedMeasurment);
+                                      });
+                                    },
+                                    items: sizeAttributes.map((location) {
+                                      return DropdownMenuItem(
+                                        child: Text(location),
+                                        value: location,
+                                      );
+                                    }).toList(),
+                                  ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 17.0, left: 25.0, right: 20),
-                      child: Text(
-                        'Comments'.toUpperCase(),
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 17.0, left: 25.0, right: 20),
+                    child: Text(
+                      'Package Description'.toUpperCase(),
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0, right: 20),
-                      child: Card(
-                        elevation: 3.0,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.0),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20),
+                    child: Card(
+                      elevation: 3.0,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5.0),
+                          ),
+                        ),
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value!.length > 0) return null;
+                            return 'This field is required';
+                          },
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 4,
+                          maxLength: 500,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  width: 2.0),
+                            ),
+                            // enabledBorder: OutlineInputBorder(
+                            //   borderSide: BorderSide(
+                            //     color: Colors.grey,
+                            //     width: 2.0,
+                            //   ),
+                            // ),
+                            hintText: 'Description',
+                            contentPadding: const EdgeInsets.all(10.0),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: const BorderSide(
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value!.length > 0) return null;
-                              return 'This field is required';
-                            },
-                            keyboardType: TextInputType.multiline,
-                            maxLines: 4,
-                            maxLength: 500,
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    width: 2.0),
-                              ),
-                              // enabledBorder: OutlineInputBorder(
-                              //   borderSide: BorderSide(
-                              //     color: Colors.grey,
-                              //     width: 2.0,
-                              //   ),
-                              // ),
-                              hintText: 'Comment',
-                              contentPadding: const EdgeInsets.all(10.0),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            controller: _comment,
-                          ),
+                          controller: _description,
                         ),
                       ),
                     ),
-                  ],
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 28.0, left: 25.0, right: 20),
-                  child: Text(
-                    'Payment Options'.toUpperCase(),
-                    style: const TextStyle(
-                        color: Color(0xff1fa2f2),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
                   ),
-                ),
-                const Divider(),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 2.0),
-            child: Card(
-              elevation: 3.0,
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5.0),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0, right: 20),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                      isExpanded: true,
-                      hint: const Text('Select payment'),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 17.0, left: 25.0, right: 20),
+                    child: Text(
+                      'Upload images'.toUpperCase(),
                       style: const TextStyle(
-                          color: Colors.blue), // Not necessary for Option 1
-                      value: paymentSelector,
-                      onChanged: (newValue) {
-                        setState(() {
-                          paymentSelector = newValue;
-                          print(paymentSelector);
-                        });
-                      },
-                      items: payment.map((location) {
-                        return DropdownMenuItem(
-                          child: Text(location),
-                          value: location,
-                        );
-                      }).toList(),
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 12, right: 15, top: 7),
+                    child: Container(
+                      margin: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(3.0),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(3.5)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              'Upload',
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 18),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                            child: ElevatedButton(
+                                //minSize: 5,
+            
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Constants.primary,
+                                ),
+                                child: const Text(
+                                  'Choose',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  loadAssets();
+            
+                                  //_onAlertPress();
+                                }),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 26.0),
+                    child: Text(
+                      'Maximum four images-size(60x60px) -20kb',
+                      style: TextStyle(
+                          color: Constants.primary,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+            
+                    _imgs.isEmpty ? Container():  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 8.0, right: 8.0, left: 8.0),
+                    child: Container(
+                        height: _imgs.length > 0 ? 200 : 0,
+                        width: double.infinity,
+                        child: buildGridView()),
+                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 26.0, top: 8),
+                  //   child: Row(
+                  //     children: <Widget>[
+                  //       Text(
+                  //         'Add Image',
+                  //         style: TextStyle(
+                  //             color: Constants.primary,
+                  //             fontSize: 18,
+                  //             fontWeight: FontWeight.w400),
+                  //       ),
+                  //       IconButton(
+                  //         icon: Icon(
+                  //           Icons.add_circle_outline,
+                  //           color: Constants.primary,
+                  //         ),
+                  //         //color: Colors.black,
+                  //         onPressed: () {},
+                  //         tooltip: "Notification",
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 15.0, left: 25.0, right: 20),
+                    child: Text(
+                      'Handle with care'.toUpperCase(),
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 12.0),
+                        child: Row(
+                          children: <Widget>[
+                            Radio<int>(
+                                activeColor: Constants.primary,
+                                value: 0,
+                                groupValue: radioValue,
+                                onChanged: (r) {
+                                  handleRadioValueChanged(r!);
+                                }),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 0.0),
+                              child: Text(
+                                "Yes",
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Divider(),
+                      //radiobuttons go here
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Row(
+                          children: <Widget>[
+                            Radio<int>(
+                                activeColor: Constants.primary,
+                                value: 1,
+                                groupValue: radioValue,
+                                onChanged: (r) {
+                                  handleRadioValueChanged(r!);
+                                }),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 0.0),
+                              child: Text(
+                                "No",
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 17.0, left: 25.0, right: 20),
+                    child: Text(
+                      'Comments'.toUpperCase(),
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20),
+                    child: Card(
+                      elevation: 3.0,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5.0),
+                          ),
+                        ),
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value!.length > 0) return null;
+                            return 'This field is required';
+                          },
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 4,
+                          maxLength: 500,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  width: 2.0),
+                            ),
+                            // enabledBorder: OutlineInputBorder(
+                            //   borderSide: BorderSide(
+                            //     color: Colors.grey,
+                            //     width: 2.0,
+                            //   ),
+                            // ),
+                            hintText: 'Comment',
+                            contentPadding: const EdgeInsets.all(10.0),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: const BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          controller: _comment,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 28.0, left: 25.0, right: 20),
+                    child: Text(
+                      'Payment Options'.toUpperCase(),
+                      style: const TextStyle(
+                          color: Color(0xff1fa2f2),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                  const Divider(),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 2.0),
+              child: Card(
+                elevation: 3.0,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5.0),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        isExpanded: true,
+                        hint: const Text('Select payment'),
+                        style: const TextStyle(
+                            color: Colors.blue), // Not necessary for Option 1
+                        value: paymentSelector,
+                        onChanged: (newValue) {
+                          setState(() {
+                            paymentSelector = newValue;
+                            print(paymentSelector);
+                          });
+                        },
+                        items: payment.map((location) {
+                          return DropdownMenuItem(
+                            child: Text(location),
+                            value: location,
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-                left: 12.0, right: 12.0, top: 20, bottom: 10),
-            child: _isLoadingsave
-                ? const Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black54),
-                    ),
-                  )
-                : Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 12.0),
-                      child: Container(
-                        child: CupertinoButton(
-                          // shape: RoundedRectangleBorder(
-                          //   borderRadius: BorderRadius.circular(10.0),
-                          // ),
-                          color: const Color(0xff1fa2f2),
-                          child: Text(
-                            "save".toUpperCase(),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 12.0, right: 12.0, top: 20, bottom: 10),
+              child: _isLoadingsave
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.black54),
+                      ),
+                    )
+                  : Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 12.0),
+                        child: Container(
+                          child: CupertinoButton(
+                            // shape: RoundedRectangleBorder(
+                            //   borderRadius: BorderRadius.circular(10.0),
+                            // ),
+                            color: const Color(0xff1fa2f2),
+                            child: Text(
+                              "save".toUpperCase(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
                             ),
+                            onPressed: () {
+                              setState(() {
+                                _formKey.currentState!.validate();
+                                if (_formKey.currentState!.validate()) {
+                                  _isLoadingsave = true;
+                                  apiResponsefromhome();
+                                  // if (widget.home == true) {
+            
+                                  // } else {
+                                  //   apiForIdentifier();
+                                  // }
+                                }
+                              });
+                            },
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _formKey.currentState!.validate();
-                              if (_formKey.currentState!.validate()) {
-                                _isLoadingsave = true;
-                                apiResponsefromhome();
-                                // if (widget.home == true) {
-
-                                // } else {
-                                //   apiForIdentifier();
-                                // }
-                              }
-                            });
-                          },
                         ),
                       ),
                     ),
-                  ),
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

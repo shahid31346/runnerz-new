@@ -42,6 +42,13 @@ class _HomeScreenDState extends State<HomeScreenD> {
   Future<Position> locateUser() async {
     // return Geolocator()
     //     .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+        bool serviceEnabled;
+    LocationPermission permission;
+
+    permission = await Geolocator.requestPermission();
+
+    // Test if location services are enabled.
+    //serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
     Position? position;
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
@@ -83,7 +90,7 @@ class _HomeScreenDState extends State<HomeScreenD> {
     // TODO: implement initState
     super.initState();
     // getUserLocation();
-    _checkGps();
+   // _checkGps();
     getUserLocation();
   }
 

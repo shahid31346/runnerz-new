@@ -107,8 +107,8 @@ class NewTripDState extends State<NewTripD> {
                           return NewSingleD(
                             profilePic: cat.userImage,
                             customerName: cat.userName,
-                            pickUpLocation: cat.pickupLocation,
-                            dropLocation: cat.dropLocation,
+                            pickUpLocation: cat.pickupLocation ?? '',
+                            dropLocation: cat.dropLocation ?? '',
                             date: cat.pickTime,
                             totalAmount: cat.amount ?? '0.0',
                             id: cat.rideId,

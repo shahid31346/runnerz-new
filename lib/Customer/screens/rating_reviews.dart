@@ -26,7 +26,7 @@ class _RateReviewsScreenState extends State<RateReviewsScreen> {
               child: Container(
                 width: double.infinity,
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
@@ -39,8 +39,8 @@ class _RateReviewsScreenState extends State<RateReviewsScreen> {
                     Radius.circular(0.0),
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 2.0, left: 15.0),
+                child: const Padding(
+                  padding: EdgeInsets.only(top: 2.0, left: 15.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,7 +70,7 @@ class _RateReviewsScreenState extends State<RateReviewsScreen> {
                       padding: const EdgeInsets.only(top: 12.0),
                       child: Text(
                         'Average Star Ratings'.toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black54,
                             fontSize: 15,
                             fontWeight: FontWeight.w600),
@@ -80,13 +80,13 @@ class _RateReviewsScreenState extends State<RateReviewsScreen> {
                       padding: const EdgeInsets.only(top: 12.0),
                       child: Text(
                         '4.5'.toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black54,
                             fontSize: 60,
                             fontWeight: FontWeight.w300),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Row(
@@ -100,10 +100,10 @@ class _RateReviewsScreenState extends State<RateReviewsScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 7,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(

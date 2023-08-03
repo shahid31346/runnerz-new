@@ -11,7 +11,6 @@ import 'package:runnerz/Common/login.dart';
 import 'package:runnerz/Common/otp.dart';
 import 'package:runnerz/Utils/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 
 class RegisterScreenD extends StatefulWidget {
   @override
@@ -21,8 +20,6 @@ class RegisterScreenD extends StatefulWidget {
 class _RegisterScreenDState extends State<RegisterScreenD> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
-
-
 
   TextEditingController _fullName = new TextEditingController();
   TextEditingController _username = new TextEditingController();
@@ -163,14 +160,15 @@ class _RegisterScreenDState extends State<RegisterScreenD> {
               context: context,
               builder: (c) {
                 return AlertDialog(
-                  title: const Text('Congratulations'),
-                  content: const Text("Check your Email, OTP send successfully."),
+                  title:  Text('Congratulations'),
+                  content: Text(
+                      "Check your Email, OTP send successfully.  For now enter this code ${_data['code']}"),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const Otp()),
+                          MaterialPageRoute(builder: (context) =>  Otp()),
                         );
                       },
                       child: Text(
@@ -221,9 +219,6 @@ class _RegisterScreenDState extends State<RegisterScreenD> {
 
   @override
   Widget build(BuildContext context) {
-    
-
- 
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -380,8 +375,8 @@ class _RegisterScreenDState extends State<RegisterScreenD> {
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: "Enter your full name",
-                              hintStyle:
-                                  const TextStyle(fontSize: 15.0, color: Colors.grey),
+                              hintStyle: const TextStyle(
+                                  fontSize: 15.0, color: Colors.grey),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -437,8 +432,8 @@ class _RegisterScreenDState extends State<RegisterScreenD> {
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: "Enter Username",
-                              hintStyle:
-                                  const TextStyle(fontSize: 15.0, color: Colors.grey),
+                              hintStyle: const TextStyle(
+                                  fontSize: 15.0, color: Colors.grey),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -494,8 +489,8 @@ class _RegisterScreenDState extends State<RegisterScreenD> {
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: "Enter Your Email",
-                              hintStyle:
-                                  const TextStyle(fontSize: 15.0, color: Colors.grey),
+                              hintStyle: const TextStyle(
+                                  fontSize: 15.0, color: Colors.grey),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -551,8 +546,8 @@ class _RegisterScreenDState extends State<RegisterScreenD> {
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: "Enter password",
-                              hintStyle:
-                                  const TextStyle(fontSize: 15.0, color: Colors.grey),
+                              hintStyle: const TextStyle(
+                                  fontSize: 15.0, color: Colors.grey),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -609,8 +604,8 @@ class _RegisterScreenDState extends State<RegisterScreenD> {
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: "Enter password again",
-                              hintStyle:
-                                  const TextStyle(fontSize: 15.0, color: Colors.grey),
+                              hintStyle: const TextStyle(
+                                  fontSize: 15.0, color: Colors.grey),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -667,8 +662,8 @@ class _RegisterScreenDState extends State<RegisterScreenD> {
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: "Enter your mobile number",
-                              hintStyle:
-                                  const TextStyle(fontSize: 15.0, color: Colors.grey),
+                              hintStyle: const TextStyle(
+                                  fontSize: 15.0, color: Colors.grey),
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -827,7 +822,7 @@ class _RegisterScreenDState extends State<RegisterScreenD> {
   //============================== Image from gallery
   Future getGalleryImage() async {
     final picker = ImagePicker();
-    var image =await picker.pickImage(source: ImageSource.gallery);
+    var image = await picker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       _image = File(image!.path);

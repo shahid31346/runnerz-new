@@ -108,10 +108,10 @@ class DeclinedTripDState extends State<DeclinedTripD> {
 
                           return DeclineSingleD(
                             profilePic: cat.profielPic,
-                            pickUpLocation: cat.pickUpLocation,
-                            dropLocation: cat.dropLocation,
+                            pickUpLocation: cat.pickUpLocation ?? '',
+                            dropLocation: cat.dropLocation ?? '',
                             date: cat.pickDate,
-                            totalAmount: cat.amount,
+                            totalAmount: cat.amount ?? '0.00',
                             userName: cat.customerName,
                             packageId: cat.packageId,
                           );

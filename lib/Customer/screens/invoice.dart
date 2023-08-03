@@ -25,7 +25,7 @@ class _InvoiceState extends State<Invoice> {
               child: Container(
                 width: double.infinity,
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
@@ -38,8 +38,8 @@ class _InvoiceState extends State<Invoice> {
                     Radius.circular(0.0),
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 2.0, left: 15.0),
+                child: const Padding(
+                  padding: EdgeInsets.only(top: 2.0, left: 15.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -66,23 +66,23 @@ class _InvoiceState extends State<Invoice> {
                 children: <Widget>[
                   Text(
                     'Jonathan carter'.toUpperCase(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  Text(
+                  const Text(
                     "+920987363333",
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: 1),
-                  Text(
+                  const SizedBox(height: 1),
+                  const Text(
                     "Jonathan@gmail.com",
                     style: TextStyle(
                       color: Color(0xff1fa2f2),
@@ -90,12 +90,12 @@ class _InvoiceState extends State<Invoice> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Divider(
+                  const SizedBox(height: 10),
+                  const Divider(
                     thickness: 1,
                   ),
-                  SizedBox(height: 10),
-                  Row(
+                  const SizedBox(height: 10),
+                  const Row(
                     children: <Widget>[
                       Text(
                         'Package Category :  ',
@@ -108,8 +108,8 @@ class _InvoiceState extends State<Invoice> {
                       )
                     ],
                   ),
-                  SizedBox(height: 4),
-                  Row(
+                  const SizedBox(height: 4),
+                  const Row(
                     children: <Widget>[
                       Text(
                         'Package Type :  ',
@@ -122,8 +122,8 @@ class _InvoiceState extends State<Invoice> {
                       )
                     ],
                   ),
-                  SizedBox(height: 4),
-                  Row(
+                  const SizedBox(height: 4),
+                  const Row(
                     children: <Widget>[
                       Text(
                         'Package Weight :  ',
@@ -136,8 +136,8 @@ class _InvoiceState extends State<Invoice> {
                       )
                     ],
                   ),
-                  SizedBox(height: 4),
-                  Row(
+                  const SizedBox(height: 4),
+                  const Row(
                     children: <Widget>[
                       Text(
                         'Package Size :  ',
@@ -150,8 +150,8 @@ class _InvoiceState extends State<Invoice> {
                       )
                     ],
                   ),
-                  SizedBox(height: 4),
-                  Row(
+                  const SizedBox(height: 4),
+                  const Row(
                     children: <Widget>[
                       Text(
                         'Handle with Care :  ',
@@ -164,7 +164,7 @@ class _InvoiceState extends State<Invoice> {
                       )
                     ],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Row(
                     children: <Widget>[
                       Image.asset(
@@ -184,7 +184,7 @@ class _InvoiceState extends State<Invoice> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Padding(
                     padding: const EdgeInsets.only(
                       right: 8.0,
@@ -197,10 +197,10 @@ class _InvoiceState extends State<Invoice> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Row(
+                            const Row(
                               children: <Widget>[
                                 Padding(
-                                  padding: const EdgeInsets.only(bottom: 5.0),
+                                  padding: EdgeInsets.only(bottom: 5.0),
                                   child: Text(
                                     'o',
                                     style: TextStyle(
@@ -246,10 +246,10 @@ class _InvoiceState extends State<Invoice> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Row(
+                            const Row(
                               children: <Widget>[
                                 Padding(
-                                  padding: const EdgeInsets.only(bottom: 5.0),
+                                  padding: EdgeInsets.only(bottom: 5.0),
                                   child: Text(
                                     'o',
                                     style: TextStyle(
@@ -296,10 +296,10 @@ class _InvoiceState extends State<Invoice> {
                       ],
                     ),
                   ),
-                  Divider(),
-                  SizedBox(height: 8.0),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0, right: 20.0),
+                  const Divider(),
+                  const SizedBox(height: 8.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0, right: 20.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -324,7 +324,7 @@ class _InvoiceState extends State<Invoice> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Text(
                     '${Constants.appname} Address'.toUpperCase(),
                     style: TextStyle(
@@ -352,17 +352,17 @@ class _InvoiceState extends State<Invoice> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
-                  Text(
+                  const Text(
                     "+920987363333",
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: 1),
+                  const SizedBox(height: 1),
                   Text(
                     "Jonathan@gmail.com",
                     style: TextStyle(
@@ -371,9 +371,9 @@ class _InvoiceState extends State<Invoice> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: 4),
-                  Divider(),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
+                  const Divider(),
+                  const SizedBox(height: 4),
                   Row(
                     children: <Widget>[
                       Container(
@@ -396,12 +396,12 @@ class _InvoiceState extends State<Invoice> {
                           children: <Widget>[
                             Text(
                               "Balakrishna".toUpperCase(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
-                            Text(
+                            const Text(
                               "TATA Cargo Truck",
                               style: TextStyle(
                                   fontSize: 15,
@@ -418,9 +418,9 @@ class _InvoiceState extends State<Invoice> {
                                       color: Colors.grey[500]!,
                                     ),
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(2))),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
+                                        const BorderRadius.all(Radius.circular(2))),
+                                child: const Padding(
+                                  padding: EdgeInsets.only(
                                       left: 6.0, right: 6),
                                   child: Center(
                                     child: Text(
@@ -434,14 +434,14 @@ class _InvoiceState extends State<Invoice> {
                                 ),
                               ),
                             ),
-                            Text(
+                            const Text(
                               "+94139065654",
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            Text(
+                            const Text(
                               "info@runnerz.com",
                               style: TextStyle(
                                 color: Color(0xff1fa2f2),
@@ -449,15 +449,15 @@ class _InvoiceState extends State<Invoice> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            SizedBox(height: 10.0),
+                            const SizedBox(height: 10.0),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  Divider(),
-                  Padding(
-                    padding: const EdgeInsets.only(
+                  const Divider(),
+                  const Padding(
+                    padding: EdgeInsets.only(
                       right: 25.0,
                       left: 10,
                       top: 20,
@@ -514,15 +514,15 @@ class _InvoiceState extends State<Invoice> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
-                  Divider(),
-                  SizedBox(
+                  const Divider(),
+                  const SizedBox(
                     height: 10,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 05.0, right: 30.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 05.0, right: 30.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -543,15 +543,15 @@ class _InvoiceState extends State<Invoice> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Divider(),
-                  SizedBox(
+                  const Divider(),
+                  const SizedBox(
                     height: 10,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 05.0, right: 30.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 05.0, right: 30.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -572,15 +572,15 @@ class _InvoiceState extends State<Invoice> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Divider(),
-                  SizedBox(
+                  const Divider(),
+                  const SizedBox(
                     height: 10,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 05.0, right: 30.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 05.0, right: 30.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -601,15 +601,15 @@ class _InvoiceState extends State<Invoice> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Divider(),
-                  SizedBox(
+                  const Divider(),
+                  const SizedBox(
                     height: 10,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 05.0, right: 30.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 05.0, right: 30.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -630,15 +630,15 @@ class _InvoiceState extends State<Invoice> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Divider(),
-                  SizedBox(
+                  const Divider(),
+                  const SizedBox(
                     height: 10,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 05.0, right: 30.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 05.0, right: 30.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -659,14 +659,14 @@ class _InvoiceState extends State<Invoice> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 23,
                   ),
-                  Text(
+                  const Text(
                     '* Terms & Conditions Apply',
                     style: TextStyle(color: Colors.black38),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 18,
                   ),
                 ],

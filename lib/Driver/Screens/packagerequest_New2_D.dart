@@ -110,10 +110,10 @@ class NewTrip2DState extends State<NewTrip2D> {
                           return NewSingleD(
                             profilePic: cat.profielPic,
                             customerName: cat.customerName,
-                            pickUpLocation: cat.pickUpLocation,
-                            dropLocation: cat.dropLocation,
+                            pickUpLocation: cat.pickUpLocation ?? '',
+                            dropLocation: cat.dropLocation ?? '',
                             date: cat.pickDate,
-                            totalAmount: cat.amount,
+                            totalAmount: cat.amount  ?? '',
                             id: cat.rideId,
                             packageId: cat.packageId,
                           );
